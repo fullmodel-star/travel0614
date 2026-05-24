@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142c33" />
+      <stop offset="40%" stop-color="#203a43" />
+      <stop offset="100%" stop-color="#2c5f8a" />
+    </linearGradient>
+    
+    <!-- Mountain Face Gradients -->
+    <linearGradient id="mtnLeftLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e3ecf5" />
+    </linearGradient>
+    <linearGradient id="mtnLeftDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b0c5d9" />
+      <stop offset="100%" stop-color="#7390ac" />
+    </linearGradient>
+    
+    <linearGradient id="mtnRightLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#faf6f0" />
+      <stop offset="100%" stop-color="#d6c3ad" />
+    </linearGradient>
+    <linearGradient id="mtnRightDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b59c7f" />
+      <stop offset="100%" stop-color="#786148" />
+    </linearGradient>
+
+    <!-- Map Pin Gradient -->
+    <linearGradient id="pinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b6b" />
+      <stop offset="100%" stop-color="#c0392b" />
+    </linearGradient>
+
+    <!-- Shadow Filter -->
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#050d10" flood-opacity="0.5" />
+    </filter>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Inner border ring for premium look -->
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="4" />
+
+  <!-- Compass / Coordinate lines in background -->
+  <g stroke="#ffffff" stroke-opacity="0.06" stroke-width="2" fill="none">
+    <circle cx="256" cy="256" r="180" />
+    <circle cx="256" cy="256" r="110" />
+    <line x1="256" y1="40" x2="256" y2="472" />
+    <line x1="40" y1="256" x2="472" y2="256" />
+    <line x1="103" y1="103" x2="409" y2="409" />
+    <line x1="409" y1="103" x2="103" y2="409" />
+  </g>
+
+  <!-- Mountain Artwork Group with Shadow -->
+  <g filter="url(#shadow)">
+    <!-- Back Mountain Range (Dolomites styled, sharp and rocky) -->
+    <!-- Left dark slope -->
+    <polygon points="340,380 430,220 480,380" fill="url(#mtnRightDark)" />
+    <!-- Right light slope -->
+    <polygon points="340,380 430,220 380,380" fill="url(#mtnRightLight)" />
+    
+    <!-- Another small peak behind -->
+    <polygon points="80,380 150,280 220,380" fill="url(#mtnLeftDark)" opacity="0.6" />
+
+    <!-- Main Front Mountain (Swiss Alps styled, Majestic Peak like Matterhorn) -->
+    <!-- Left shadow/dark slope -->
+    <polygon points="256,120 100,380 256,380" fill="url(#mtnLeftDark)" />
+    <!-- Right light slope -->
+    <polygon points="256,120 256,380 412,380" fill="url(#mtnLeftLight)" />
+    
+    <!-- Snow cap detail line/polygon -->
+    <polygon points="256,120 216,190 236,185 256,210 276,180 296,195" fill="#ffffff" opacity="0.9" />
+    <!-- Snow cap shadow side -->
+    <polygon points="256,120 216,190 236,185 256,210 256,120" fill="#e3ecf5" opacity="0.9" />
+
+    <!-- Mountain base connector -->
+    <rect x="80" y="375" width="352" height="15" rx="6" fill="#142c33" opacity="0.4" />
+  </g>
+
+  <!-- Compass Star (Center bottom) -->
+  <g transform="translate(256, 420) scale(0.85)" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.5">
+    <!-- North Arrow -->
+    <polygon points="0,0 -8,-25 0,-35" fill="#e74c3c" stroke="none" />
+    <polygon points="0,0 8,-25 0,-35" fill="#c0392b" stroke="none" />
+    <!-- South/East/West -->
+    <polygon points="0,0 -20,-5 -30,0" fill="#cfd8dc" stroke="none" />
+    <polygon points="0,0 -20,5 -30,0" fill="#90a4ae" stroke="none" />
+    <polygon points="0,0 5,-20 0,-30" fill="#cfd8dc" stroke="none" opacity="0.5" />
+    <polygon points="0,0 20,-5 30,0" fill="#cfd8dc" stroke="none" />
+    <polygon points="0,0 20,5 30,0" fill="#90a4ae" stroke="none" />
+  </g>
+
+  <!-- Map Pin pointing to the peak of Matterhorn -->
+  <g transform="translate(256, 95)" filter="url(#shadow)">
+    <!-- Pin Shape -->
+    <path d="M 0,0 C -18,-18 -26,-32 -26,-46 C -26,-62 -12,-74 0,-74 C 12,-74 26,-62 26,-46 C 26,-32 18,-18 0,0 Z" fill="url(#pinGrad)" />
+    <!-- Pin Inner Dot -->
+    <circle cx="0" cy="-46" r="9" fill="#ffffff" />
+  </g>
+</svg>

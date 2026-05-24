@@ -1,0 +1,36 @@
+{
+  "name": "瑞士義大利旅遊行程 2026",
+  "short_name": "瑞義行程",
+  "description": "2026瑞士與義大利多洛米堤自駕旅遊精華行程",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#faf8f4",
+  "theme_color": "#203a43",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
