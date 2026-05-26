@@ -2330,7 +2330,25 @@ function updateProgress() {
   else bar.style.background = 'linear-gradient(90deg,var(--accent3),var(--warn))';
 }
 
-updateProgress();
+// 恢復與儲存待辦清單狀態 (儲存於本機瀏覽器 localStorage)
+function initChecklist() {
+  const checkboxes = document.querySelectorAll('.todo-check');
+  checkboxes.forEach((cb, index) => {
+    // 讀取已儲存的勾選狀態
+    const saved = localStorage.getItem('todo-check-' + index);
+    if (saved !== null) {
+      cb.checked = saved === 'true';
+    }
+    // 當狀態變更時，儲存至 localStorage
+    cb.addEventListener('change', () => {
+      localStorage.setItem('todo-check-' + index, cb.checked);
+    });
+  });
+  updateProgress();
+}
+
+// 網頁載入完成後執行初始化
+window.addEventListener('DOMContentLoaded', initChecklist);
 </script>
 
 <style>
