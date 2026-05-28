@@ -80,6 +80,9 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
 .day-body { display: none; padding: 0 1rem 1rem; border-top: 1px solid var(--border); }
 .day-card.open .day-body { display: block; }
+.day-card.today-card { border-color: var(--accent2); box-shadow: 0 0 0 2px rgba(74,140,111,0.55); }
+.day-card.today-card .day-num { background: var(--accent2); }
+.today-badge { display: inline-block; background: var(--accent2); color: #fff; font-size: 0.65rem; padding: 1px 7px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
 
 .timeline { padding: 0.75rem 0; }
 .timeline-item { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; }
@@ -542,7 +545,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
             <div class="tl-desc">從 Lauterbrunnen 搭火車上 Wengen，再接纜車到 Männlichen，或直接搭齒軌火車到 Kleine Scheidegg。這是不用上少女峰頂、但能近看 Eiger / Mönch / Jungfrau 的經典路線。</div>
             <div class="tags"><span class="tag tag-blue">Jungfrau Travel Pass 含多數路段</span><span class="tag tag-green">順路不繞</span></div>
             <a href="https://www.google.com/maps/search/?api=1&query=46.6059,7.9200" target="_blank" class="map-btn">📍 Wengen 車站</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6108,7.9426" target="_blank" class="map-btn" style="margin-top:4px;">📍 Männlichen 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6181,7.9381" target="_blank" class="map-btn" style="margin-top:4px;">📍 Männlichen 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -589,7 +592,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
             <div class="tl-title">備案：First 或 Schynige Platte 二選一</div>
             <div class="tl-desc">若當天想改口味：First + Bachalpsee 較活潑、Schynige Platte 較復古安靜。兩者不要同天硬塞，挑一個替代半山腰路線即可。</div>
             <div class="tags"><span class="tag tag-blue">備案二選一</span><span class="tag tag-green">避免過度移動</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6244,8.0531" target="_blank" class="map-btn">📍 Grindelwald First</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6243,8.0419" target="_blank" class="map-btn">📍 Grindelwald First</a>
             <a href="https://www.google.com/maps/search/?api=1&query=46.6631,7.9086" target="_blank" class="map-btn" style="margin-top:4px;">📍 Schynige Platte</a>
           </div>
         </div>
@@ -671,7 +674,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     <div class="day-body">
       <div class="alert alert-info">
         <span class="alert-icon">🚗</span>
-        <span>上午依天氣 A/B 擇一；<strong>14:00 準時往奧地利開</strong>。路線改走瑞士北側 / Arlberg：Lauterbrunnen → Bern / Zürich 或 Luzern → Sargans → Arlberg → Innsbruck，含休息約 <strong>5~5.5 小時</strong>。</span>
+        <span>上午依天氣 A/B 擇一；<strong>14:00 準時往奧地利開</strong>。路線改走瑞士北側 / Arlberg：Lauterbrunnen → Interlaken → Luzern → Zürich → Sargans → Arlberg → Innsbruck，含休息約 <strong>5~5.5 小時</strong>。</span>
       </div>
       <div class="alert alert-warn">
         <span class="alert-icon">💳</span>
@@ -685,7 +688,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
             <div class="tl-title">上午 A/B：天氣好 Niederhorn、天氣差遊湖</div>
             <div class="tl-desc">A案（天氣好）：Beatenberg / Niederhorn 俯瞰圖恩湖與少女峰。B案（天氣差）：Interlaken West 搭圖恩湖船，或 Spiez / Interlaken 輕鬆午餐。今天只排半天，不要拖到下午。</div>
             <div class="tags"><span class="tag tag-amber">A：Niederhorn</span><span class="tag tag-blue">B：遊湖 / 小鎮</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.7167,7.8156" target="_blank" class="map-btn">📍 Beatenberg / Niederhorn</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6980,7.7940" target="_blank" class="map-btn">📍 Beatenberg / Niederhorn</a>
             <a href="https://www.google.com/maps/search/?api=1&query=46.6874,7.8635" target="_blank" class="map-btn" style="margin-top:4px;">📍 Interlaken West 船站</a>
           </div>
         </div>
@@ -702,7 +705,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
           <div class="tl-dot"></div>
           <div class="tl-content">
             <div class="tl-title">🚗 出發往 Innsbruck（經 Arlberg / 瑞士北側）</div>
-            <div class="tl-desc">建議路線：Lauterbrunnen → Bern / Zürich 或 Luzern → Sargans → Arlberg → Innsbruck。這天走瑞士北側進奧地利，Brenner 留到隔天往義大利使用。</div>
+            <div class="tl-desc">建議路線：Lauterbrunnen → Interlaken → Luzern → Zürich → Sargans → Arlberg → Innsbruck。這天走瑞士北側進奧地利，Brenner 留到隔天往義大利使用。</div>
             <div class="tags"><span class="tag tag-blue">約5~5.5h 含休息</span><span class="tag tag-green">比隔天少壓力</span></div>
             <a href="https://www.google.com/maps/search/?api=1&query=47.2692,11.4041" target="_blank" class="map-btn">📍 Innsbruck</a>
           </div>
@@ -804,8 +807,8 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
             <div class="tl-title">🚗 出發往 Cortina（景觀路線）</div>
             <div class="tl-desc">Passo Gardena（2,121m）→ Passo Falzarego（2,105m）→ Cortina，壯麗山口連連，沿途停車拍照，實際約 2~2.5 小時。</div>
             <div class="tags"><span class="tag tag-green">景觀公路</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5154,11.8296" target="_blank" class="map-btn">📍 Passo Gardena</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.4942,12.0086" target="_blank" class="map-btn">📍 Passo Falzarego</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5497,11.8080" target="_blank" class="map-btn">📍 Passo Gardena</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn">📍 Passo Falzarego</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -942,7 +945,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
             <div class="tl-title">Dobbiaco / San Candido 咖啡短停</div>
             <div class="tl-desc">從 Braies 下山後，不硬排 Sorapis。可在 Dobbiaco 或 San Candido 補咖啡、逛小鎮，讓上午節奏收乾淨。</div>
             <div class="tags"><span class="tag tag-green">順路輕鬆</span><span class="tag tag-blue">小鎮散步</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.7326,12.2797" target="_blank" class="map-btn">📍 Dobbiaco / Toblach</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.7355,12.2230" target="_blank" class="map-btn">📍 Dobbiaco / Toblach</a>
             <a href="https://www.google.com/maps/search/?api=1&query=46.7320,12.2782" target="_blank" class="map-btn" style="margin-top:4px;">📍 San Candido / Innichen</a>
           </div>
         </div>
@@ -1029,7 +1032,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
             <div class="tl-title">🚡 Lagazuoi 纜車 + 一戰隧道</div>
             <div class="tl-desc">Passo Falzarego 旁纜車上 Lagazuoi（2,752m），可鑽一戰地下隧道，步行返回約 2 小時下坡。歷史感最強的多洛米堤體驗！</div>
             <div class="tags"><span class="tag tag-blue">上山單程 €21｜來回 €29.50</span><span class="tag tag-amber">一戰歷史遺跡</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.4942,12.0086" target="_blank" class="map-btn">📍 Passo Falzarego 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn">📍 Passo Falzarego 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1039,7 +1042,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
             <div class="tl-title">🍝 Rifugio Averau 午餐（山頂）⭐</div>
             <div class="tl-desc">Cinque Torri 纜車上去的山屋，被譽為多洛米堤最頂級山頂 Pasta，每盤 €15-18，岩塔群環繞用餐</div>
             <div class="tags"><span class="tag tag-amber">⭐ 多洛米堤最佳山頂餐廳</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5029,12.0261" target="_blank" class="map-btn">📍 Cinque Torri 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn">📍 Cinque Torri 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1450,7 +1453,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
       <a href="https://www.bls-schiff.ch/en/discover-offers/niederhorn-combined-ticket" class="book-btn">🚢 BLS 遊湖套票購買 →</a>
       <a href="https://www.niederhorn.ch/en/timetable-prices/prices" class="book-btn" style="margin-top:0.4rem;background:var(--accent2);">纜車單票票價 →</a>
       <a href="https://www.google.com/maps/search/?api=1&query=46.7119,7.8356" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Niederhorn 頂站</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.7167,7.8156" target="_blank" class="map-btn" style="margin-top:4px;">📍 Beatenberg 纜車站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.6980,7.7940" target="_blank" class="map-btn" style="margin-top:4px;">📍 Beatenberg 纜車站</a>
     </div>
   </div>
 
@@ -1530,19 +1533,6 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
       <div class="cable-row"><span class="cable-label">車輛管制</span><span class="cable-val">9:00-17:00 一般車禁止進入</span></div>
       <div class="cable-row"><span class="cable-label">Gardena Card</span><span class="cable-val">3日€124 / 6日€160（可含本纜車）</span></div>
       <a href="https://www.seiseralm.it/en/summer/cable-cars.html" class="book-btn green">官網資訊 →</a>
-    </div>
-  </div>
-
-  <div class="cable-card">
-    <div class="cable-header">
-      <h3>💡 義大利纜車通票比較（6/21一天）</h3>
-      <p>Seceda + Alpe di Siusi 最佳購票策略</p>
-    </div>
-    <div class="cable-body">
-      <div class="cable-row"><span class="cable-label">✅ 推薦：單張購買</span><span class="cable-val price-big">€115/人</span></div>
-      <div class="cable-row"><span class="cable-label">Seceda（€74）+ Alpe di Siusi（€41）</span><span class="cable-val">合計 €115</span></div>
-      <div class="cable-row"><span class="cable-label">Gardena Card 3日</span><span class="cable-val">€124（只玩一天不划算）</span></div>
-      <div class="cable-row"><span class="cable-label" style="color:var(--warn)">❌ Supersummer Card €67</span><span class="cable-val" style="color:var(--warn)">Seceda 已不能用！勿購買</span></div>
     </div>
   </div>
 
@@ -1769,28 +1759,6 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
       <li>Brenner Pass 隧道額外收費：約 <strong>€12/車</strong></li>
       <li>在邊境或奧地利加油站購買即可，數位版可上 asfinag.at 購買</li>
       <li>注意：A12 Kiefersfelden → Kufstein-Süd 段免Vignette，但Brenner段需要</li>
-    </ul>
-  </div>
-
-  <div class="section-label">🇮🇹 義大利交通注意</div>
-  <div class="notice-card">
-    <h3>🚧 ZTL 限制通行區（重要！）</h3>
-    <ul>
-      <li>義大利大城市中心區（ZTL）外地車輛限制進入</li>
-      <li><strong>米蘭 Area C</strong>：週一至五 07:30-19:30，€5/次</li>
-      <li>進入ZTL會被攝影機拍下，之後會寄罰單回台灣（€80~250）</li>
-      <li>對策：在市郊停車場停車，搭地鐵/公車進市區</li>
-      <li>多洛米堤山區部分路段夏季有管制，需留意路標</li>
-    </ul>
-  </div>
-
-  <div class="notice-card">
-    <h3>🅿️ 多洛米堤停車注意</h3>
-    <ul>
-      <li>黃線 = 居民專用停車，白線 = 免費停車，藍線 = 付費停車</li>
-      <li>三峰（Tre Cime）需線上預訂，€40/車</li>
-      <li>Alpe di Siusi 旺季日間封路，需從Ortisei搭纜車</li>
-      <li>Cinque Torri、Passo Falzarego 路邊有免費停車</li>
     </ul>
   </div>
 
@@ -2146,7 +2114,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   <div class="notice-card">
     <h3>🇨🇭 少女峰地區</h3>
     <ul>
-      <li>⭐ <strong>少女峰觀景台（Sphinx）</strong> — 雪地全景，建議晴天上午前往，雲霧下午易起</li>
+      <li>⭐ <strong>Männlichen → Kleine Scheidegg 全景步道</strong> — 艾格／僧侶／少女三連峰正面，建議晴天上午前往，雲霧下午易起</li>
       <li>⭐ <strong>Grindelwald First展望台</strong> — 艾格峰與農舍構圖，清晨7~9點最清澈</li>
       <li>📍 <strong>Mürren小鎮</strong> — 懸崖上的小村，席爾頓山與農舍的經典構圖</li>
       <li>💡 提示：陰天也美，雲霧繚繞有另一種神秘感，雨後空氣特別清</li>
@@ -2171,6 +2139,23 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
       <li>📍 <strong>Galleria Vittorio Emanuele II</strong> — 拱頂玻璃構圖，早晨開門時段光線最美</li>
       <li>📍 <strong>Navigli運河區夜景</strong> — 倒影最美時間：日落後30分鐘（約21:30），酒吧點燈</li>
     </ul>
+  </div>
+
+  <!-- 日出日落 -->
+  <div class="section-label" style="margin-top:1.2rem;">🌅 日出 / 日落時刻</div>
+  <div class="notice-card">
+    <h3>🌅 各地日出日落（2026/6 夏至前後）</h3>
+    <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">接近夏至，白天很長；時間為當地 CEST，約略值（±數分鐘）。深谷與高峰會遮擋，實際見光更晚、沒入更早。</p>
+    <div style="font-size:0.82rem;">
+      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🏔 策馬特 <span style="color:var(--muted);font-size:0.72rem;">6/15–17</span></span><span style="font-weight:500;">🌅 05:45　🌇 21:25</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>⛷ 少女峰區 <span style="color:var(--muted);font-size:0.72rem;">6/18–20</span></span><span style="font-weight:500;">🌅 05:35　🌇 21:30</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🏔 Cortina / 多洛米堤 <span style="color:var(--muted);font-size:0.72rem;">6/21–25</span></span><span style="font-weight:500;">🌅 05:25　🌇 21:10</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;"><span>🏙 米蘭 <span style="color:var(--muted);font-size:0.72rem;">6/26</span></span><span style="font-weight:500;">🌅 05:35　🌇 21:15</span></div>
+    </div>
+    <div class="alert alert-info" style="margin-top:0.6rem;">
+      <span class="alert-icon">📸</span>
+      <span>多洛米堤<strong>岩石橙紅（Enrosadira）</strong>約在日落前 30–60 分鐘最濃（約 20:10–21:10）；Passo Giau / Braies 晨景建議日出前 30 分鐘到位。</span>
+    </div>
   </div>
 
   <!-- 必買紀念品推薦 -->
@@ -2450,36 +2435,27 @@ function buildQuickTable() {
 
 fetchRates();
 
-// ===== 行程倒數 =====
-function updateCountdown() {
-  const DEPART = new Date('2026-06-14T00:00:00');
-  const RETURN = new Date('2026-06-27T23:59:59');
-  const now = new Date();
-  const box = document.getElementById('countdown-box');
-  const txt = document.getElementById('countdown-text');
-  const sub = document.getElementById('countdown-sub');
-  if (!box || !txt || !sub) return;
+// ===== 行程日期與每日地點 =====
+const TRIP_DEPART = new Date('2026-06-14T00:00:00');
+const TRIP_RETURN = new Date('2026-06-27T23:59:59');
+const TRIP_DAY_LABELS = ['', '出發日','策馬特','策馬特','前往少女峰區','少女峰區健行','雪朗峰','前往茵斯布魯克','Seceda → Cortina','Cortina 三峰','布萊埃斯湖','五塔山 / Passo Giau','前往米蘭方向','米蘭','返程'];
 
-  if (now < DEPART) {
-    const diff = Math.ceil((DEPART - now) / 86400000);
-    txt.textContent = diff + ' 天';
-    sub.textContent = '距離出發還有 🛫';
-    box.style.background = 'rgba(255,255,255,0.13)';
-  } else if (now <= RETURN) {
-    const dayNum = Math.floor((now - DEPART) / 86400000) + 1;
-    // 對應每天地點
-    const dayLabels = ['', '策馬特','策馬特','少女峰地區','少女峰','席爾頓','前往多洛米堤','Val Gardena','Cortina三峰','布萊埃斯湖','Passo Giau','多洛米堤','米蘭','米蘭'];
-    const label = dayLabels[dayNum] || '旅途中';
-    txt.textContent = '旅程第 ' + dayNum + ' 天';
-    sub.textContent = '📍 今天在 ' + label;
-    box.style.background = 'rgba(74,140,111,0.35)';
-  } else {
-    txt.textContent = '旅程已結束';
-    sub.textContent = '滿載回憶回到台灣 🏠';
-    box.style.background = 'rgba(255,255,255,0.08)';
-  }
+// 旅程期間自動展開並標示「今天」的行程卡
+function highlightToday() {
+  const now = new Date();
+  if (now < TRIP_DEPART || now > TRIP_RETURN) return;
+  const m = now.getMonth() + 1, d = now.getDate();
+  document.querySelectorAll('#tab-itinerary .day-card').forEach(card => {
+    const dateEl = card.querySelector('.day-date');
+    if (!dateEl || card.querySelector('.today-badge')) return;
+    const mt = dateEl.textContent.match(/(\d+)月(\d+)日/);
+    if (mt && parseInt(mt[1], 10) === m && parseInt(mt[2], 10) === d) {
+      card.classList.add('open', 'today-card');
+      dateEl.insertAdjacentHTML('beforeend', '<span class="today-badge">今天</span>');
+      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+    }
+  });
 }
-updateCountdown();
 
 // ===== 出發準備倒數（精確到秒）=====
 function updateBigCountdown() {
@@ -2490,7 +2466,13 @@ function updateBigCountdown() {
   const diff = DEPART - now;
 
   if (diff <= 0) {
-    document.getElementById('bc-label').textContent = '已出發！旅程進行中 🛫';
+    const today = new Date();
+    if (today <= TRIP_RETURN) {
+      const dayNum = Math.floor((today - TRIP_DEPART) / 86400000) + 1;
+      document.getElementById('bc-label').textContent = '旅程第 ' + dayNum + ' 天 · 📍 ' + (TRIP_DAY_LABELS[dayNum] || '旅途中');
+    } else {
+      document.getElementById('bc-label').textContent = '旅程已結束 · 滿載回憶 🏠';
+    }
     ['bc-days','bc-hours','bc-mins','bc-secs'].forEach(id => {
       document.getElementById(id).textContent = '0';
     });
@@ -2545,7 +2527,7 @@ function initChecklist() {
 }
 
 // 網頁載入完成後執行初始化
-window.addEventListener('DOMContentLoaded', initChecklist);
+window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightToday(); });
 </script>
 
 <style>
@@ -2645,7 +2627,7 @@ window.addEventListener('DOMContentLoaded', initChecklist);
         <span class="badge badge-warn">⏰ 下午雲霧易起，建議上午走</span>
         <span class="badge badge-warn">❄️ 六月初可能有殘雪</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.6274,7.9411" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Männlichen 纜車站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.6181,7.9381" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Männlichen 纜車站</a>
     </div>
   </div>
 
@@ -2779,7 +2761,7 @@ window.addEventListener('DOMContentLoaded', initChecklist);
         <span class="badge badge-warn">⚠️ 碎石路需穿健行鞋，雨天濕滑</span>
         <span class="badge badge-tip">🐑 沿途常見黑面羊</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=45.9831,7.7806" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Rotenboden 站（Riffelsee 步道起點）</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=45.9858,7.7625" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Rotenboden 站（Riffelsee 步道起點）</a>
     </div>
   </div>
 
@@ -2992,7 +2974,7 @@ window.addEventListener('DOMContentLoaded', initChecklist);
         <span class="badge badge-tip">💧 備足 1.5L 飲水，山屋價格昂貴</span>
         <span class="badge badge-info">🕗 建議上午 9:30 前出發</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5304,12.2025" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Passo Tre Croci 停車場（步道起點）</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5561,12.2046" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Passo Tre Croci 停車場（步道起點）</a>
     </div>
   </div>
 
@@ -3023,7 +3005,7 @@ window.addEventListener('DOMContentLoaded', initChecklist);
       </div>
       <div class="hike-desc">五座獨特的岩塔群，從 Passo Falzarego 旁的停車場步行可達。同時保留完整的一戰地下壕溝網絡，文化景觀豐富。人潮比 Tre Cime 少很多，停車也免費，是非常高 CP 值的選擇。傍晚岩塔在 Enrosadira 現象下轉橙紅色極美。</div>
       <div class="hike-highlight"><strong>推薦加入行程：</strong>此地在你 6/21 移動至 Cortina 的路上，Passo Falzarego 就在必經路線，只需停留 1.5~2h，極度值得！</div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5029,12.0261" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Cinque Torri 停車場</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Cinque Torri 停車場</a>
     </div>
   </div>
 
@@ -3066,6 +3048,32 @@ window.addEventListener('DOMContentLoaded', initChecklist);
   <div class="alert alert-warn">
     <span class="alert-icon">🚗</span>
     <span>此頁整合全程自駕重點，離線也能查。出發前確認完畢，路上不慌。</span>
+  </div>
+
+  <!-- 租車資訊 -->
+  <div class="section-label">🚙 租車資訊</div>
+  <div class="notice-card">
+    <h3>🚗 租車重點（取 / 還車）</h3>
+    <ul>
+      <li>取車：<strong>6/15（一）米蘭 MXP 機場</strong>（清晨 07:55 抵達後領車）</li>
+      <li>還車：<strong>6/27（六）米蘭 MXP 機場</strong>（航班前 3 小時，預留還車與加油時間）</li>
+      <li>租車公司 / 訂單編號：<strong>＿＿＿（待填入）</strong></li>
+      <li>車型 / 車牌：<strong>＿＿＿（待填入；e-Vignette 綁車牌會用到）</strong></li>
+      <li>保險內容：<strong>＿＿＿（建議全險 CDW + 竊盜險，確認自負額 Excess）</strong></li>
+      <li>⚠️ 確認租車<strong>是否已含瑞士 Vignette</strong>，否則自行線上購買 e-Vignette（CHF 40）</li>
+      <li>⚠️ 跨國行駛（瑞士／奧地利／義大利）需向租車公司確認允許並備妥文件</li>
+    </ul>
+  </div>
+  <div class="notice-card">
+    <h3>⛽ 加油常識（重要！）</h3>
+    <ul>
+      <li><strong>務必先確認油種！</strong>取車時問清楚汽油或柴油，加錯油會嚴重損壞引擎</li>
+      <li>🟢 汽油：義大利「<strong>Benzina</strong>」、德語區「<strong>Benzin</strong>」（95 = Super）</li>
+      <li>⚫ 柴油：義大利「<strong>Gasolio</strong>」、德語區「<strong>Diesel</strong>」</li>
+      <li>多為<strong>自助式</strong>：先刷卡 / 預付再加油；山區油站少，進山前在大鎮先加滿</li>
+      <li>瑞士部分無人站只收晶片卡，備好可海外感應的信用卡</li>
+      <li>把油種與油箱蓋位置拍照存手機；多數採<strong>滿油還車</strong>政策，還車前先加滿</li>
+    </ul>
   </div>
 
   <!-- 公路費用 -->
@@ -3124,12 +3132,12 @@ window.addEventListener('DOMContentLoaded', initChecklist);
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Gardena</strong><span style="color:var(--muted);">2,121m｜多洛米堤</span></div>
         <div style="color:var(--muted);font-size:0.75rem;margin-top:2px;">景觀公路，沿途停車點多。路面良好，6月應無積雪。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5154,11.8296" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Gardena</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5497,11.8080" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Gardena</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Falzarego</strong><span style="color:var(--muted);">2,105m｜多洛米堤</span></div>
         <div style="color:var(--muted);font-size:0.75rem;margin-top:2px;">Lagazuoi 纜車在此。Cinque Torri 停車也在旁邊。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.4942,12.0086" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Falzarego</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Falzarego</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Giau</strong><span style="color:var(--muted);">2,236m｜多洛米堤</span></div>
@@ -3139,7 +3147,7 @@ window.addEventListener('DOMContentLoaded', initChecklist);
       <div style="padding:0.5rem 0;">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Tre Croci</strong><span style="color:var(--muted);">1,805m｜Sorapis步道起點</span></div>
         <div style="color:var(--muted);font-size:0.75rem;margin-top:2px;">SS48旁路邊停車，免費，早去才有位。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5304,12.2025" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Tre Croci</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5561,12.2046" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Tre Croci</a>
       </div>
     </div>
   </div>
@@ -3655,7 +3663,7 @@ window.addEventListener('DOMContentLoaded', initChecklist);
       <li>💰 人均 <strong>EUR 20–35</strong>（多洛米堤最頂級山頂 Pasta，每盤 EUR 15–18）</li>
       <li>💡 Cinque Torri 纜車上去，景觀絕頂的山屋午餐</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5186,12.0381" target="_blank" class="map-btn">📍 Cinque Torri 纜車站</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn">📍 Cinque Torri 纜車站</a>
   </div>
 
   <div class="notice-card">
