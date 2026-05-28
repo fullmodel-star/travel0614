@@ -1,0 +1,5 @@
+# Claude Code 本機設定（含個人權限/設定，不應進版控）
+.claude/
+
+# macOS
+.DS_Store
