@@ -2,13 +2,14 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>瑞士義大利旅遊行程 2026</title>
 <meta name="theme-color" content="#203a43">
 <meta name="application-name" content="瑞義行程">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="瑞義行程">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
@@ -32,7 +33,33 @@
   --tag-amber-t: #7a4510;
   --tag-red: #fddcdc;
   --tag-red-t: #8c1f1f;
+  --tag-purple: #f0eafa;
+  --tag-purple-t: #4a2d7a;
 }
+:root[data-theme="dark"] {
+  --bg: #15130f;
+  --surface: #211d18;
+  --border: #38332c;
+  --text: #ece7df;
+  --muted: #a8a094;
+  --accent: #6fa8d4;
+  --accent2: #6fbf95;
+  --accent3: #d49a5c;
+  --warn: #e6776a;
+  --tag-blue: #18303f; --tag-blue-t: #9fd0ee;
+  --tag-green: #16341f; --tag-green-t: #8fe0b4;
+  --tag-amber: #382b13; --tag-amber-t: #e8c489;
+  --tag-red: #3c1f1f; --tag-red-t: #f0a59c;
+  --tag-purple: #29234a; --tag-purple-t: #c3b1f0;
+}
+:root[data-theme="dark"] .alert-warn { background:#2f2713; color:#e8cf97; }
+:root[data-theme="dark"] .alert-info { background:#16273a; color:#a9cfec; }
+:root[data-theme="dark"] .alert-danger { background:#331a1a; color:#eda69e; }
+:root[data-theme="dark"] .alert-success { background:#16331f; color:#9fe0b4; }
+:root[data-theme="dark"] .map-btn { border-color:#2c5a40; }
+:root[data-theme="dark"] .map-btn:hover { background:#1f4634; }
+.theme-toggle { position: fixed; right: calc(14px + env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 100; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 1.25rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
+.theme-toggle:hover { border-color: var(--accent); }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
 
@@ -154,8 +181,12 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 .map-btn { display: inline-flex; align-items: center; gap: 3px; font-size: 0.7rem; color: var(--accent2); background: var(--tag-green); border: 1px solid #b2dbc8; border-radius: 20px; padding: 2px 8px; text-decoration: none; margin-top: 4px; font-weight: 500; white-space: nowrap; }
 .map-btn:hover { background: #c3e8d5; }
 </style>
+<script>
+(function(){try{var t=localStorage.getItem('theme');if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
 </head>
 <body>
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式" title="切換深色／淺色">🌙</button>
 
 <div class="hero">
   <svg class="hero-svg" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -2378,6 +2409,21 @@ function toggleDay(card) {
   card.classList.toggle('open');
 }
 
+// ===== 深色模式 =====
+function applyThemeIcon() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = dark ? '☀️' : '🌙';
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', dark ? '#15130f' : '#203a43');
+}
+function toggleTheme() {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+  applyThemeIcon();
+}
+
 // ===== 匯率換算 =====
 const RATES = { TWD: 1, CHF: 0.0294, EUR: 0.0284 };
 const RATE_LABELS = { CHF: 'CHF 1 ≈ TWD 34.0', EUR: 'EUR 1 ≈ TWD 35.2', TWD: 'TWD 1 ≈ TWD 1' };
@@ -2422,7 +2468,7 @@ function setAmount(n) {
 function buildQuickTable() {
   const twds = [100, 500, 1000, 3000, 5000, 10000];
   let html = '<table style="width:100%;border-collapse:collapse;font-size:0.8rem;">';
-  html += '<tr style="background:var(--bg);"><th style="padding:0.3rem 0.4rem;text-align:left;color:var(--muted);font-weight:500;">TWD</th><th style="padding:0.3rem 0.4rem;text-align:right;color:#1a3d5c;font-weight:500;">CHF</th><th style="padding:0.3rem 0.4rem;text-align:right;color:#1a4a2e;font-weight:500;">EUR</th></tr>';
+  html += '<tr style="background:var(--bg);"><th style="padding:0.3rem 0.4rem;text-align:left;color:var(--muted);font-weight:500;">TWD</th><th style="padding:0.3rem 0.4rem;text-align:right;color:var(--tag-blue-t);font-weight:500;">CHF</th><th style="padding:0.3rem 0.4rem;text-align:right;color:var(--tag-green-t);font-weight:500;">EUR</th></tr>';
   twds.forEach((t,i) => {
     const bg = i%2===0 ? 'var(--surface)' : 'var(--bg)';
     const chf = (t * RATES.CHF).toFixed(1);
@@ -2527,7 +2573,7 @@ function initChecklist() {
 }
 
 // 網頁載入完成後執行初始化
-window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightToday(); });
+window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightToday(); applyThemeIcon(); });
 </script>
 
 <style>
@@ -2553,12 +2599,12 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
 .hike-stat-lbl { font-size:0.68rem; color:var(--muted); margin-top:1px; }
 .hike-badges { display:flex; flex-wrap:wrap; gap:4px; margin:0.5rem 0; }
 .badge { font-size:0.7rem; padding:2px 7px; border-radius:20px; font-weight:500; }
-.badge-easy { background:#d8f0e4; color:#1a5c3a; }
-.badge-mid { background:#fff0d0; color:#7a4510; }
-.badge-hard { background:#fddcdc; color:#8c1f1f; }
+.badge-easy { background:var(--tag-green); color:var(--tag-green-t); }
+.badge-mid { background:var(--tag-amber); color:var(--tag-amber-t); }
+.badge-hard { background:var(--tag-red); color:var(--tag-red-t); }
 .badge-info { background:var(--tag-blue); color:var(--tag-blue-t); }
 .badge-warn { background:var(--tag-amber); color:var(--tag-amber-t); }
-.badge-tip { background:#f0eafa; color:#4a2d7a; }
+.badge-tip { background:var(--tag-purple); color:var(--tag-purple-t); }
 .hike-desc { font-size:0.82rem; line-height:1.7; margin:0.5rem 0; }
 .hike-highlight { font-size:0.8rem; background:var(--bg); border-radius:8px; padding:0.5rem 0.7rem; margin:0.5rem 0; border-left:3px solid var(--accent3); }
 .ranking-table { background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:1rem; }
@@ -2568,6 +2614,10 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
 .rank-num.gold { background:#fde68a; color:#7a4510; }
 .rank-num.silver { background:#e2e8f0; color:#374151; }
 .rank-num.bronze { background:#fed7aa; color:#7c3a10; }
+:root[data-theme="dark"] .rank-num { background:#34302a; color:#d8d2c8; }
+:root[data-theme="dark"] .rank-num.gold { background:#5a4a1a; color:#fde68a; }
+:root[data-theme="dark"] .rank-num.silver { background:#3a3f47; color:#d6dde6; }
+:root[data-theme="dark"] .rank-num.bronze { background:#4a3320; color:#f0c79a; }
 </style>
 
 <!-- ===== 健行指南 ===== -->
@@ -2590,7 +2640,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
     <div class="ranking-row"><div class="rank-num bronze">7</div><span>🚂 Gornergrat → Riffelsee</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.72rem;color:var(--muted);margin-left:0.5rem;">策馬特</span></div>
     <div class="ranking-row"><div class="rank-num bronze">8</div><span>🏊 Lago di Sorapis</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.72rem;color:var(--muted);margin-left:0.5rem;">多洛米堤東</span></div>
     <div class="ranking-row"><div class="rank-num bronze">9</div><span>🪨 Sassolungo Circuit</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.72rem;color:var(--muted);margin-left:0.5rem;">多洛米堤西</span></div>
-    <div class="ranking-row"><div class="rank-num" style="background:#e9d5ff;color:#5b21b6;">10</div><span>🌾 Männlichen Panorama Trail</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.72rem;color:var(--muted);margin-left:0.5rem;">少女峰區</span></div>
+    <div class="ranking-row"><div class="rank-num" style="background:var(--tag-purple);color:var(--tag-purple-t);">10</div><span>🌾 Männlichen Panorama Trail</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.72rem;color:var(--muted);margin-left:0.5rem;">少女峰區</span></div>
   </div>
 
   <!-- ===== 少女峰區 ===== -->
@@ -3329,22 +3379,22 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
   <div class="notice-card">
     <h3>🚨 各國緊急號碼</h3>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.3rem;">
-      <a href="tel:112" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:#fdeaea;border:1px solid #f5c6c6;border-radius:10px;text-decoration:none;">
+      <a href="tel:112" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:var(--tag-red);border:1px solid var(--tag-red);border-radius:10px;text-decoration:none;">
         <span style="font-size:1.4rem;">🆘</span>
         <span style="font-size:1.1rem;font-weight:700;color:var(--warn);margin-top:4px;">112</span>
         <span style="font-size:0.72rem;color:var(--warn);text-align:center;">歐盟通用緊急<br>（瑞士/義大利/奧地利）</span>
       </a>
-      <a href="tel:117" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:#e8f2fb;border:1px solid #b8d4ee;border-radius:10px;text-decoration:none;">
+      <a href="tel:117" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:var(--tag-blue);border:1px solid var(--tag-blue);border-radius:10px;text-decoration:none;">
         <span style="font-size:1.4rem;">👮</span>
         <span style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-top:4px;">117</span>
         <span style="font-size:0.72rem;color:var(--accent);text-align:center;">瑞士警察<br>Switzerland Police</span>
       </a>
-      <a href="tel:118" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:#d8f0e4;border:1px solid #a8d8bc;border-radius:10px;text-decoration:none;">
+      <a href="tel:118" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:var(--tag-green);border:1px solid var(--tag-green);border-radius:10px;text-decoration:none;">
         <span style="font-size:1.4rem;">🚑</span>
         <span style="font-size:1.1rem;font-weight:700;color:var(--accent2);margin-top:4px;">118</span>
         <span style="font-size:0.72rem;color:var(--accent2);text-align:center;">義大利救護車<br>Italy Ambulance</span>
       </a>
-      <a href="tel:1414" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:#fff8e6;border:1px solid #f5d88a;border-radius:10px;text-decoration:none;">
+      <a href="tel:1414" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:var(--tag-amber);border:1px solid var(--tag-amber);border-radius:10px;text-decoration:none;">
         <span style="font-size:1.4rem;">🚁</span>
         <span style="font-size:1.1rem;font-weight:700;color:var(--accent3);margin-top:4px;">1414</span>
         <span style="font-size:0.72rem;color:var(--accent3);text-align:center;">瑞士山難救援<br>REGA 直升機</span>
@@ -3421,8 +3471,8 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
           <div style="font-weight:600;color:var(--accent);">冰川天堂</div>
           <div style="font-size:0.9rem;font-weight:700;">3,883m</div>
         </div>
-        <div style="background:#f0eafa;border-radius:8px;padding:0.4rem 0.6rem;text-align:center;">
-          <div style="font-weight:600;color:#4a2d7a;">高納葛拉特</div>
+        <div style="background:var(--tag-purple);border-radius:8px;padding:0.4rem 0.6rem;text-align:center;">
+          <div style="font-weight:600;color:var(--tag-purple-t);">高納葛拉特</div>
           <div style="font-size:0.9rem;font-weight:700;">3,089m</div>
         </div>
         <div style="background:var(--tag-green);border-radius:8px;padding:0.4rem 0.6rem;text-align:center;">
