@@ -31,22 +31,44 @@ jobs:
         env:
           PW: ${{ secrets.PAGES_PASSWORD }}
         run: |
+          set -ex
           if [ -z "$PW" ]; then
-            echo "❌ Secret PAGES_PASSWORD is not set. Add it in repo Settings → Secrets and variables → Actions."
+            echo "::error::PAGES_PASSWORD secret is not set. Add it in repo Settings → Secrets and variables → Actions."
             exit 1
           fi
           mkdir -p build
 
-          # Encrypt index.html (default output: <dir>/index.html). --remember 365 lets the device skip the prompt for a year.
+          # Encrypt index.html (output: build/index.html). --remember 365 lets the device skip the prompt for a year after first unlock.
           staticrypt index.html -p "$PW" --remember 365 -d build
+          ls -la build/
 
           # StatiCrypt's wrapper replaces the original <head>, which hides our PWA meta tags
-          # (manifest, apple-touch-icon, status-bar). Inject them back so iPhone can still "Add to Home Screen"
-          # before the password is entered.
-          PWA_HEAD='<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#203a43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="瑞義行程"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="manifest" href="./manifest.json"><link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./apple-touch-icon.png">'
-          sed -i "s|</head>|${PWA_HEAD}</head>|" build/index.html
+          # (manifest, apple-touch-icon, status-bar). Re-inject them with Python so iPhone can still
+          # "Add to Home Screen" before the password is entered.
+          python3 <<'PYEOF'
+          pwa_head = (
+              '<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">'
+              '<meta name="theme-color" content="#203a43">'
+              '<meta name="apple-mobile-web-app-capable" content="yes">'
+              '<meta name="mobile-web-app-capable" content="yes">'
+              '<meta name="apple-mobile-web-app-title" content="瑞義行程">'
+              '<meta name="apple-mobile-web-app-status-bar-style" content="black">'
+              '<link rel="manifest" href="./manifest.json">'
+              '<link rel="icon" href="./icon.svg" type="image/svg+xml">'
+              '<link rel="apple-touch-icon" href="./apple-touch-icon.png">'
+          )
+          path = 'build/index.html'
+          with open(path, 'r', encoding='utf-8') as f:
+              html = f.read()
+          if '</head>' not in html:
+              raise SystemExit('No </head> found in encrypted output — staticrypt template changed?')
+          html = html.replace('</head>', pwa_head + '</head>', 1)
+          with open(path, 'w', encoding='utf-8') as f:
+              f.write(html)
+          print('Injected PWA meta tags into encrypted index.html')
+          PYEOF
 
-          # Copy unencrypted PWA assets (manifest, service worker, icons) into the build output
+          # Copy unencrypted PWA assets into build output
           cp manifest.json sw.js icon.svg icon-192.png icon-512.png apple-touch-icon.png build/
 
           echo "✅ build/ contents:"
