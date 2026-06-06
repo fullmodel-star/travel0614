@@ -1,0 +1,67 @@
+name: Encrypt & deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install StatiCrypt
+        run: npm install -g staticrypt@3
+
+      - name: Encrypt index.html and assemble build/
+        env:
+          PW: ${{ secrets.PAGES_PASSWORD }}
+        run: |
+          if [ -z "$PW" ]; then
+            echo "❌ Secret PAGES_PASSWORD is not set. Add it in repo Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+          mkdir -p build
+
+          # Encrypt index.html (default output: <dir>/index.html). --remember 365 lets the device skip the prompt for a year.
+          staticrypt index.html -p "$PW" --remember 365 -d build
+
+          # StatiCrypt's wrapper replaces the original <head>, which hides our PWA meta tags
+          # (manifest, apple-touch-icon, status-bar). Inject them back so iPhone can still "Add to Home Screen"
+          # before the password is entered.
+          PWA_HEAD='<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#203a43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="瑞義行程"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="manifest" href="./manifest.json"><link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./apple-touch-icon.png">'
+          sed -i "s|</head>|${PWA_HEAD}</head>|" build/index.html
+
+          # Copy unencrypted PWA assets (manifest, service worker, icons) into the build output
+          cp manifest.json sw.js icon.svg icon-192.png icon-512.png apple-touch-icon.png build/
+
+          echo "✅ build/ contents:"
+          ls -la build/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

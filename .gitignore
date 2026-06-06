@@ -3,3 +3,6 @@
 
 # macOS
 .DS_Store
+
+# CI 加密輸出（StatiCrypt build artifact）
+build/
