@@ -60,6 +60,13 @@
 :root[data-theme="dark"] .map-btn:hover { background:#1f4634; }
 .theme-toggle { position: fixed; right: calc(14px + env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 100; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 1.25rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
 .theme-toggle:hover { border-color: var(--accent); }
+.myid-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem; font-size:0.82rem; }
+.myid-row label { flex:0 0 38%; color:var(--muted); }
+.myid-row input.myid { flex:1; padding:0.35rem 0.5rem; border:1px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text); font-family:inherit; font-size:0.82rem; }
+@media (max-width: 520px) {
+  .myid-row { flex-direction: column; align-items: stretch; gap: 0.2rem; }
+  .myid-row label { flex: 0 0 auto; }
+}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
 
@@ -1615,8 +1622,30 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 <!-- ===== 證件通行 ===== -->
 <div class="section" id="tab-docs">
 
+  <!-- 我的證件（localStorage，僅存本機）-->
+  <div class="section-label">🔐 我的證件（只存本機）</div>
+  <div class="notice-card" style="border:2px solid var(--accent2);">
+    <h3>🔐 個人證件號碼</h3>
+    <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">資料只儲存在<strong>這支手機的瀏覽器</strong>，永遠不會上 GitHub 或網路。換手機或清掉瀏覽器資料就會消失，需重新輸入。</p>
+
+    <div class="section-label" style="margin-top:0.6rem;">✈️ 機票</div>
+    <div class="myid-row"><label>訂位代號（PNR）</label><input class="myid" id="myid-pnr" type="text" placeholder="例：ABC123"></div>
+    <div class="myid-row"><label>乘客 1 姓名</label><input class="myid" id="myid-name1" type="text" placeholder="LAST/FIRST MS/MR"></div>
+    <div class="myid-row"><label>乘客 1 票號</label><input class="myid" id="myid-ticket1" type="text" placeholder="13 碼"></div>
+    <div class="myid-row"><label>乘客 2 姓名</label><input class="myid" id="myid-name2" type="text"></div>
+    <div class="myid-row"><label>乘客 2 票號</label><input class="myid" id="myid-ticket2" type="text"></div>
+    <div class="myid-row"><label>常旅客號</label><input class="myid" id="myid-ffp" type="text" placeholder="例：CA 01807…"></div>
+
+    <div class="section-label" style="margin-top:0.8rem;">🛸 空拍機操作員編號</div>
+    <div class="myid-row"><label>🇨🇭 瑞士 dLIS</label><input class="myid" id="myid-drone-ch" type="text" placeholder="CHE…"></div>
+    <div class="myid-row"><label>🇮🇹 義大利 D-Flight</label><input class="myid" id="myid-drone-it" type="text" placeholder="ITA…"></div>
+    <div class="myid-row"><label>🇦🇹 奧地利 Austro</label><input class="myid" id="myid-drone-at" type="text" placeholder="可沿用義大利註冊"></div>
+
+    <button onclick="clearMyId()" style="margin-top:0.8rem;background:var(--warn);color:white;border:none;padding:0.4rem 0.8rem;border-radius:6px;font-size:0.78rem;cursor:pointer;">🗑 清除本機所有資料</button>
+  </div>
+
   <!-- 航班資訊 -->
-  <div class="section-label">✈️ 航班資訊</div>
+  <div class="section-label" style="margin-top:1rem;">✈️ 航班資訊</div>
 
   <div class="notice-card" style="padding:0.75rem 1rem;">
     <h3>✈️ 去程航班</h3>
@@ -2484,6 +2513,25 @@ function toggleTheme() {
   applyThemeIcon();
 }
 
+// ===== 我的證件（localStorage，僅存本機） =====
+function initMyId() {
+  document.querySelectorAll('input.myid').forEach(inp => {
+    const key = inp.id; // myid-pnr / myid-name1 / ...
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved !== null) inp.value = saved;
+    } catch(e) {}
+    inp.addEventListener('input', () => { try { localStorage.setItem(key, inp.value); } catch(e) {} });
+  });
+}
+function clearMyId() {
+  if (!confirm('確定清除這支手機上儲存的所有個人證件資料？此動作只影響本機，無法復原。')) return;
+  document.querySelectorAll('input.myid').forEach(inp => {
+    try { localStorage.removeItem(inp.id); } catch(e) {}
+    inp.value = '';
+  });
+}
+
 // ===== 匯率換算 =====
 const RATES = { TWD: 1, CHF: 0.0294, EUR: 0.0284 };
 const RATE_LABELS = { CHF: 'CHF 1 ≈ TWD 34.0', EUR: 'EUR 1 ≈ TWD 35.2', TWD: 'TWD 1 ≈ TWD 1' };
@@ -2633,7 +2681,7 @@ function initChecklist() {
 }
 
 // 網頁載入完成後執行初始化
-window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightToday(); applyThemeIcon(); });
+window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightToday(); applyThemeIcon(); initMyId(); });
 </script>
 
 <style>
