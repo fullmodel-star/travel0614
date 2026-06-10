@@ -1,4 +1,4 @@
-const CACHE_NAME = 'travel-itinerary-v17';
+const CACHE_NAME = 'travel-itinerary-v18';
 const ASSETS = [
   './',
   './index.html',
@@ -12,13 +12,20 @@ const ASSETS = [
 ];
 
 // 安裝 Service Worker 並快取核心資源
+// 注意：不自動 skipWaiting，改由使用者點「立即更新」按鈕觸發（見下方 message 監聽），
+// 避免 iOS 上「先顯示舊版、背景才換新版」需要關兩次的問題。
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Caching app shell');
       return cache.addAll(ASSETS);
-    }).then(() => self.skipWaiting())
+    })
   );
+});
+
+// 收到頁面「立即更新」指令時，讓等待中的新版 SW 立刻接管
+self.addEventListener('message', (event) => {
+  if (event.data === 'SKIP_WAITING') self.skipWaiting();
 });
 
 // 啟用 Service Worker 並清理舊快取

@@ -60,6 +60,9 @@
 :root[data-theme="dark"] .map-btn:hover { background:#1f4634; }
 .theme-toggle { position: fixed; right: calc(14px + env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 100; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 1.25rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
 .theme-toggle:hover { border-color: var(--accent); }
+.update-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--accent2); color:#fff; padding: calc(0.6rem + env(safe-area-inset-top)) 1rem 0.6rem; display:none; align-items:center; justify-content:center; gap:0.75rem; font-size:0.85rem; box-shadow:0 2px 12px rgba(0,0,0,0.25); }
+.update-banner.show { display:flex; }
+.update-banner button { background:#fff; color:var(--accent2); border:none; border-radius:8px; padding:0.4rem 0.9rem; font-weight:700; font-size:0.82rem; cursor:pointer; font-family:inherit; white-space:nowrap; }
 .myid-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem; font-size:0.82rem; }
 .myid-row label { flex:0 0 38%; color:var(--muted); }
 .myid-row input.myid { flex:1; padding:0.35rem 0.5rem; border:1px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text); font-family:inherit; font-size:0.82rem; }
@@ -193,6 +196,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 </script>
 </head>
 <body>
+<div class="update-banner" id="update-banner"><span>🔄 有新版本行程</span><button onclick="doUpdate()">立即更新</button></div>
 <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式" title="切換深色／淺色">🌙</button>
 
 <div class="hero">
@@ -2474,9 +2478,35 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 </div><!-- end tools -->
 
 <script>
+// ===== Service worker 註冊 + 新版偵測 =====
+function doUpdate(){
+  if (window.__swWaiting) { window.__swWaiting.postMessage('SKIP_WAITING'); }
+  else { location.reload(); }
+}
 if ('serviceWorker' in navigator) {
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return; refreshing = true; location.reload();
+  });
+  function showUpdate(worker) {
+    if (!worker) return;
+    window.__swWaiting = worker;
+    const b = document.getElementById('update-banner');
+    if (b) b.classList.add('show');
+  }
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+    navigator.serviceWorker.register('./sw.js').then((reg) => {
+      if (reg.waiting && navigator.serviceWorker.controller) showUpdate(reg.waiting);
+      reg.addEventListener('updatefound', () => {
+        const nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener('statechange', () => {
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) showUpdate(nw);
+        });
+      });
+      // App 開著時每小時自動檢查一次新版
+      setInterval(() => reg.update(), 3600000);
+    }).catch(() => {});
   });
 }
 
