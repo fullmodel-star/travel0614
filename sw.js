@@ -1,8 +1,9 @@
-const CACHE_NAME = 'travel-itinerary-v14';
+const CACHE_NAME = 'travel-itinerary-v15';
 const ASSETS = [
   './',
   './index.html',
   './milano-itinerary.html',
+  './italy-trip-map.html',
   './manifest.json',
   './icon.svg',
   './icon-192.png',
