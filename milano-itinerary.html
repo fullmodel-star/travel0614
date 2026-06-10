@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>米蘭＋維羅納 行程</title>
+<style>
+  :root{
+    --paper:#FCFBF8;--ink:#211F1C;--muted:#6F6A62;--line:#E6E1D8;
+    --accent:#D24A2C;--accent-soft:#FBEDE7;
+    --sight:#3C6A4A;--sight-bg:#EAF1EA;
+    --food:#B0471C;--food-bg:#FAEBE1;
+    --move:#2E5566;--move-bg:#E7EEF1;
+    --warn:#8C6310;--warn-bg:#FBF1D7;
+  }
+  *{box-sizing:border-box;}
+  html,body{overflow-x:hidden;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC","Hiragino Sans GB",system-ui,-apple-system,sans-serif;
+    line-height:1.65;font-size:16px;}
+  .wrap{max-width:660px;margin:0 auto;padding:0 18px 64px;}
+
+  header{padding:30px 0 14px;}
+  .eyebrow{font-size:12px;letter-spacing:.2em;color:var(--accent);font-weight:700;}
+  h1{font-size:27px;line-height:1.2;margin:8px 0 6px;font-weight:800;letter-spacing:-.01em;}
+  .sub{color:var(--muted);font-size:13.5px;margin:0;}
+
+  .tabs{position:sticky;top:0;z-index:20;background:var(--paper);
+    display:flex;gap:8px;overflow-x:auto;padding:12px 0;margin-bottom:8px;
+    border-bottom:1px solid var(--line);-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{flex:0 0 auto;white-space:nowrap;cursor:pointer;border:1px solid var(--line);
+    background:#fff;color:var(--ink);font-family:inherit;font-weight:700;font-size:13.5px;
+    padding:9px 16px;border-radius:999px;line-height:1.2;transition:all .18s;}
+  .tab.on{background:var(--accent);border-color:var(--accent);color:#fff;
+    box-shadow:0 3px 10px rgba(210,74,44,.28);}
+
+  .panel{display:none;scroll-margin-top:66px;}
+  .panel.active{display:block;animation:fade .28s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  .card{border:1px solid var(--line);border-radius:14px;padding:16px 16px 6px;margin:14px 0;background:#fff;}
+  .card.flag{border-left:4px solid var(--accent);background:var(--accent-soft);border-color:#F1D9D0;}
+  .card h2{font-size:16px;margin:0 0 10px;font-weight:800;}
+  .card ul{margin:0 0 10px;padding-left:18px;}
+  .card li{margin:0 0 7px;font-size:14px;}
+  .k{font-weight:700;}
+  a{color:var(--accent);}
+
+  .day-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+    padding-bottom:10px;border-bottom:2px solid var(--ink);margin:6px 0 4px;}
+  .day-head .d{font-size:20px;font-weight:800;}
+  .day-head .theme{font-size:12.5px;color:var(--muted);text-align:right;line-height:1.45;}
+
+  .tl{margin:0;padding:4px 0 0;}
+  .row{display:flex;align-items:stretch;}
+  .row .time{flex:0 0 48px;text-align:right;padding:13px 12px 0 0;
+    font-weight:800;font-size:13.5px;color:var(--accent);
+    font-variant-numeric:tabular-nums;line-height:1.3;}
+  .row .content{flex:1 1 auto;min-width:0;position:relative;
+    padding:13px 0 13px 20px;border-left:2px solid var(--line);}
+  .row .content::before{content:"";position:absolute;left:-6px;top:18px;
+    width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--accent);}
+  .row.sight .content::before{border-color:var(--sight);}
+  .row.food .content::before{border-color:var(--food);}
+
+  .title{font-size:15.5px;font-weight:700;margin:0;overflow-wrap:anywhere;}
+  .title a{font-size:12px;font-weight:600;margin-left:6px;white-space:nowrap;text-decoration:none;}
+  .note{font-size:13px;color:var(--muted);margin:5px 0 0;overflow-wrap:anywhere;}
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:middle;}
+  .t-sight{background:var(--sight-bg);color:var(--sight);}
+  .t-food{background:var(--food-bg);color:var(--food);}
+  .t-warn{background:var(--warn-bg);color:var(--warn);}
+
+  .row.leg .content{border-left:2px dashed #C9D3D6;padding-top:9px;padding-bottom:9px;
+    color:var(--move);font-size:12.5px;}
+  .row.leg .content::before{display:none;}
+  .row.leg .pill{display:inline-block;background:var(--move-bg);color:var(--move);
+    font-weight:700;font-size:11px;padding:2px 9px;border-radius:999px;margin-right:7px;}
+
+  .alts{margin-top:9px;border-top:1px dashed var(--line);padding-top:8px;}
+  .alts .lab{display:inline-block;font-size:10.5px;font-weight:700;color:var(--accent);
+    letter-spacing:.05em;background:var(--accent-soft);padding:2px 8px;border-radius:999px;}
+  .alts ul{list-style:none;margin:7px 0 0;padding:0;}
+  .alts li{font-size:12.5px;color:var(--muted);margin:0 0 6px;line-height:1.5;padding-left:14px;position:relative;}
+  .alts li::before{content:"›";position:absolute;left:2px;color:var(--accent);font-weight:700;}
+  .alts li b{color:var(--ink);font-weight:700;}
+  .alts .px{color:var(--food);font-weight:700;}
+  .alts a{font-size:12px;font-weight:600;text-decoration:none;margin-left:3px;}
+
+  .buylist{display:grid;gap:10px;margin-top:12px;}
+  .buycard{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);
+    border-radius:12px;padding:12px 14px;background:#fff;}
+  .buycard .ic{font-size:22px;line-height:1.25;flex:0 0 auto;}
+  .buycard .bt{font-weight:700;font-size:14.5px;margin:0 0 2px;}
+  .buycard .bn{font-size:12.5px;color:var(--muted);margin:0;overflow-wrap:anywhere;}
+
+  footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;}
+
+  @media (max-width:360px){
+    .wrap{padding-left:14px;padding-right:14px;}
+    .row .time{flex-basis:42px;padding-right:9px;}
+    .row .content{padding-left:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a href="./index.html" style="display:inline-flex;align-items:center;gap:5px;margin-bottom:12px;font-size:13.5px;font-weight:700;color:var(--accent);text-decoration:none;">← 回瑞義主行程</a>
+    <div class="eyebrow">Milano + Verona · 自駕行程</div>
+    <h1>米蘭＋維羅納 行程</h1>
+    <p class="sub">6/25 維羅納→米蘭 ｜ 6/26 米蘭 ｜ 6/27 中午 MXP 班機 ｜ 住宿：米蘭住宿（詳見主行程「我的證件」）</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab on" data-t="d1">6/25 維羅納</button>
+    <button class="tab" data-t="d2">6/26 米蘭</button>
+    <button class="tab" data-t="d3">6/27 回程</button>
+    <button class="tab" data-t="buy">必買</button>
+    <button class="tab" data-t="market">超市</button>
+    <button class="tab" data-t="tickets">訂票</button>
+    <button class="tab" data-t="info">交通</button>
+  </div>
+
+  <!-- 第一天 -->
+  <section class="panel active" id="p-d1">
+    <div class="day-head"><span class="d">第一天 · 6/25（四）</span><span class="theme">維羅納下午＋晚餐逛街<br>傍晚開車入住米蘭</span></div>
+    <div class="tl">
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">停車</span>下午抵維羅納，車停 Parcheggio Cittadella（地下、有保全、ZTL 外）</div></div>
+
+      <div class="row sight"><div class="time">1:30 PM</div><div class="content">
+        <p class="title">Arena di Verona ＋ Piazza Bra <span class="tag t-sight">景點</span><a href="https://maps.google.com/?cid=10893438234845508597">📍地圖</a></p>
+        <p class="note">看點：西元 1 世紀的古羅馬圓形競技場，比羅馬競技場還早約 30 年、保存完好。可走進去登上看台，想像兩千年前萬人觀競技的場面；夏季夜晚是露天歌劇的舞台。建議線上買票免排隊。</p>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">走路</span>沿購物街 Via Mazzini 前往（精品名店一路相隨）</div></div>
+
+      <div class="row sight"><div class="time">2:45 PM</div><div class="content">
+        <p class="title">Casa di Giulietta 茱麗葉之家 <span class="tag t-sight">景點</span><a href="https://maps.google.com/?cid=813513705080237291">📍地圖</a></p>
+        <p class="note">看點：莎翁《羅密歐與茱麗葉》的場景。最有看頭的是小陽台、牆上滿滿的愛情留言，以及庭院的茱麗葉銅像（傳說摸右胸帶來愛情運）。庭院免費就能拍到精華，室內博物館較普通、可省。</p>
+      </div></div>
+
+      <div class="row sight"><div class="time">3:20 PM</div><div class="content">
+        <p class="title">Piazza delle Erbe ＋ Piazza dei Signori <span class="tag t-sight">景點</span><a href="https://maps.google.com/?cid=17540689017988865291">📍地圖</a></p>
+        <p class="note">看點：維羅納跳動的心臟、由古羅馬廣場演變而來，四周是有濕壁畫的中世紀宮殿與高塔、市集熱鬧。穿過掛著鯨魚肋骨的拱門就到安靜優雅的但丁廣場（中央有但丁雕像）。</p>
+        <div class="alts"><span class="lab">這附近可加（看時間機動）</span><ul>
+          <li><b>Torre dei Lamberti</b>（門票約 €6＋電梯 €1）84m 高塔、全城最佳 360° 俯瞰紅瓦屋頂與河灣<a href="https://maps.google.com/?cid=1539611860846073150">📍</a></li>
+          <li><b>Basilica di Sant'Anastasia</b>（約 €4）維羅納最大哥德教堂，濕壁畫與「駝背人托聖水盆」是亮點<a href="https://maps.google.com/?cid=3073384366479452845">📍</a></li>
+          <li><b>Duomo di Verona</b>（約 €4）羅馬式主教座堂，有提香畫作與地板下考古層<a href="https://maps.google.com/?cid=14895936851215412853">📍</a></li>
+          <li><b>Castelvecchio ＋ Ponte Scaligero</b>（過橋免費）14 世紀紅磚城堡與燕尾雉堞堤橋，黃昏超美、回程順路<a href="https://maps.google.com/?cid=10410795942312446568">📍</a></li>
+        </ul></div>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">走路</span></div></div>
+
+      <div class="row sight"><div class="time">4:30 PM</div><div class="content">
+        <p class="title">Ponte Pietra 古羅馬石橋 <span class="tag t-sight">景點</span><a href="https://maps.google.com/?cid=10423911865663706042">📍地圖</a></p>
+        <p class="note">看點：維羅納最古老的橋（羅馬時代），二戰被炸毀後用原石重建。紅磚拱橋跨碧綠的阿迪傑河，傍晚金光與對岸山丘最上鏡——全城最經典的拍照點之一。</p>
+      </div></div>
+
+      <div class="row food"><div class="time">5:15 PM</div><div class="content">
+        <p class="title">購物逛街 <span class="tag t-food">逛街</span></p>
+        <p class="note">回到 Via Mazzini 與 Corso Porta Borsari 一帶慢慢逛——精品、皮件、紀念品都集中在這兩條徒步街，是維羅納最好逛的購物軸線。</p>
+      </div></div>
+
+      <div class="row food"><div class="time">6:30 PM</div><div class="content">
+        <p class="title">維羅納晚餐 <span class="tag t-food">3 選 1</span></p>
+        <p class="note">都在歷史中心、傳統維羅納菜，現場看心情與排隊狀況挑一家；建議先訂位。價位為每人約略（不含太多酒水）。</p>
+        <div class="alts"><span class="lab">餐廳選項</span><ul>
+          <li><b>Osteria Il Bertoldo</b>（⭐4.6・<span class="px">每人約 €30–45</span>）南瓜餃、燉牛肉配玉米糊，近 Piazza Erbe<a href="https://www.google.com/maps/search/?api=1&query=45.4448582,10.9945702">📍</a></li>
+          <li><b>Caffè Monte Baldo</b>（⭐4.9・<span class="px">每人約 €35–55</span>）招牌 Amarone 紅酒燉飯、精緻（週二休）<a href="https://www.google.com/maps/search/?api=1&query=45.4446263,10.9969361">📍</a></li>
+          <li><b>Osteria il Ciottolo</b>（⭐4.6・<span class="px">每人約 €30–40</span>）道地家常菜、近 Castelvecchio（週三休）<a href="https://www.google.com/maps/search/?api=1&query=45.440136,10.9899797">📍</a></li>
+        </ul></div>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">取車</span>約 8:00 PM 回 Cittadella 取車（想早走可把晚餐提前到 18:00）</div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">開車</span>8:00–9:50 PM 維羅納 → 米蘭（A4，約 160 km、1 小時 50 分，有過路費）</div></div>
+
+      <div class="row sight"><div class="time">9:50 PM</div><div class="content">
+        <p class="title">入住 米蘭住宿（Sesto San Giovanni）<span class="tag t-sight">住宿</span><a href="https://www.google.com/maps/search/?api=1&query=Sesto+1+Maggio+M1+Milano">📍 Sesto 1° Maggio 站</a></p>
+        <p class="note">Sesto San Giovanni、M1 Sesto 1° Maggio 站旁約 180 m，地下停車場、ZTL 外。<span class="k">櫃台 24 小時、可晚到</span>（你們約 21:50 到 OK）、check-in 從 14:00 起；夜間大門是住客專用閘門，<span class="k">建議先告知預計到達時間</span>、午夜前抵達最保險。</p>
+      </div></div>
+
+    </div>
+  </section>
+
+  <!-- 第二天 -->
+  <section class="panel" id="p-d2">
+    <div class="day-head"><span class="d">第二天 · 6/26（五）</span><span class="theme">早出玩好玩滿<br>清晨大教堂→達文西→城堡→屋頂→運河</span></div>
+    <div class="tl">
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">交通</span>6:30 出發，走 2 分到 M1 Sesto 1° Maggio → 直達市中心（約 25 分）</div></div>
+
+      <div class="row sight"><div class="time">7:00</div><div class="content">
+        <p class="title">Piazza del Duomo 清晨空景 <span class="tag t-sight">景點</span><a href="https://maps.google.com/?cid=12357681832208772627">📍地圖</a></p>
+        <p class="note">看點：清晨七點的大教堂廣場幾乎沒人，是拍純淨大教堂正面與廣場空景的黃金時刻；趁開店前先在這裡散步、拍照。</p>
+      </div></div>
+
+      <div class="row food"><div class="time">7:30</div><div class="content">
+        <p class="title">市區早餐 <span class="tag t-food">3 選 1</span></p>
+        <p class="note">義式早餐＝卡布奇諾＋可頌（cornetto）。三家都 7:30 開、皆在市中心，挑一家；價位為每人約略。</p>
+        <div class="alts"><span class="lab">早餐選項</span><ul>
+          <li><b>Princi（Via Speronari）</b>（<span class="px">每人約 €5–10</span>）大教堂旁人氣烘焙坊，現烤可頌與肉桂捲超讚、出餐快<a href="https://www.google.com/maps/search/?api=1&query=45.4629919,9.1879952">📍</a></li>
+          <li><b>Marchesi 1824（Galleria 店）</b>（<span class="px">每人約 €10–18</span>）拱廊裡的優雅老牌甜點店，環境與擺盤最美、可拍<a href="https://www.google.com/maps/search/?api=1&query=45.4656209,9.1900859">📍</a></li>
+          <li><b>Pasticceria Cucchi</b>（<span class="px">每人約 €8–15</span>）在地人最愛的歷史咖啡館、早午餐氛圍佳（偏運河方向）<a href="https://www.google.com/maps/search/?api=1&query=45.4584945,9.1775838">📍</a></li>
+        </ul></div>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">交通</span>M1→M2（或電車）到 Santa Maria delle Grazie，約 15 分</div></div>
+
+      <div class="row sight"><div class="time">8:30</div><div class="content">
+        <p class="title">《最後的晚餐》 <span class="tag t-warn">需預約</span><a href="https://maps.google.com/?cid=7906342492968976262">📍地圖</a></p>
+        <p class="note">看點：達文西繪在修道院食堂牆上的曠世真跡，全世界僅此一幅；看十二門徒聽到「你們其中一人將出賣我」瞬間的情緒與透視。官網訂早上場、停留 15 分。</p>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">走路</span>往 Castello 方向（途經 Corso Magenta）</div></div>
+
+      <div class="row sight"><div class="time">9:15</div><div class="content">
+        <p class="title">Sforzesco 城堡 ＋ Pietà <span class="tag t-sight">景點</span><a href="https://maps.google.com/?cid=7302267279280095899">📍地圖</a></p>
+        <p class="note">看點：米蘭文藝復興紅磚大城堡。必看米開朗基羅臨終未完成的《隆達尼尼聖母哀慟》，能感受大師生命終點的筆觸。庭院免費隨意逛。</p>
+        <div class="alts"><span class="lab">這段路上可加（看時間機動）</span><ul>
+          <li><b>San Maurizio al Monastero Maggiore</b>（免費・10:00 開・週一休）被稱「米蘭的西斯汀禮拜堂」，整室盧伊尼濕壁畫，遊客少、超值<a href="https://www.google.com/maps/search/?api=1&query=45.4656402,9.1789374">📍</a></li>
+          <li><b>Basilica di Sant'Ambrogio</b>（免費）西元 4 世紀羅馬式古教堂、米蘭主保聖人聖安博的聖殿，肅穆動人<a href="https://www.google.com/maps/search/?api=1&query=45.4622965,9.17548">📍</a></li>
+        </ul></div>
+      </div></div>
+
+      <div class="row sight"><div class="time">10:45</div><div class="content">
+        <p class="title">Parco Sempione 公園 <span class="tag t-sight">景點</span><a href="https://maps.google.com/?cid=13311476257980519350">📍地圖</a></p>
+        <p class="note">看點：城堡後方大片英式綠地，盡頭是拿破崙的和平之門（Arco della Pace）。散步歇腳剛好；想登高可上園內 Torre Branca 觀景塔俯瞰全城。</p>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">走路</span></div></div>
+
+      <div class="row food"><div class="time">12:00</div><div class="content">
+        <p class="title">米蘭午餐 <span class="tag t-food">3 選 1</span></p>
+        <p class="note">城堡／布雷拉一帶，現場挑一家。價位為每人約略。</p>
+        <div class="alts"><span class="lab">餐廳選項</span><ul>
+          <li><b>Pizzium - Via Arco</b>（太太選・<span class="px">每人約 €12–20</span>）道地拿坡里披薩、城堡旁<a href="https://maps.google.com/?cid=1205513349414277460">📍</a></li>
+          <li><b>Trattoria del Ciumbia</b>（<span class="px">每人約 €30–45</span>）傳統米蘭菜：番紅花燉飯／炸牛排（布雷拉）<a href="https://www.google.com/maps/search/?api=1&query=45.4718528,9.1847326">📍</a></li>
+          <li><b>Pizzeria da Giuliano</b>（<span class="px">每人約 €12–20</span>）中國城、想吃亞洲味順道<a href="https://www.google.com/maps/search/?api=1&query=Pizzeria+da+Giuliano+Via+Paolo+Sarpi+Milano">📍</a></li>
+        </ul></div>
+      </div></div>
+
+      <div class="row sight"><div class="time">13:15</div><div class="content">
+        <p class="title">Brera 區 ＋ Pinacoteca <span class="tag t-sight">景點 · 選配</span><a href="https://maps.google.com/?cid=1960889438820185910">📍地圖</a></p>
+        <p class="note">看點：米蘭最有文青氣質的老街區，石板巷弄、藝廊與小店。Pinacoteca 是頂級畫廊（曼帖那《哀悼基督》的驚人透視、拉斐爾、卡拉瓦喬）；對藝術沒那麼熱衷就純逛布雷拉小巷與庭院。</p>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">交通</span>往大教堂（M3 或散步約 15 分）</div></div>
+
+      <div class="row sight"><div class="time">15:00</div><div class="content">
+        <p class="title">Duomo 屋頂 ＋ 內部 <span class="tag t-warn">指定時段</span><a href="https://maps.google.com/?cid=12357681832208772627">📍地圖</a></p>
+        <p class="note">看點（重頭戲）：搭電梯上屋頂，走在 135 座大理石尖塔的「石林」間俯瞰全城；內部有巨幅彩繪玻璃與寫實到驚人的「被剝皮的聖巴多羅買」雕像。順道美食：Panzerotti Luini 炸餃、Ciacco 冰淇淋、Starbucks 臻選都在周邊。</p>
+        <div class="alts"><span class="lab">大教堂周邊可加</span><ul>
+          <li><b>Museo del Novecento</b>（約 €5・週一休）20 世紀藝術（封塔納、薄丘尼、畢卡索），頂樓還有絕佳大教堂景<a href="https://www.google.com/maps/search/?api=1&query=45.463408,9.1901686">📍</a></li>
+          <li><b>Santa Maria presso San Satiro</b>（免費）布拉曼帖用透視「畫」出根本不存在的後殿，3D 錯覺神作、人少<a href="https://www.google.com/maps/search/?api=1&query=45.4626814,9.1878262">📍</a></li>
+        </ul></div>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">走路</span>穿 Galleria 拱廊（世界最古老購物拱廊之一、踩金牛求好運）經 Piazza della Scala 史卡拉歌劇院</div></div>
+
+      <div class="row sight"><div class="time">17:15</div><div class="content">
+        <p class="title">Quadrilatero 金三角逛街 <span class="tag t-sight">景點</span><a href="https://maps.google.com/?cid=16954237272813760867">📍地圖</a></p>
+        <p class="note">看點：全球時尚之都的精品金三角（Via Montenapoleone 一帶）。就算不買，櫥窗與貴氣建築也值得散步。多數店約 19:30 打烊。</p>
+      </div></div>
+
+      <div class="row food"><div class="time">18:30</div><div class="content">
+        <p class="title">開胃酒 Aperitivo <span class="tag t-food">小酌</span></p>
+        <p class="note">米蘭的黃昏儀式：點一杯（Negroni／Spritz）附吧台小點。挑一處小歇再去吃晚餐。</p>
+        <div class="alts"><span class="lab">小酌選項</span><ul>
+          <li><b>Camparino in Galleria</b>（<span class="px">一杯約 €12–18</span>）拱廊口的百年名吧、Campari 發源地，氣派<a href="https://www.google.com/maps/search/?api=1&query=Camparino+in+Galleria+Milano">📍</a></li>
+          <li>到 <b>Navigli 運河區</b>沿岸任挑一家 aperitivo 小館（<span class="px">一杯約 €10–15</span>、附小點吃到飽）順便接著吃晚餐</li>
+        </ul></div>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">交通</span>電車／M2 到運河區 Navigli</div></div>
+
+      <div class="row food"><div class="time">20:00</div><div class="content">
+        <p class="title">運河區晚餐 <span class="tag t-food">3 選 1</span></p>
+        <p class="note">在 Navigli 運河區，先沿運河散步再入座。飯後 M1 回 Sesto 1° Maggio，走 2 分回飯店。價位為每人約略。</p>
+        <div class="alts"><span class="lab">餐廳選項</span><ul>
+          <li><b>Bellariva</b>（太太選・<span class="px">每人約 €30–45</span>）米蘭炸牛排＋番紅花燉飯，河景<a href="https://maps.google.com/?cid=6895615321184770601">📍</a></li>
+          <li><b>La Prosciutteria Navigli</b>（<span class="px">每人約 €20–30</span>）火腿起司拼盤＋葡萄酒，輕鬆<a href="https://www.google.com/maps/search/?api=1&query=45.4511055,9.1723673">📍</a></li>
+          <li>沿 Ripa di Porta Ticinese 任挑一家小館（<span class="px">每人約 €20–35</span>）</li>
+        </ul></div>
+      </div></div>
+
+    </div>
+  </section>
+
+  <!-- 第三天 -->
+  <section class="panel" id="p-d3">
+    <div class="day-head"><span class="d">第三天 · 6/27（六）</span><span class="theme">回程日 · 飛 MXP<br>半路喝咖啡吃早餐</span></div>
+    <div class="tl">
+
+      <div class="row sight"><div class="time">07:00</div><div class="content">
+        <p class="title">退房、行李上車 <span class="tag t-sight">住宿</span></p>
+        <p class="note">早點退房（早餐改在半路的咖啡廳吃）；跟櫃台確認停車場出場與帳務。</p>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">開車</span>約 07:15 出發，走環城接 A8（往 Varese／Malpensa 方向）；沿途找加油站加滿（租車多需滿油還車）</div></div>
+
+      <div class="row food"><div class="time">07:50</div><div class="content">
+        <p class="title">半路早餐 <span class="tag t-food">3 選 1</span></p>
+        <p class="note">義式早餐＝卡布奇諾＋可頌。停約 25–30 分鐘，吃飽再上路；以下由近機場到遠排列，價位為每人約略。</p>
+        <div class="alts"><span class="lab">咖啡早餐選項</span><ul>
+          <li><b>Pasticceria Aurora（Gallarate）</b>（⭐4.4・<span class="px">每人約 €4–8</span>）離 MXP 約 13km／15 分，在地人激推、便宜好吃；先開大半段再悠閒喝最從容（週六 7:00 開）<a href="https://www.google.com/maps/search/?api=1&query=45.6799529,8.79934">📍</a></li>
+          <li><b>Autogrill Villoresi（A8 上）</b>（⭐4.1・<span class="px">每人約 €5–9</span>）最順、不用下交流道，24h 的經典橋式公路餐廳，喝完直接上路<a href="https://www.google.com/maps/search/?api=1&query=45.5593044,9.0416636">📍</a></li>
+          <li><b>La Dolce Legnano</b>（⭐4.5・<span class="px">每人約 €4–8</span>）真正的中點（離 MXP 約 25km），熱可可與 bombolone 被推爆；需稍下交流道進鎮（週六 7:00 開）<a href="https://www.google.com/maps/search/?api=1&query=45.5861246,8.9005932">📍</a></li>
+        </ul></div>
+      </div></div>
+
+      <div class="row leg"><div class="time"></div><div class="content"><span class="pill">還車</span>續開到 MXP 租車還車區還車 → 接駁／步行到航廈（抓 20–30 分）</div></div>
+
+      <div class="row sight"><div class="time">09:00</div><div class="content">
+        <p class="title">抵航廈、辦理登機 <span class="tag t-warn">提前 3 小時</span></p>
+        <p class="note">飛台灣的長程線多在第一航廈（T1），請依航空公司確認航廈。中午 12:00 起飛、09:00 到航廈 buffer 充足；轉機線報到＋安檢要留時間。</p>
+      </div></div>
+
+      <div class="row sight"><div class="time">12:00</div><div class="content">
+        <p class="title">班機起飛 ✈︎</p>
+        <p class="note">回台灣。</p>
+      </div></div>
+
+    </div>
+  </section>
+
+  <!-- 必買 -->
+  <section class="panel" id="p-buy">
+    <div class="day-head"><span class="d">特色必買清單</span><span class="theme">每項附在哪買<br>維羅納 / 米蘭 / 機場</span></div>
+
+    <div class="card flag">
+      <h2>購買點一覽（先記這幾個）</h2>
+      <ul>
+        <li><span class="k">米蘭食品一站購：Eataly Milano</span>（Piazza XXV Aprile，每天 8–23）<a href="https://www.google.com/maps/search/?api=1&query=45.4806249,9.1878807">📍</a>——醋、油、松露、燉飯米、純番紅花、咖啡、潘娜朵尼（全年有）、Campari、巧克力幾乎全包，最適合掃貨。</li>
+        <li><span class="k">米蘭巧克力：Venchi</span>（Via Mengoni、大教堂旁）<a href="https://www.google.com/maps/search/?api=1&query=45.4652376,9.1886659">📍</a>；<span class="k">設計：Alessi Store</span>（Via Manzoni 14，金三角旁）<a href="https://www.google.com/maps/search/?api=1&query=45.4689866,9.1918207">📍</a>。</li>
+        <li><span class="k">維羅納超市：Eurospar Manin</span>（Via Manin 7、中心兩層、酒類多）<a href="https://www.google.com/maps/search/?api=1&query=45.438246,10.9891327">📍</a>——Campari、米、番紅花、醋、咖啡、Baci 都有。</li>
+        <li><span class="k">彩妝 Kiko：</span>維羅納 Via Mazzini 33a（逛街順路）<a href="https://www.google.com/maps/search/?api=1&query=45.4409786,10.9955084">📍</a>；米蘭 Via Torino／Corso V. Emanuele 一帶多家。</li>
+        <li><span class="k">機場 MXP T1：</span>過安檢後 Dufry 免稅＋「Piazza del Gusto」美食區——酒（Campari）、巧克力、咖啡、部分食品禮盒、Kiko 都有；酒水免稅最划算。</li>
+      </ul>
+    </div>
+
+    <div class="buylist">
+
+      <div class="buycard"><span class="ic">🍷</span><div>
+        <p class="bt">Campari</p>
+        <p class="bn">調酒 Negroni 的靈魂、就誕生在米蘭。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 維羅納 Eurospar／米蘭超市・Eataly／<b>✈ 機場免稅最便宜</b></p></div></div>
+
+      <div class="buycard"><span class="ic">🍞</span><div>
+        <p class="bt">Panettone 潘娜朵尼甜麵包</p>
+        <p class="bn">米蘭發源的經典甜麵包，送禮體面、體積大放托運。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 米蘭 Eataly／名甜點店（全年有）・✈ 機場禮盒。<b>六月非旺季，一般超市不一定有</b>。</p></div></div>
+
+      <div class="buycard"><span class="ic">🍚</span><div>
+        <p class="bt">Carnaroli 燉飯米 ＋ 番紅花</p>
+        <p class="bn">米蘭名菜番紅花燉飯的主角，輕巧又少見。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 維羅納 Eurospar／米蘭超市・Eataly（純柱頭番紅花到 Eataly 或機場食品區）</p></div></div>
+
+      <div class="buycard"><span class="ic">🍫</span><div>
+        <p class="bt">Baci Perugina 巧克力</p>
+        <p class="bn">榛果巧克力、每顆有情話小籤，經典義式糖果禮。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 維羅納／米蘭任何超市・✈ 機場糖果區</p></div></div>
+
+      <div class="buycard"><span class="ic">🍫</span><div>
+        <p class="bt">Gianduiotti 金錠榛果巧克力</p>
+        <p class="bn">金紙包的義式巧克力代表。⚠️ 六月易融，放托運或盡快吃。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 米蘭 Venchi（大教堂旁）／維羅納 Venchi・巧克力店／✈ 機場</p></div></div>
+
+      <div class="buycard"><span class="ic">☕</span><div>
+        <p class="bt">Lavazza／Illy 咖啡 ＋ Moka 壺</p>
+        <p class="bn">咖啡豆或粉配一支摩卡壺，回家煮義式風味。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 咖啡：任何超市最便宜；Moka 壺：超市家用區・Eataly・✈ 機場</p></div></div>
+
+      <div class="buycard"><span class="ic">🫒</span><div>
+        <p class="bt">巴薩米克醋（Modena）＋ 橄欖油</p>
+        <p class="bn">廚房系經典、質感好。⚠️ 屬液體，城內買要托運。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 米蘭 Eataly（選擇最多）・超市／維羅納 Eurospar</p></div></div>
+
+      <div class="buycard"><span class="ic">🍄</span><div>
+        <p class="bt">松露醬／松露鹽</p>
+        <p class="bn">高級又輕巧，拌麵拌蛋秒變餐廳味。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 米蘭 Eataly・gourmet 食品店／維羅納 gourmet 食品店・Eurospar</p></div></div>
+
+      <div class="buycard"><span class="ic">💄</span><div>
+        <p class="bt">Kiko Milano 彩妝</p>
+        <p class="bn">米蘭平價彩妝品牌，CP 值高、好分送。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 維羅納 Via Mazzini 33a（逛街順路）／米蘭 Via Torino 一帶／✈ 機場 T1</p></div></div>
+
+      <div class="buycard"><span class="ic">🎨</span><div>
+        <p class="bt">Alessi 設計小物</p>
+        <p class="bn">義大利設計代表（開瓶器、小鳥水壺哨等），實用又有梗。</p>
+        <p class="bn" style="color:var(--food);margin-top:5px">🛒 米蘭 Alessi Store（Via Manzoni 14）・Rinascente 百貨／✈ 機場設計店（維羅納無專賣店）</p></div></div>
+
+    </div>
+
+    <div class="card flag">
+      <h2>避雷與退稅</h2>
+      <ul>
+        <li><span class="k">肉類一律別買</span>（生火腿、薩拉米等）—— 帶回台灣違法、重罰。起司少量真空硬起司可、記得申報。</li>
+        <li><span class="k">液體</span>（酒、油、醋）城內買要托運；免稅區買可手提（密封袋）。</li>
+        <li><span class="k">退稅</span>：市區單張收據滿 €70 有拿 Tax-Free 單，於 T1 報到區 Global Blue 櫃台辦理（約退 12–15%）。<span class="k">托運的退稅品要先驗章再去報到</span>。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 交通・須知 -->
+  <section class="panel" id="p-market">
+    <div class="day-head"><span class="d">超市・大賣場</span><span class="theme">大型便宜採買<br>義式 ipermercato</span></div>
+
+    <div class="card flag">
+      <h2>先看這個：Costco？沒有！</h2>
+      <ul>
+        <li>義大利<span class="k">沒有 Costco</span>。想要「大量、便宜、大停車場」就找 <span class="k">ipermercato 大賣場</span>（Iper、Ipercoop、Carrefour Iper、Conad Superstore、Bennet）或 <span class="k">折扣超市</span>（Lidl、Eurospin、MD、Penny，便宜 20–40%）。</li>
+        <li>食品伴手禮最省力的做法：<span class="k">車停飯店，回飯店前在 Sesto 的大超市一次買齊裝進後車廂</span>，機場只留免稅酒水與巧克力。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🏨 飯店附近（Sesto，開車最方便掃貨）</h2>
+      <ul>
+        <li><span class="k">Esselunga（Via Rovani）</span>——大型兩層、地下停車，品質＋價格俱佳，離飯店約 1km。7:30–21:00。<a href="https://www.google.com/maps/search/?api=1&query=45.53735,9.2301685">📍</a></li>
+        <li><span class="k">Centro Sarca → Ipercoop</span>（Via Milanese 10）——購物中心裡的 <span class="k">Ipercoop 大賣場</span>（什麼都有、室內停車），離飯店近。<span class="k">超市 8:30–21:00</span>（週日 9:00–21:00；商場餐廳／電影院才到深夜）。<a href="https://www.google.com/maps/search/?api=1&query=45.5288862,9.2177971">📍</a></li>
+        <li><span class="k">Lidl（Viale Brianza 2, Cinisello）</span>——折扣超市、便宜、近高速有停車。8:00–21:00。<a href="https://www.google.com/maps/search/?api=1&query=45.55033,9.23793">📍</a></li>
+        <li><span class="k">Eurospin（Via Carlo Marx, Sesto）</span>——折扣超市、最便宜。<a href="https://www.google.com/maps/search/?api=1&query=45.5236005,9.2472868">📍</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🛣 往機場路上（6/27 可順）</h2>
+      <ul>
+        <li><span class="k">Il Centro（Arese）</span>——倫巴底最大購物中心之一、內有 <span class="k">Iper「La grande i」大賣場</span>（最像 Costco 的體驗），就在往 Malpensa 的 A8 旁。<span class="k">Iper 超市每天 8:00–22:00</span>（商場店家 9:00–22:00）——這一帶少數開到 22:00 的大賣場。清晨趕機仍偏早，想血拼或班機較晚才繞。<a href="https://www.google.com/maps/search/?api=1&query=45.5639022,9.055778">📍</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🏛 維羅納（6/25）</h2>
+      <ul>
+        <li><span class="k">Eurospar Manin（Via Manin 7）</span>——市中心兩層、酒類多，逛街順路（近 Arena）。8:30–20:00。<a href="https://www.google.com/maps/search/?api=1&query=45.438246,10.9891327">📍</a></li>
+        <li><span class="k">Iper La grande i（San Martino B.A.，城東）</span>——維羅納的大賣場、什麼都有、大停車場，離中心約 10 分車程。8:30–21:00。<a href="https://www.google.com/maps/search/?api=1&query=45.4128573,11.0915713">📍</a></li>
+        <li><span class="k">Lidl（Via Manzoni 11）</span>——折扣超市、市區西側。8:00–21:30。<a href="https://www.google.com/maps/search/?api=1&query=45.4425,10.96995">📍</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🏔 多洛米堤回程（A22 沿線，往 Verona／米蘭）</h2>
+      <ul>
+        <li><span class="k">由北往南順路</span>：玩 Bolzano／Val Gardena 一帶，回程走 A22 往南，沿線大賣場很多、可順手補貨。南提洛主要連鎖是 Despar／Eurospar、MPREIS、Poli；<span class="k">觀光區週日多有開</span>。</li>
+        <li><span class="k">Eurospar（Bressanone／Brixen, Via Brennero 21/H）</span>——最北的 A22 選項。一–六 8:00–19:30、日 9:00–19:30。<a href="https://www.google.com/maps/search/?api=1&query=46.7227799,11.6547153">📍</a></li>
+        <li><span class="k">INTERSPAR（Bolzano, Via Bruno Buozzi 30）</span>——大賣場、選擇多、免費大停車場。一–六 7:30–20:30、日 9:00–19:30。<a href="https://www.google.com/maps/search/?api=1&query=46.4696422,11.32235">📍</a></li>
+        <li><span class="k">IperPoli Trento（La Cittadella, Via del Brennero 270）</span>——Trento 最大、地下停車。每天 8:30–21:00（日至 20:00）。<a href="https://www.google.com/maps/search/?api=1&query=46.0875313,11.1180771">📍</a></li>
+        <li><span class="k">INTERSPAR Rovereto（Via del Garda 95）</span>——<span class="k">離 Verona 最近、回程最後補貨點</span>，大賣場、好停車。一–六 8:00–20:00、日 9:00–20:00。<a href="https://www.google.com/maps/search/?api=1&query=45.8696114,11.0151379">📍</a></li>
+        <li>🚗 <span class="k">若從 Cortina（東側）回</span>：走 SS51→Belluno→A27，路線不同。鎮上 <span class="k">CONAD CITY Cortina</span>（Via Barone Franchetti 1）一–五 8:30–19:30、六 至 20:00、日 8:30–13:00；<span class="k">⚠️ 停車位很少、不好停</span>。<a href="https://www.google.com/maps/search/?api=1&query=46.5369,12.1405">📍</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🇨🇭 MXP → 策馬特 Zermatt（瑞士）路上</h2>
+      <ul>
+        <li>路線：MXP → 經 Lago Maggiore → <span class="k">Simplon 辛普朗山口</span> → Brig → Visp → 停 Täsch 轉小火車上策馬特（策馬特禁車）。<span class="k">瑞士物價高，重的、大量的先在義大利這側買齊</span>。</li>
+        <li><span class="k">🇮🇹 Domodossola — Conad（Corso F.lli di Dio 12）</span>：進山口前最後的義大利城鎮。一–五 8:30–13:30＋15:00–19:30、週日休；附近還有 Lidl／Eurospin 更便宜。👉 <span class="k">水、飲料、零食、義大利麵、酒、咖啡在這裡買齊</span>，過山口進瑞士常貴 50–80%。<a href="https://www.google.com/maps/search/?api=1&query=46.115166,8.2926138">📍</a></li>
+        <li><span class="k">🇨🇭 Visp — Lidl（Kantonsstrasse 49）</span>：Visp 最便宜。一–四只到 18:30（五 20:00、六 17:00）、週日休。<a href="https://www.google.com/maps/search/?api=1&query=46.29393,7.89644">📍</a></li>
+        <li><span class="k">🇨🇭 Visp — Coop Pronto（車站）</span>：5:00–23:00、<span class="k">週日也開</span>（五六到午夜），時間最彈性、轉車最方便（便利店型、較貴）。<a href="https://www.google.com/maps/search/?api=1&query=46.2937287,7.8815575">📍</a></li>
+        <li><span class="k">🇨🇭 Täsch — Coop（Kantonsstrasse 165）</span>：<span class="k">開車能到的最後一家超市</span>（之後停車轉小火車）。8:00–18:30、週日休、選擇較少。<a href="https://www.google.com/maps/search/?api=1&query=46.0674597,7.7760869">📍</a></li>
+        <li><span class="k">🇨🇭 Zermatt — Migros（鎮內）</span>：每天 8:00–19:00（<span class="k">週日也開</span>），旁有 Coop。價格最高；住宿有廚房自己煮最省。<a href="https://www.google.com/maps/search/?api=1&query=46.0217657,7.7482835">📍</a></li>
+        <li>⚠️ <span class="k">瑞士超市關得早（多 18:30）、週日多休</span>；週日只有車站 Coop Pronto 與策馬特鎮內 Migros／Coop 有開。一般食品可從義大利帶進瑞士自用，生鮮肉／乳製品有入境限量。</li>
+      </ul>
+    </div>
+
+    <p class="note" style="margin-top:14px">超市買的酒、油、醋等液體記得托運；自備購物袋；蔬果多需自己秤重貼標。營業時間以現場為準、週日多較短。</p>
+  </section>
+
+  <section class="panel" id="p-tickets">
+    <div class="day-head"><span class="d">訂票總整理</span><span class="theme">哪些要先訂<br>現場買 / 免費一次看</span></div>
+
+    <div class="card flag">
+      <h2>① 務必提前線上訂（會售完）</h2>
+      <ul>
+        <li><span class="k">《最後的晚餐》</span>（6/26 米蘭）：官網 <a href="https://cenacolovinciano.org/">cenacolovinciano.org</a>，約 €15＋手續費，限時 15 分鐘梯次。<span class="k">現場不售票、常數月前售罄，越早訂越好</span>；訂不到就把該格改逛布雷拉。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>② 建議線上訂指定時段（免排隊）</h2>
+      <ul>
+        <li><span class="k">米蘭大教堂 Duomo 屋頂＋內部</span>（6/26）：官網 <a href="https://www.duomomilano.it/">duomomilano.it</a>，<span class="k">電梯套票 Combo Lift 約 €26</span>（含屋頂＋內部＋博物館＋考古區）；中文語音導覽 +€7。選好時段、提早 15–20 分到安檢，需遮肩遮膝。</li>
+        <li><span class="k">Arena di Verona 競技場</span>（6/25）：官網 <a href="https://www.arena.it/">arena.it</a> 線上買參觀票約 €12，可走快速通道免排隊。⚠️ 有歌劇演出的日子白天提早關閉參觀，去前先查當天開放時間。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>③ 維羅納景點（可現場買 / 用 Verona Card）</h2>
+      <ul>
+        <li><span class="k">Casa di Giulietta 茱麗葉之家：</span>庭院免費；上陽台／進屋約 €10。</li>
+        <li><span class="k">Torre dei Lamberti 高塔：</span>約 €6（電梯 +€1）。</li>
+        <li><span class="k">Sant'Anastasia／Duomo di Verona 教堂：</span>各約 €4，或 €8 四教堂通票（chieseverona.it）。</li>
+        <li><span class="k">Castelvecchio 城堡博物館：</span>約 €6（堤橋 Ponte Scaligero 免費）。</li>
+        <li>💡 <span class="k">Verona Card</span>（24h 約 €27／48h 約 €32）涵蓋 Arena、茱麗葉之家、Lamberti、教堂、Castelvecchio ＋市區公車——當天想進 <span class="k">3 個以上景點就買它划算</span>（Lamberti 的 €1 電梯不含）。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>④ 米蘭景點（現場買 / 免費）</h2>
+      <ul>
+        <li><span class="k">Sforzesco 城堡：</span>庭院免費；博物館（含米開朗基羅《Pietà Rondanini》）約 €5，現場買即可，每月第一個週日免費。</li>
+        <li><span class="k">Pinacoteca di Brera（選配）：</span>約 €15，brerabooking.org 或現場。</li>
+        <li><span class="k">Museo del Novecento（選配）：</span>約 €5、現場。Torre Branca 觀景塔約 €6。</li>
+        <li><span class="k">免費免票：</span>San Maurizio（米蘭西斯汀）、Sant'Ambrogio、Santa Maria presso San Satiro、Galleria 拱廊、各廣場、Parco Sempione。</li>
+      </ul>
+    </div>
+
+    <p class="note" style="margin-top:14px">票價為約略、以各官網為準。「①」務必出發前先訂；「②」建議出發前或前一晚訂好時段；「③④」多數現場買或免費。</p>
+  </section>
+
+  <section class="panel" id="p-info">
+    <div class="day-head"><span class="d">交通</span><span class="theme">停車・地鐵・車程<br>出發前看一次</span></div>
+
+    <div class="card flag">
+      <h2>維羅納自駕重點（6/25 下午）</h2>
+      <ul>
+        <li><span class="k">停車（最安全）：</span><span class="k">Parcheggio Cittadella（APCOA）</span>——地下、24h、有保全、在 ZTL 限行區外。入口 Via Andrea Paglieri。約 €2–3.5/時、日上限約 €16–18。歌劇季傍晚易滿，建議 apcoa.it 先訂位。</li>
+        <li><span class="k">別開進歷史中心：</span>市中心是 ZTL，無證駛入會被攝影機罰款（約 €85）。停好走進去即可。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>米蘭每日通勤（從飯店出發，6/26 用）</h2>
+      <ul>
+        <li><span class="k">車停飯店：</span>飯店有停車場（官網直訂才含停車）。車停好整趟不用動。</li>
+        <li><span class="k">進城：</span>飯店步行約 <span class="k">2 分到 M1 紅線 Sesto 1° Maggio</span> → 直達 Duomo 約 25 分。門到大教堂約 30 分、不用搭公車。</li>
+        <li><span class="k">車票：</span>感應卡直接嗶（當日自動封頂 €7.60）或單程 €2.20；<span class="k">進、出站都要嗶</span>，買 Mi1–Mi3 區段。</li>
+        <li><span class="k">夜間回程超方便：</span>搭 M1 回 Sesto 1° Maggio，<span class="k">走 2 分就到飯店</span>，不必再叫車。地鐵末班約 00:30。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>車程 · 維羅納→米蘭→機場</h2>
+      <ul>
+        <li><span class="k">維羅納 → 米蘭（6/25）：</span>A4 高速約 160 km、<span class="k">約 1 小時 50 分</span>（傍晚車少）。</li>
+        <li><span class="k">米蘭 → MXP（6/27）：</span>從 Sesto 約 50 km、<span class="k">45–55 分</span>。中午 12:00 國際線，09:00 前進航廈、提前 3 小時。在機場還租車（多需滿油）。</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <footer>
+    每個地點的「📍地圖」可直接點開 Google 地圖導航。上方標籤切換每一天。餐廳價位為每人約略、不含太多酒水，實際以菜單為準。<br>
+    維羅納與米蘭歷史中心都是 ZTL／限行區，車停區外有保全車場再走進去；隨身防扒。
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var tabs=document.querySelectorAll('.tab');
+    var panels=document.querySelectorAll('.panel');
+    function show(t){
+      panels.forEach(function(p){p.classList.toggle('active', p.id==='p-'+t);});
+      tabs.forEach(function(b){b.classList.toggle('on', b.getAttribute('data-t')===t);});
+      document.querySelector('.tabs').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    tabs.forEach(function(b){
+      b.addEventListener('click',function(){show(b.getAttribute('data-t'));});
+    });
+  })();
+</script>
+</body>
+</html>
