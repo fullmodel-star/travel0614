@@ -1,4 +1,4 @@
-const CACHE_NAME = 'travel-itinerary-v21';
+const CACHE_NAME = 'travel-itinerary-v22';
 const ASSETS = [
   './',
   './index.html',
@@ -44,11 +44,30 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// 攔截請求：採用 Stale-While-Revalidate 策略
-// 離線時直接讀取快取；在線時，先回傳快取以加快速度，並於背景向網路請求最新版本更新快取
+// 頁面導航：Network-First（3 秒逾時退回快取）
+// → 有網路時永遠拿到最新內容（iOS 不再卡舊版）；離線/逾時則用快取，山區照常可用
+// 其他資源：Stale-While-Revalidate（先回快取秒開，背景向網路更新）
 self.addEventListener('fetch', (event) => {
   // 只攔截 GET 請求與 HTTP/HTTPS 協議 (排除 chrome-extension 等)
   if (event.request.method !== 'GET' || !event.request.url.startsWith('http')) {
+    return;
+  }
+
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      try {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 3000);
+        const res = await fetch(event.request, { signal: ctrl.signal });
+        clearTimeout(timer);
+        if (res.status === 200) cache.put(event.request, res.clone());
+        return res;
+      } catch (e) {
+        const cached = await cache.match(event.request);
+        return cached || cache.match('./index.html');
+      }
+    })());
     return;
   }
 

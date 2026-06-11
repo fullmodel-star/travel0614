@@ -2496,7 +2496,8 @@ if ('serviceWorker' in navigator) {
   }
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').then((reg) => {
-      if (reg.waiting && navigator.serviceWorker.controller) showUpdate(reg.waiting);
+      // 剛啟動就有等待中的新版 → 直接套用（此刻自動重載無感，不必等人按）
+      if (reg.waiting && navigator.serviceWorker.controller) reg.waiting.postMessage('SKIP_WAITING');
       reg.addEventListener('updatefound', () => {
         const nw = reg.installing;
         if (!nw) return;
@@ -2504,7 +2505,15 @@ if ('serviceWorker' in navigator) {
           if (nw.state === 'installed' && navigator.serviceWorker.controller) showUpdate(nw);
         });
       });
-      // App 開著時每小時自動檢查一次新版
+      // iOS 點開 PWA 常是「快照還原」不會重新載入頁面：每次回到前景都檢查新版
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          reg.update().then(() => {
+            if (reg.waiting && navigator.serviceWorker.controller) showUpdate(reg.waiting);
+          }).catch(() => {});
+        }
+      });
+      // App 開著時每小時也檢查一次
       setInterval(() => reg.update(), 3600000);
     }).catch(() => {});
   });
