@@ -4,6 +4,11 @@
 > 版本以 `sw.js` 的快取編號為準（`travel-itinerary-vNN`），每次改版 +1；使用者重開會跳「🔄 有新版本行程」橫幅。
 > 發版提醒：每次改 `index.html`／地圖 HTML 後，記得把 `sw.js` 的 `CACHE_NAME` 編號 +1。
 
+## v26 — 2026-10-03 修第一次造訪頁面自己重整
+
+- sw activate 會 clients.claim()，首訪「沒有控制者→有控制者」也觸發 controllerchange，原本直接 reload＝新使用者打開 1～2 秒後頁面自己重整。加 hadController，只有真的換版才重新載入（比照 605／607～609）。全新瀏覽器實測導覽次數 2→1。
+- sw CACHE_NAME travel-itinerary-v25→v26。部署前確認 GitHub Pages 線上 index.html／sw.js＝git HEAD。
+
 ## v22（最新 · 2026-06-11）
 
 目前發布版本，內容涵蓋：
