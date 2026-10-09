@@ -4,6 +4,10 @@
 > 版本以 `sw.js` 的快取編號為準（`travel-itinerary-vNN`），每次改版 +1；使用者重開會跳「🔄 有新版本行程」橫幅。
 > 發版提醒：每次改 `index.html`／地圖 HTML 後，記得把 `sw.js` 的 `CACHE_NAME` 編號 +1。
 
+## 2026-10-09 · 體驗盤點：字級下限 13px（sw travel-itinerary-v28；index／italy-trip-map／milano-itinerary 三頁）
+
+- 字級下限 13px（`01_原始碼庫_apps-monorepo/packages/tooling/_font_floor.py`）：寫死的 10～12.9px→13px、`.625～.81rem`→`.8125rem`；<10px、em、font: 簡寫、品牌層 ridgeline-ui.css 不動。手機 390 寬 13px 以下字比例 43%→0%，橫向溢出 0。
+
 ## 2026-10-09 · 浮動安裝鈕不再蓋住行程卡
 
 - **浮動按鈕不擋內容**：「📲 安裝到桌面」原本找不到品牌頁尾時固定在畫面底部置中（`.rdg-fixed`），壓住卡片與主按鈕。加上與英語家族同一套 `<!--FABSAFE_START-->` 區塊（工具：`01_原始碼庫_apps-monorepo/packages/tooling/_fabsafe_inject.py`，冪等），安裝鈕改成頁面最底的一般區塊；按鈕功能不變。
