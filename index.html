@@ -189,6 +189,19 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 .doc-link { font-size: .8125rem; color: var(--accent); text-decoration: none; }
 
 .map-btn { display: inline-flex; align-items: center; gap: 3px; font-size: .8125rem; color: var(--accent2); background: var(--tag-green); border: 1px solid #b2dbc8; border-radius: 20px; padding: 2px 8px; text-decoration: none; margin-top: 4px; font-weight: 500; white-space: nowrap; }
+/* ── 桌機版（>=1000px）：12 個分頁排成一列、主欄放寬到 980、每日行程兩欄；手機版不受影響 ── */
+@media (min-width: 1000px) {
+  .hero { height: 340px; }
+  .hero-svg { width: 100%; height: auto; margin-top: -45px; }
+  .nav { grid-template-columns: repeat(12, minmax(0, 1fr)); padding: 0.2rem max(0.5rem, calc((100% - 1200px) / 2)) 0; }
+  .nav-btn { padding: 0.6rem 0.15rem; white-space: nowrap; overflow: hidden; text-overflow: clip; }
+  .main { max-width: 980px; }
+  #tab-itinerary.active { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+  #tab-itinerary > :not(.day-card) { grid-column: 1 / -1; }
+  #tab-itinerary > .day-card { margin-bottom: 0; }
+  .overview-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .supermarket-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 .map-btn:hover { background: #c3e8d5; }
 </style>
 <script>

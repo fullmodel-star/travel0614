@@ -4,6 +4,13 @@
 > 版本以 `sw.js` 的快取編號為準（`travel-itinerary-vNN`），每次改版 +1；使用者重開會跳「🔄 有新版本行程」橫幅。
 > 發版提醒：每次改 `index.html`／地圖 HTML 後，記得把 `sw.js` 的 `CACHE_NAME` 編號 +1。
 
+## 2026-10-09 · 體驗盤點：桌機版（sw travel-itinerary-v29）
+
+- **問題**：視窗 ≥1000px 時主欄只有 680px 窄欄；12 個分頁被拉成兩排（6 欄格線），間距過大；首圖在 1440 寬時高達 465px 把內容推到畫面下半。
+- **改法**：只新增一段 `@media (min-width:1000px)`（約 13 行 CSS，放在 index.html 第一個 `<style>` 尾端）：12 個分頁排成一列（導覽列最寬 1200px）；主欄放寬到 980px；「每日行程」每日卡片改兩欄（展開不拉高鄰卡）；首圖限高 340px（裁切不變形）；總覽格 4 欄、超市格 3 欄。手機版面零變動（390×844 改前改後 5 個畫面截圖逐像素相同）。
+- **sw.js**：`CACHE_NAME` travel-itinerary-v28 → v29。
+- 未動：italy-trip-map.html、milano-itinerary.html（獨立頁面，本次未納入桌機版）；其餘分頁（纜車、證件等）在桌機維持單欄 980px。
+
 ## 2026-10-09 · 體驗盤點：字級下限 13px（sw travel-itinerary-v28；index／italy-trip-map／milano-itinerary 三頁）
 
 - 字級下限 13px（`01_原始碼庫_apps-monorepo/packages/tooling/_font_floor.py`）：寫死的 10～12.9px→13px、`.625～.81rem`→`.8125rem`；<10px、em、font: 簡寫、品牌層 ridgeline-ui.css 不動。手機 390 寬 13px 以下字比例 43%→0%，橫向溢出 0。
