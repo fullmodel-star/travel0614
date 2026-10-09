@@ -4,6 +4,10 @@
 > 版本以 `sw.js` 的快取編號為準（`travel-itinerary-vNN`），每次改版 +1；使用者重開會跳「🔄 有新版本行程」橫幅。
 > 發版提醒：每次改 `index.html`／地圖 HTML 後，記得把 `sw.js` 的 `CACHE_NAME` 編號 +1。
 
+## 2026-10-09 · 浮動安裝鈕不再蓋住行程卡
+
+- **浮動按鈕不擋內容**：「📲 安裝到桌面」原本找不到品牌頁尾時固定在畫面底部置中（`.rdg-fixed`），壓住卡片與主按鈕。加上與英語家族同一套 `<!--FABSAFE_START-->` 區塊（工具：`01_原始碼庫_apps-monorepo/packages/tooling/_fabsafe_inject.py`，冪等），安裝鈕改成頁面最底的一般區塊；按鈕功能不變。
+
 ## 2026-10-03 新增自動化走查測試（App 未改）
 
 - `node _tools/ui_tests.mjs`：headless Chrome 瀏覽器走查，不連外網、不動 App 檔；`--dir=<路徑>` 可對副本跑。
