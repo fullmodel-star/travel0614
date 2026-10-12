@@ -100,7 +100,34 @@ def draw_icon(size):
     # 繪製定位針中心小圓圈
     draw.ellipse([pin_x - 9*s, pin_y - 46*s, pin_x + 9*s, pin_y - 28*s], fill=(255, 255, 255, 255))
     
-    return icon_img
+    # 2026-10-12：整體把山形與定位標記放大 4%，背景與圓角不變。
+    pixels = icon_img.load()
+    mask = Image.new("L", icon_img.size, 0)
+    mp = mask.load()
+    for yy in range(size):
+        for xx in range(size):
+            r, g, b, a = pixels[xx, yy]
+            if a and ((r > 100 and g > 75 and b > 50) or (r > 180 and g > 180 and b > 180)):
+                mp[xx, yy] = a
+    foreground = Image.new("RGBA", icon_img.size, (0, 0, 0, 0))
+    foreground.putalpha(mask)
+    for yy in range(size):
+        for xx in range(size):
+            if mp[xx, yy]:
+                foreground.putpixel((xx, yy), pixels[xx, yy])
+    background = Image.new("RGBA", icon_img.size, (0, 0, 0, 0))
+    background.alpha_composite(icon_img)
+    bg_color = icon_img.getpixel((max(1, int(20 * s)), size // 2))
+    bp = background.load()
+    for yy in range(size):
+        for xx in range(size):
+            if mp[xx, yy]:
+                bp[xx, yy] = bg_color
+    enlarged = foreground.resize((round(size * 1.04), round(size * 1.04)), Image.Resampling.LANCZOS)
+    layer = Image.new("RGBA", icon_img.size, (0, 0, 0, 0))
+    layer.alpha_composite(enlarged, ((size - enlarged.width) // 2, (size - enlarged.height) // 2))
+    background.alpha_composite(layer)
+    return background
 
 def main():
     print("開始產生 PWA 圖示資源...")
