@@ -224,6 +224,12 @@ body { font-size: 15px; }
 .book-btn { display: flex; justify-content: center; }
 @media (max-width: 520px) { .hero { height: 250px; } .nav { position: static; } }
 @media (min-width: 1000px) { .nav-btn { font-size: .8125rem; } }
+/* 2026-10-12 第三輪：桌機引導主按鈕限寬；頁首深色切換改線條 SVG（與回報鈕同一組：灰底圓鈕＋白色線條圖示） */
+@media (min-width: 768px) { .start-btn { width: auto; min-width: 360px; max-width: 420px; padding: 0 1.5rem; } }
+.theme-toggle { width: 44px; height: 44px; border: none; background: #6B7280; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.theme-toggle:hover { border-color: transparent; background: #5b6170; }
+.theme-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.theme-toggle svg { width: 20px; height: 20px; display: block; }
 </style>
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -231,7 +237,7 @@ body { font-size: 15px; }
 </head>
 <body>
 <div class="update-banner" id="update-banner"><span>🔄 有新版本行程</span><button onclick="doUpdate()">立即更新</button></div>
-<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式" title="切換深色／淺色">🌙</button>
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式" title="切換深色／淺色" data-icon="moon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></button>
 
 <header class="hero rl-appbar" role="banner">
   <svg class="hero-svg" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -2592,7 +2598,12 @@ function toggleDay(card) {
 function applyThemeIcon() {
   const dark = document.documentElement.getAttribute('data-theme') === 'dark';
   const btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = dark ? '☀️' : '🌙';
+  if (btn) {
+    btn.dataset.icon = dark ? 'sun' : 'moon';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      (dark ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>'
+            : '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>') + '</svg>';
+  }
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', dark ? '#15130f' : '#203a43');
 }

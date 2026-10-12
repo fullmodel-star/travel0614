@@ -533,8 +533,8 @@ try {
   await c.open(BASE);
   const th0 = await c.eval(`document.documentElement.getAttribute('data-theme')`);
   await c.eval(`document.getElementById('theme-toggle').click()`);
-  const th1 = await c.call(() => ({ t: document.documentElement.getAttribute('data-theme'), s: localStorage.getItem('theme'), icon: document.getElementById('theme-toggle').textContent, meta: document.querySelector('meta[name="theme-color"]').content, bg: getComputedStyle(document.body).backgroundColor }));
-  ok(`11.1 預設淺色（${th0}），按一次切到深色：記住設定、圖示變 ☀️、網址列顏色 ${th1.meta}`, th0 === 'light' && th1.t === 'dark' && th1.s === 'dark' && th1.icon === '☀️' && th1.meta === '#15130f', th1);
+  const th1 = await c.call(() => ({ t: document.documentElement.getAttribute('data-theme'), s: localStorage.getItem('theme'), icon: document.getElementById('theme-toggle').dataset.icon, svg: !!document.querySelector('#theme-toggle svg circle'), txt: document.getElementById('theme-toggle').textContent.trim(), aria: document.getElementById('theme-toggle').getAttribute('aria-label'), meta: document.querySelector('meta[name="theme-color"]').content, bg: getComputedStyle(document.body).backgroundColor }));
+  ok(`11.1 預設淺色（${th0}），按一次切到深色：記住設定、圖示變線條太陽 SVG（無 emoji 文字、aria-label 保留）、網址列顏色 ${th1.meta}`, th0 === 'light' && th1.t === 'dark' && th1.s === 'dark' && th1.icon === 'sun' && th1.svg && th1.txt === '' && th1.aria === '切換深色模式' && th1.meta === '#15130f', th1);
   await c.open(BASE, { clear: false });
   const th2 = await c.call(() => ({ t: document.documentElement.getAttribute('data-theme'), bg: getComputedStyle(document.body).backgroundColor }));
   ok(`11.2 重新整理後仍是深色，且頁面底色真的變了（${th2.bg}）`, th2.t === 'dark' && th2.bg === th1.bg && th2.bg !== 'rgb(250, 248, 244)', th2);

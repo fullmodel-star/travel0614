@@ -4,6 +4,8 @@
 > 版本以 `sw.js` 的快取編號為準（`travel-itinerary-vNN`），每次改版 +1；使用者重開會跳「🔄 有新版本行程」橫幅。
 > 發版提醒：每次改 `index.html`／地圖 HTML 後，記得把 `sw.js` 的 `CACHE_NAME` 編號 +1。
 
+- 2026-10-12 · v31（未部署）：桌機（≥768px）引導卡主按鈕限寬 360–420px、手機仍全寬；頁首深色切換由 emoji 🌙／☀️ 改為線條 SVG 月亮／太陽，與回報鈕同為灰底圓鈕＋白色線條圖示（aria-label 不變）；ui_tests 11.1 改驗 SVG 圖示。行程內容未動。
+
 ## 2026-10-12 · 體驗改善（v2 評分；sw travel-itinerary-v30，只改 index.html／sw.js）｜已部署 2026-10-12 GitHub Pages
 
 - **效能**：移除 Google Fonts 中文字型（首載 2182KB→359KB），改系統字型堆疊；其餘兩頁（地圖、米蘭）仍用 Google 字型。
