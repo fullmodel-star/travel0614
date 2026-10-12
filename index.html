@@ -13,7 +13,6 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #faf8f4;
@@ -60,31 +59,31 @@
 :root[data-theme="dark"] .map-btn:hover { background:#1f4634; }
 .theme-toggle { position: fixed; right: calc(14px + env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 100; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 1.25rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
 .theme-toggle:hover { border-color: var(--accent); }
-.update-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--accent2); color:#fff; padding: calc(0.6rem + env(safe-area-inset-top)) 1rem 0.6rem; display:none; align-items:center; justify-content:center; gap:0.75rem; font-size:0.85rem; box-shadow:0 2px 12px rgba(0,0,0,0.25); }
+.update-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--accent2); color:#fff; padding: calc(0.6rem + env(safe-area-inset-top)) 1rem 0.6rem; display:none; align-items:center; justify-content:center; gap:0.75rem; font-size:0.9375rem; box-shadow:0 2px 12px rgba(0,0,0,0.25); }
 .update-banner.show { display:flex; }
-.update-banner button { background:#fff; color:var(--accent2); border:none; border-radius:8px; padding:0.4rem 0.9rem; font-weight:700; font-size:0.82rem; cursor:pointer; font-family:inherit; white-space:nowrap; }
-.myid-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem; font-size:0.82rem; }
+.update-banner button { background:#fff; color:var(--accent2); border:none; border-radius:8px; padding:0.4rem 0.9rem; font-weight:700; font-size:0.9375rem; cursor:pointer; font-family:inherit; white-space:nowrap; }
+.myid-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem; font-size:0.9375rem; }
 .myid-row label { flex:0 0 38%; color:var(--muted); }
-.myid-row input.myid { flex:1; padding:0.35rem 0.5rem; border:1px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text); font-family:inherit; font-size:0.82rem; }
+.myid-row input.myid { flex:1; padding:0.35rem 0.5rem; border:1px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text); font-family:inherit; font-size:0.9375rem; }
 @media (max-width: 520px) {
   .myid-row { flex-direction: column; align-items: stretch; gap: 0.2rem; }
   .myid-row label { flex: 0 0 auto; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
+body { font-family: -apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif; background: var(--bg); color: var(--text); font-size: 0.9375rem; line-height: 1.7; }
 
 .hero { position: relative; color: white; text-align: center; overflow: hidden; }
 .hero-svg { display: block; width: 100%; height: auto; }
 .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.38); }
 .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; }
-.hero h1 { font-family: 'Noto Serif TC', serif; font-size: 1.8rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.4rem; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
-.hero p { font-size: 0.9rem; opacity: 0.88; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+.hero h1 { font-family: 'Noto Serif TC','Songti TC','PMingLiU',serif; font-size: 1.8rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.4rem; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+.hero p { font-size: 0.9375rem; opacity: 0.88; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
 .hero-meta { display: flex; justify-content: center; gap: 2rem; margin-top: 1.2rem; }
-.hero-meta span { font-size: 0.85rem; opacity: 0.92; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+.hero-meta span { font-size: 0.9375rem; opacity: 0.92; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
 .hero-meta strong { display: block; font-size: 1.1rem; font-weight: 500; }
 
 .nav { background: var(--surface); border-bottom: 1px solid var(--border); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; padding: 0.2rem 0.5rem 0; position: sticky; top: 0; z-index: 50; }
-.nav-btn { min-width: 0; padding: 0.55rem 0.35rem; font-size: .8125rem; font-family: 'Noto Sans TC', sans-serif; border: none; background: none; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; text-align: center; }
+.nav-btn { min-width: 0; padding: 0.55rem 0.35rem; font-size: 0.9375rem; font-family: -apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif; border: none; background: none; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; text-align: center; }
 .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
 .nav-btn:hover { color: var(--text); }
 @media (max-width: 520px) {
@@ -92,12 +91,12 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   .hero-svg { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   .hero-content { padding: 1.15rem 1rem 1.35rem; justify-content: center; }
   .hero h1 { font-size: 1.55rem; line-height: 1.35; max-width: 10em; margin-bottom: 0.35rem; }
-  .hero p { font-size: 0.82rem; line-height: 1.45; }
+  .hero p { font-size: 0.9375rem; line-height: 1.45; }
   .hero-meta { width: 100%; gap: 0.45rem; margin-top: 0.85rem; }
-  .hero-meta span { flex: 1; min-width: 0; font-size: .8125rem; }
-  .hero-meta strong { font-size: 0.9rem; }
+  .hero-meta span { flex: 1; min-width: 0; font-size: 0.9375rem; }
+  .hero-meta strong { font-size: 0.9375rem; }
   .nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .nav-btn { font-size: .8125rem; padding: 0.5rem 0.25rem; }
+  .nav-btn { font-size: 0.9375rem; padding: 0.5rem 0.25rem; }
 }
 
 .main { max-width: 680px; margin: 0 auto; padding: 1rem 1rem 4rem; }
@@ -107,11 +106,11 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
 .day-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; }
 .day-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1rem; cursor: pointer; user-select: none; }
-.day-num { background: var(--accent); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .8125rem; font-weight: 500; flex-shrink: 0; }
+.day-num { background: var(--accent); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9375rem; font-weight: 500; flex-shrink: 0; }
 .day-header-info { flex: 1; }
-.day-date { font-weight: 500; font-size: 0.9rem; }
-.day-region { font-size: .8125rem; color: var(--muted); }
-.day-hotel { font-size: .8125rem; color: var(--accent); }
+.day-date { font-weight: 500; font-size: 0.9375rem; }
+.day-region { font-size: 0.9375rem; color: var(--muted); }
+.day-hotel { font-size: 0.9375rem; color: var(--accent); }
 .chevron { font-size: 1rem; color: var(--muted); transition: transform 0.2s; }
 .day-card.open .chevron { transform: rotate(180deg); }
 
@@ -119,40 +118,40 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 .day-card.open .day-body { display: block; }
 .day-card.today-card { border-color: var(--accent2); box-shadow: 0 0 0 2px rgba(74,140,111,0.55); }
 .day-card.today-card .day-num { background: var(--accent2); }
-.today-badge { display: inline-block; background: var(--accent2); color: #fff; font-size: .8125rem; padding: 1px 7px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+.today-badge { display: inline-block; background: var(--accent2); color: #fff; font-size: 0.9375rem; padding: 1px 7px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
 
 .timeline { padding: 0.75rem 0; }
 .timeline-item { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; }
-.tl-time { font-size: .8125rem; color: var(--muted); width: 50px; flex-shrink: 0; padding-top: 2px; font-weight: 500; }
+.tl-time { font-size: 0.9375rem; color: var(--muted); width: 50px; flex-shrink: 0; padding-top: 2px; font-weight: 500; }
 .tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 6px; position: relative; }
 .tl-dot::after { content: ''; position: absolute; top: 8px; left: 3px; width: 1px; height: calc(100% + 8px); background: var(--border); }
 .timeline-item:last-child .tl-dot::after { display: none; }
 .tl-content { flex: 1; }
-.tl-title { font-weight: 500; font-size: 0.88rem; }
-.tl-desc { font-size: .8125rem; color: var(--muted); margin-top: 2px; }
+.tl-title { font-weight: 500; font-size: 0.9375rem; }
+.tl-desc { font-size: 0.9375rem; color: var(--muted); margin-top: 2px; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.5rem; }
-.tag { font-size: .8125rem; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+.tag { font-size: 0.9375rem; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
 .tag-blue { background: var(--tag-blue); color: var(--tag-blue-t); }
 .tag-green { background: var(--tag-green); color: var(--tag-green-t); }
 .tag-amber { background: var(--tag-amber); color: var(--tag-amber-t); }
 .tag-red { background: var(--tag-red); color: var(--tag-red-t); }
 
-.alert { border-radius: 8px; padding: 0.6rem 0.8rem; margin: 0.5rem 0; font-size: .8125rem; display: flex; gap: 0.5rem; align-items: flex-start; }
+.alert { border-radius: 8px; padding: 0.6rem 0.8rem; margin: 0.5rem 0; font-size: 0.9375rem; display: flex; gap: 0.5rem; align-items: flex-start; }
 .alert-warn { background: #fff8e6; border-left: 3px solid var(--accent3); color: #5a3d10; }
 .alert-info { background: #e8f2fb; border-left: 3px solid var(--accent); color: #1a3d5c; }
 .alert-danger { background: #fdeaea; border-left: 3px solid var(--warn); color: #6b1a1a; }
 .alert-success { background: var(--tag-green); border-left: 3px solid var(--accent2); color: #1a4a2e; }
 .alert-icon { flex-shrink: 0; font-size: 1rem; }
 
-.section-label { font-size: .8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 1rem 0 0.5rem; }
+.section-label { font-size: 0.9375rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 1rem 0 0.5rem; }
 
 .cable-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.75rem; }
 .cable-header { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
-.cable-header h3 { font-size: 0.9rem; font-weight: 500; }
-.cable-header p { font-size: .8125rem; color: var(--muted); }
+.cable-header h3 { font-size: 0.9375rem; font-weight: 500; }
+.cable-header p { font-size: 0.9375rem; color: var(--muted); }
 .cable-body { padding: 0.75rem 1rem; }
-.cable-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; padding: 0.3rem 0; border-bottom: 1px solid var(--bg); font-size: 0.82rem; }
+.cable-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; padding: 0.3rem 0; border-bottom: 1px solid var(--bg); font-size: 0.9375rem; }
 .cable-row:last-child { border: none; }
 .cable-label { color: var(--muted); flex: 0 0 36%; }
 .cable-val { font-weight: 500; flex: 1; text-align: right; }
@@ -161,34 +160,34 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   .cable-label, .cable-val { flex: 0 0 auto; width: 100%; text-align: left; }
 }
 .price-big { font-size: 1.1rem; color: var(--accent); font-weight: 600; }
-.book-btn { display: block; text-align: center; background: var(--accent); color: white; padding: 0.5rem; border-radius: 8px; text-decoration: none; font-size: 0.82rem; font-weight: 500; margin-top: 0.6rem; transition: opacity 0.2s; }
+.book-btn { display: block; text-align: center; background: var(--accent); color: white; padding: 0.5rem; border-radius: 8px; text-decoration: none; font-size: 0.9375rem; font-weight: 500; margin-top: 0.6rem; transition: opacity 0.2s; }
 .book-btn:hover { opacity: 0.85; }
 .book-btn.green { background: var(--accent2); }
 
 .notice-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1rem; margin-bottom: 0.75rem; }
-.notice-card h3 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
-.notice-card ul { padding-left: 1.2rem; font-size: 0.82rem; color: var(--muted); }
+.notice-card h3 { font-size: 0.9375rem; font-weight: 500; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+.notice-card ul { padding-left: 1.2rem; font-size: 0.9375rem; color: var(--muted); }
 .notice-card ul li { margin-bottom: 0.3rem; color: var(--text); }
 
 .supermarket-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
 .sm-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.8rem; }
-.sm-card h4 { font-size: 0.85rem; font-weight: 500; }
-.sm-card p { font-size: .8125rem; color: var(--muted); margin-top: 2px; }
+.sm-card h4 { font-size: 0.9375rem; font-weight: 500; }
+.sm-card p { font-size: 0.9375rem; color: var(--muted); margin-top: 2px; }
 .sm-flag { font-size: 1.2rem; margin-bottom: 0.2rem; }
 
 .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
 .ov-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem; text-align: center; }
-.ov-num { font-size: 1.5rem; font-weight: 600; color: var(--accent); font-family: 'Noto Serif TC', serif; }
-.ov-label { font-size: .8125rem; color: var(--muted); margin-top: 2px; }
+.ov-num { font-size: 1.5rem; font-weight: 600; color: var(--accent); font-family: 'Noto Serif TC','Songti TC','PMingLiU',serif; }
+.ov-label { font-size: 0.9375rem; color: var(--muted); margin-top: 2px; }
 
 .doc-item { display: flex; gap: 0.75rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); }
 .doc-item:last-child { border: none; }
 .doc-icon { font-size: 1.4rem; flex-shrink: 0; }
-.doc-title { font-size: 0.85rem; font-weight: 500; }
-.doc-detail { font-size: .8125rem; color: var(--muted); margin-top: 2px; }
-.doc-link { font-size: .8125rem; color: var(--accent); text-decoration: none; }
+.doc-title { font-size: 0.9375rem; font-weight: 500; }
+.doc-detail { font-size: 0.9375rem; color: var(--muted); margin-top: 2px; }
+.doc-link { font-size: 0.9375rem; color: var(--accent); text-decoration: none; }
 
-.map-btn { display: inline-flex; align-items: center; gap: 3px; font-size: .8125rem; color: var(--accent2); background: var(--tag-green); border: 1px solid #b2dbc8; border-radius: 20px; padding: 2px 8px; text-decoration: none; margin-top: 4px; font-weight: 500; white-space: nowrap; }
+.map-btn { display: inline-flex; align-items: center; gap: 3px; font-size: 0.9375rem; color: var(--accent2); background: var(--tag-green); border: 1px solid #b2dbc8; border-radius: 20px; padding: 2px 8px; text-decoration: none; margin-top: 4px; font-weight: 500; white-space: nowrap; }
 /* ── 桌機版（>=1000px）：12 個分頁排成一列、主欄放寬到 980、每日行程兩欄；手機版不受影響 ── */
 @media (min-width: 1000px) {
   .hero { height: 340px; }
@@ -203,6 +202,28 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   .supermarket-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .map-btn:hover { background: #c3e8d5; }
+/* ── 2026-10-12 體驗改善（v2 評分）：主文字 15px、觸控目標 40px、起手引導卡、分組標題、浮鈕不蓋卡 ── */
+body { font-size: 15px; }
+:root[data-theme="dark"] .day-num:not([style]) { color: #15130f; }
+.theme-toggle { position: absolute; top: 10px; right: 10px; bottom: auto; z-index: 100; }
+.hero .reportFab { position: absolute; top: 10px; left: 10px; width: 44px; height: 44px; z-index: 100; }
+.hero .reportFab svg { width: 20px; height: 20px; }
+.nav-btn { min-height: 44px; }
+.tag, .today-badge { font-size: .8125rem; }
+.start-card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+.start-card h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: .3rem; }
+.start-card p { font-size: .9375rem; color: var(--muted); margin-bottom: .8rem; }
+.start-btn, .start-btn2 { display: flex; align-items: center; justify-content: center; gap: .6rem; width: 100%; border-radius: 12px; font-family: inherit; cursor: pointer; }
+.start-btn { min-height: 52px; border: none; background: var(--accent); color: var(--bg); font-size: 1.0625rem; font-weight: 600; }
+.start-btn2 { min-height: 48px; margin-top: .6rem; border: 1px solid var(--accent); background: transparent; color: var(--accent); font-size: .9375rem; font-weight: 500; justify-content: space-between; padding: 0 1rem; }
+.start-prog { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: .5rem; }
+.start-prog i { display: block; height: 100%; width: 0; background: var(--accent2); }
+.day-group { font-size: 1.05rem; font-weight: 600; margin: 1.3rem 0 .6rem; padding-left: .6rem; border-left: 4px solid var(--accent3); }
+.day-group small { font-weight: 400; color: var(--muted); font-size: .9375rem; margin-left: .5rem; }
+.map-btn, .doc-link, .book-btn { min-height: 40px; display: inline-flex; align-items: center; }
+.book-btn { display: flex; justify-content: center; }
+@media (max-width: 520px) { .hero { height: 250px; } .nav { position: static; } }
+@media (min-width: 1000px) { .nav-btn { font-size: .8125rem; } }
 </style>
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -212,7 +233,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 <div class="update-banner" id="update-banner"><span>🔄 有新版本行程</span><button onclick="doUpdate()">立即更新</button></div>
 <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式" title="切換深色／淺色">🌙</button>
 
-<header class="hero" role="banner">
+<header class="hero rl-appbar" role="banner">
   <svg class="hero-svg" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <linearGradient id="sky-dawn" x1="0" y1="0" x2="0" y2="1">
@@ -302,6 +323,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   </svg>
   <div class="hero-overlay"></div>
   <div class="hero-content">
+    <img class="rl-glyph" src="./rl-mark-fitzroy-white.png" width="44" height="31" alt="" style="object-fit:contain;margin-bottom:.25rem">
     <h1>🗺 瑞士 × 義大利多洛米堤</h1>
     <p>2026年 夏季精華行程 — 12晚14天</p>
     <div class="hero-meta">
@@ -331,6 +353,18 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
 <!-- ===== 每日行程 ===== -->
 <div class="section active" id="tab-itinerary">
+
+  <div class="start-card" id="start-card">
+    <h2>第一次打開？從這裡開始</h2>
+    <p>點下方日期卡片，展開當天的時間軸、住宿與路線。上方 12 個分頁可切換纜車票券、證件、緊急資訊等。</p>
+    <button type="button" class="start-btn" id="start-btn" onclick="openNextDay()">開始看行程：6/14 出發日</button>
+    <button type="button" class="start-btn2" onclick="gotoTab('checklist')">
+      <span>✅ 出發準備清單</span><span id="home-prog">已完成 0 / 0 項</span>
+    </button>
+    <div class="start-prog" aria-hidden="true"><i id="home-prog-bar"></i></div>
+  </div>
+
+  <h2 class="day-group">出發與策馬特<small>6/14–6/16</small></h2>
 
   <!-- 6/14 -->
   <div class="day-card" onclick="toggleDay(this)">
@@ -492,6 +526,8 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
       </div>
     </div>
   </div>
+
+  <h2 class="day-group">Lauterbrunnen 少女峰區<small>6/17–6/19</small></h2>
 
   <!-- 6/17 -->
   <div class="day-card" onclick="toggleDay(this)">
@@ -715,6 +751,8 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     </div>
   </div>
 
+  <h2 class="day-group">伊姆斯特<small>6/20</small></h2>
+
   <!-- 6/20 -->
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header">
@@ -791,6 +829,8 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
       </div>
     </div>
   </div>
+
+  <h2 class="day-group">Cortina 多洛米堤<small>6/21–6/24</small></h2>
 
   <!-- 6/21 -->
   <div class="day-card" onclick="toggleDay(this)">
@@ -1131,6 +1171,8 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     </div>
   </div>
 
+  <h2 class="day-group">米蘭與回程<small>6/25–6/27</small></h2>
+
   <!-- 6/25 -->
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header">
@@ -1303,7 +1345,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
 <!-- ===== 纜車票券 ===== -->
 <div class="section" id="tab-cable">
-  <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;">以下依 2026 官方資訊整理；山區纜車會因天氣、維修、季節班表調整，出發前一天請再查官網營運狀態。</p>
+  <p style="font-size:0.9375rem;color:var(--muted);margin-bottom:1rem;">以下依 2026 官方資訊整理；山區纜車會因天氣、維修、季節班表調整，出發前一天請再查官網營運狀態。</p>
 
   <div class="section-label">🇨🇭 瑞士 — 半價卡估算</div>
 
@@ -1490,7 +1532,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
       <div class="cable-row"><span class="cable-label" style="color:var(--warn)">⚠️ Jungfrau Travel Pass</span><span class="cable-val" style="color:var(--warn)">❌ 不含 Niederhorn（屬 Berner Oberland Pass 範圍）</span></div>
 
       <div style="margin:0.6rem 0;border-top:1px solid var(--border);padding-top:0.6rem;">
-        <div style="font-size:.8125rem;font-weight:600;color:var(--accent3);margin-bottom:0.4rem;">🚢 BLS 遊湖套票（Combo Ticket）— 省 20% 以上</div>
+        <div style="font-size:0.9375rem;font-weight:600;color:var(--accent3);margin-bottom:0.4rem;">🚢 BLS 遊湖套票（Combo Ticket）— 省 20% 以上</div>
         <div class="cable-row"><span class="cable-label">Interlaken West → 遊湖 → Niederhorn 來回</span><span class="cable-val price-big" style="color:var(--accent3);">套票優惠</span></div>
         <div class="cable-row"><span class="cable-label">路線 A</span><span class="cable-val">Interlaken West → 船 → Beatenbucht → 纜車 → Niederhorn，回程巴士</span></div>
         <div class="cable-row"><span class="cable-label">路線 B</span><span class="cable-val">Spiez → 船來回 → Beatenbucht → 纜車 → Niederhorn</span></div>
@@ -1639,7 +1681,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   <div class="section-label">🔐 我的證件（只存本機）</div>
   <div class="notice-card" style="border:2px solid var(--accent2);">
     <h3>🔐 個人證件號碼</h3>
-    <p style="font-size:.8125rem;color:var(--muted);margin-bottom:0.6rem;">資料只儲存在<strong>這支手機的瀏覽器</strong>，永遠不會上 GitHub 或網路。換手機或清掉瀏覽器資料就會消失，需重新輸入。</p>
+    <p style="font-size:0.9375rem;color:var(--muted);margin-bottom:0.6rem;">資料只儲存在<strong>這支手機的瀏覽器</strong>，永遠不會上 GitHub 或網路。換手機或清掉瀏覽器資料就會消失，需重新輸入。</p>
 
     <div class="section-label" style="margin-top:0.6rem;">✈️ 機票</div>
     <div class="myid-row"><label>訂位代號（PNR）</label><input class="myid" id="myid-pnr" type="text" placeholder="例：ABC123"></div>
@@ -1661,7 +1703,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     <div class="myid-row"><label>6/21–24 Cortina</label><input class="myid" id="myid-hotel-cortina1" type="text" placeholder="飯店名／訂單編號"></div>
     <div class="myid-row"><label>6/25–26 米蘭（Sesto / M1 Sesto 1° Maggio）</label><input class="myid" id="myid-hotel-milan" type="text" placeholder="飯店名／訂單編號"></div>
 
-    <button onclick="clearMyId()" style="margin-top:0.8rem;background:var(--warn);color:white;border:none;padding:0.4rem 0.8rem;border-radius:6px;font-size:.8125rem;cursor:pointer;">🗑 清除本機所有資料</button>
+    <button onclick="clearMyId()" style="margin-top:0.8rem;background:var(--warn);color:white;border:none;padding:0.4rem 0.8rem;border-radius:6px;font-size:0.9375rem;cursor:pointer;">🗑 清除本機所有資料</button>
   </div>
 
   <!-- 航班資訊 -->
@@ -1669,51 +1711,51 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
   <div class="notice-card" style="padding:0.75rem 1rem;">
     <h3>✈️ 去程航班</h3>
-    <div style="font-size:0.82rem;margin-bottom:0.4rem;color:var(--muted);">乘客／訂位代號：請查 e-ticket（為隱私已從公開頁移除）</div>
+    <div style="font-size:0.9375rem;margin-bottom:0.4rem;color:var(--muted);">乘客／訂位代號：請查 e-ticket（為隱私已從公開頁移除）</div>
 
     <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:0.6rem;">
-      <div style="background:var(--tag-blue);padding:0.5rem 0.8rem;font-size:.8125rem;font-weight:600;color:var(--accent);">第一段｜CA196 桃園 → 上海浦東</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:.8125rem;">
+      <div style="background:var(--tag-blue);padding:0.5rem 0.8rem;font-size:0.9375rem;font-weight:600;color:var(--accent);">第一段｜CA196 桃園 → 上海浦東</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:0.9375rem;">
         <div style="padding:0.4rem 0.8rem;border-right:1px solid var(--bg);border-bottom:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">出發</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">出發</div>
           <div style="font-weight:600;">2026/06/14（日）17:55</div>
-          <div style="font-size:.8125rem;color:var(--muted);">桃園國際機場 T2</div>
+          <div style="font-size:0.9375rem;color:var(--muted);">桃園國際機場 T2</div>
         </div>
         <div style="padding:0.4rem 0.8rem;border-bottom:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">抵達</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">抵達</div>
           <div style="font-weight:600;">2026/06/14（日）19:55</div>
-          <div style="font-size:.8125rem;color:var(--muted);">上海浦東 T2</div>
+          <div style="font-size:0.9375rem;color:var(--muted);">上海浦東 T2</div>
         </div>
         <div style="padding:0.4rem 0.8rem;border-right:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">飛行時間</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">飛行時間</div>
           <div>2小時｜空巴A330-300</div>
         </div>
         <div style="padding:0.4rem 0.8rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">行李 / 餐食</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">行李 / 餐食</div>
           <div>23kg × 1件｜點心</div>
         </div>
       </div>
     </div>
 
     <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:0.6rem;">
-      <div style="background:var(--tag-blue);padding:0.5rem 0.8rem;font-size:.8125rem;font-weight:600;color:var(--accent);">第二段｜CA967 上海浦東 → 米蘭馬爾彭薩</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:.8125rem;">
+      <div style="background:var(--tag-blue);padding:0.5rem 0.8rem;font-size:0.9375rem;font-weight:600;color:var(--accent);">第二段｜CA967 上海浦東 → 米蘭馬爾彭薩</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:0.9375rem;">
         <div style="padding:0.4rem 0.8rem;border-right:1px solid var(--bg);border-bottom:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">出發</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">出發</div>
           <div style="font-weight:600;">2026/06/15（一）01:30</div>
-          <div style="font-size:.8125rem;color:var(--muted);">上海浦東 T2</div>
+          <div style="font-size:0.9375rem;color:var(--muted);">上海浦東 T2</div>
         </div>
         <div style="padding:0.4rem 0.8rem;border-bottom:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">抵達</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">抵達</div>
           <div style="font-weight:600;">2026/06/15（一）07:55</div>
-          <div style="font-size:.8125rem;color:var(--muted);">米蘭 MXP T1</div>
+          <div style="font-size:0.9375rem;color:var(--muted);">米蘭 MXP T1</div>
         </div>
         <div style="padding:0.4rem 0.8rem;border-right:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">飛行時間</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">飛行時間</div>
           <div>12小時25分｜空巴A350-900</div>
         </div>
         <div style="padding:0.4rem 0.8rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">行李 / 餐食</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">行李 / 餐食</div>
           <div>23kg × 1件｜正餐</div>
         </div>
       </div>
@@ -1727,51 +1769,51 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
   <div class="notice-card" style="padding:0.75rem 1rem;">
     <h3>✈️ 回程航班</h3>
-    <div style="font-size:0.82rem;margin-bottom:0.4rem;color:var(--muted);">訂位代號／機票號碼：請查 e-ticket（為隱私已從公開頁移除）</div>
+    <div style="font-size:0.9375rem;margin-bottom:0.4rem;color:var(--muted);">訂位代號／機票號碼：請查 e-ticket（為隱私已從公開頁移除）</div>
 
     <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:0.6rem;">
-      <div style="background:var(--tag-green);padding:0.5rem 0.8rem;font-size:.8125rem;font-weight:600;color:var(--accent2);">第三段｜CA968 米蘭馬爾彭薩 → 上海浦東</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:.8125rem;">
+      <div style="background:var(--tag-green);padding:0.5rem 0.8rem;font-size:0.9375rem;font-weight:600;color:var(--accent2);">第三段｜CA968 米蘭馬爾彭薩 → 上海浦東</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:0.9375rem;">
         <div style="padding:0.4rem 0.8rem;border-right:1px solid var(--bg);border-bottom:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">出發</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">出發</div>
           <div style="font-weight:600;">2026/06/27（六）12:15</div>
-          <div style="font-size:.8125rem;color:var(--muted);">米蘭 MXP T1</div>
+          <div style="font-size:0.9375rem;color:var(--muted);">米蘭 MXP T1</div>
         </div>
         <div style="padding:0.4rem 0.8rem;border-bottom:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">抵達</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">抵達</div>
           <div style="font-weight:600;">2026/06/28（日）05:50</div>
-          <div style="font-size:.8125rem;color:var(--muted);">上海浦東 T2</div>
+          <div style="font-size:0.9375rem;color:var(--muted);">上海浦東 T2</div>
         </div>
         <div style="padding:0.4rem 0.8rem;border-right:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">飛行時間</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">飛行時間</div>
           <div>11小時35分｜空巴A350-900</div>
         </div>
         <div style="padding:0.4rem 0.8rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">行李 / 餐食</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">行李 / 餐食</div>
           <div>23kg × 1件｜正餐</div>
         </div>
       </div>
     </div>
 
     <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:0.6rem;">
-      <div style="background:var(--tag-green);padding:0.5rem 0.8rem;font-size:.8125rem;font-weight:600;color:var(--accent2);">第四段｜CA195 上海浦東 → 桃園</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:.8125rem;">
+      <div style="background:var(--tag-green);padding:0.5rem 0.8rem;font-size:0.9375rem;font-weight:600;color:var(--accent2);">第四段｜CA195 上海浦東 → 桃園</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:0.9375rem;">
         <div style="padding:0.4rem 0.8rem;border-right:1px solid var(--bg);border-bottom:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">出發</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">出發</div>
           <div style="font-weight:600;">2026/06/28（日）14:25</div>
-          <div style="font-size:.8125rem;color:var(--muted);">上海浦東 T2</div>
+          <div style="font-size:0.9375rem;color:var(--muted);">上海浦東 T2</div>
         </div>
         <div style="padding:0.4rem 0.8rem;border-bottom:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">抵達</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">抵達</div>
           <div style="font-weight:600;">2026/06/28（日）16:25</div>
-          <div style="font-size:.8125rem;color:var(--muted);">桃園國際機場 T2</div>
+          <div style="font-size:0.9375rem;color:var(--muted);">桃園國際機場 T2</div>
         </div>
         <div style="padding:0.4rem 0.8rem;border-right:1px solid var(--bg);">
-          <div style="color:var(--muted);font-size:.8125rem;">飛行時間</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">飛行時間</div>
           <div>2小時｜空巴A330-300</div>
         </div>
         <div style="padding:0.4rem 0.8rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">行李 / 餐食</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">行李 / 餐食</div>
           <div>23kg × 1件｜點心</div>
         </div>
       </div>
@@ -1812,7 +1854,7 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
       <li>電子版（e-vignette）可網路購買，連結車牌</li>
     </ul>
     <div style="margin-top:0.6rem">
-      <a href="https://www.ch.ch/en/travel-and-emigrate/holidays-in-switzerland/how-to-behave-in-road-traffic/motorway-vignette/" style="font-size:.8125rem;color:var(--accent);text-decoration:none">▸ 官方購買資訊</a>
+      <a href="https://www.ch.ch/en/travel-and-emigrate/holidays-in-switzerland/how-to-behave-in-road-traffic/motorway-vignette/" style="font-size:0.9375rem;color:var(--accent);text-decoration:none">▸ 官方購買資訊</a>
     </div>
   </div>
 
@@ -1974,29 +2016,29 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     <div class="notice-card" style="padding:0.75rem 1rem;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;">
         <div>
-          <div style="font-weight:600;font-size:0.9rem;">🏔 策馬特住宿</div>
-          <div style="font-size:.8125rem;color:var(--muted);margin-top:2px;">策馬特（Zermatt）</div>
+          <div style="font-weight:600;font-size:0.9375rem;">🏔 策馬特住宿</div>
+          <div style="font-size:0.9375rem;color:var(--muted);margin-top:2px;">策馬特（Zermatt）</div>
         </div>
-        <span class="tag tag-green" style="white-space:nowrap;font-size:.8125rem;">✅ 已確認</span>
+        <span class="tag tag-green" style="white-space:nowrap;font-size:0.9375rem;">✅ 已確認</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:.8125rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:0.9375rem;">
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">入住</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">入住</div>
           <div style="font-weight:500;">6/15（一）</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">退房</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">退房</div>
           <div style="font-weight:500;">6/17（三）</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">晚數</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">晚數</div>
           <div style="font-weight:500;">2晚</div>
         </div>
       </div>
-      <div style="margin-top:0.5rem;font-size:.8125rem;color:var(--muted);">
+      <div style="margin-top:0.5rem;font-size:0.9375rem;color:var(--muted);">
         ⏰ Check-in 時間未標示，建議提前聯繫確認 &nbsp;|&nbsp; Check-out 時間未標示
       </div>
-      <div style="margin-top:0.4rem;font-size:.8125rem;">
+      <div style="margin-top:0.4rem;font-size:0.9375rem;">
         <span class="alert alert-warn" style="padding:0.3rem 0.6rem;display:inline-flex;margin:0;">⚠️ 策馬特禁車，停車於 Täsch，搭接駁火車入村</span>
       </div>
       <a href="https://www.google.com/maps/search/?api=1&query=46.0205,7.7488" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 策馬特住宿 位置</a>
@@ -2006,29 +2048,29 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     <div class="notice-card" style="padding:0.75rem 1rem;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;">
         <div>
-          <div style="font-weight:600;font-size:0.9rem;">🌊 Lauterbrunnen 住宿</div>
-          <div style="font-size:.8125rem;color:var(--muted);margin-top:2px;">勞特布魯嫩（Lauterbrunnen）</div>
+          <div style="font-weight:600;font-size:0.9375rem;">🌊 Lauterbrunnen 住宿</div>
+          <div style="font-size:0.9375rem;color:var(--muted);margin-top:2px;">勞特布魯嫩（Lauterbrunnen）</div>
         </div>
-        <span class="tag tag-green" style="white-space:nowrap;font-size:.8125rem;">✅ 已確認</span>
+        <span class="tag tag-green" style="white-space:nowrap;font-size:0.9375rem;">✅ 已確認</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:.8125rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:0.9375rem;">
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">入住</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">入住</div>
           <div style="font-weight:500;">6/17（三）</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">退房</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">退房</div>
           <div style="font-weight:500;">原 6/20</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">晚數</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">晚數</div>
           <div style="font-weight:500;">3晚</div>
         </div>
       </div>
-      <div style="margin-top:0.5rem;font-size:.8125rem;color:var(--muted);">
+      <div style="margin-top:0.5rem;font-size:0.9375rem;color:var(--muted);">
         ⏰ Check-in / Check-out 時間未標示，建議提前確認
       </div>
-      <div style="margin-top:0.4rem;font-size:.8125rem;">
+      <div style="margin-top:0.4rem;font-size:0.9375rem;">
         <span class="alert alert-info" style="padding:0.3rem 0.6rem;display:inline-flex;margin:0;">💡 少女峰、席爾頓3天的基地，停車場在村莊入口</span>
       </div>
       <a href="https://www.google.com/maps/search/?api=1&query=46.5932,7.9087" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Lauterbrunnen 住宿 位置</a>
@@ -2038,26 +2080,26 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     <div class="notice-card" style="padding:0.75rem 1rem;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;">
         <div>
-          <div style="font-weight:600;font-size:0.9rem;">🏔 6/20 伊姆斯特住宿</div>
-          <div style="font-size:.8125rem;color:var(--muted);margin-top:2px;">Imst（伊姆斯特，Tyrol）</div>
+          <div style="font-weight:600;font-size:0.9375rem;">🏔 6/20 伊姆斯特住宿</div>
+          <div style="font-size:0.9375rem;color:var(--muted);margin-top:2px;">Imst（伊姆斯特，Tyrol）</div>
         </div>
-        <span class="tag tag-green" style="white-space:nowrap;font-size:.8125rem;">✅ 已確認</span>
+        <span class="tag tag-green" style="white-space:nowrap;font-size:0.9375rem;">✅ 已確認</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:.8125rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:0.9375rem;">
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">入住</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">入住</div>
           <div style="font-weight:500;">6/20（六）16:00</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">退房</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">退房</div>
           <div style="font-weight:500;">6/21（日）10:00</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">晚數</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">晚數</div>
           <div style="font-weight:500;">1 晚</div>
         </div>
       </div>
-      <div style="margin-top:0.5rem;font-size:.8125rem;">
+      <div style="margin-top:0.5rem;font-size:0.9375rem;">
         Imst 位於 Innsbruck 西側約 60km、A12 高速旁。6/20 從 Lauterbrunnen 出發車程比 Innsbruck 少 30 分鐘；但 6/21 早上往 Brenner 多 1 小時，建議 06:30 出發。
       </div>
       <a href="https://www.google.com/maps/search/?api=1&query=47.2381,10.7396" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Imst 鎮中心</a>
@@ -2067,29 +2109,29 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     <div class="notice-card" style="padding:0.75rem 1rem;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;">
         <div>
-          <div style="font-weight:600;font-size:0.9rem;">🏔 Cortina 住宿</div>
-          <div style="font-size:.8125rem;color:var(--muted);margin-top:2px;">科爾蒂納丹佩佐（Cortina d'Ampezzo）</div>
+          <div style="font-weight:600;font-size:0.9375rem;">🏔 Cortina 住宿</div>
+          <div style="font-size:0.9375rem;color:var(--muted);margin-top:2px;">科爾蒂納丹佩佐（Cortina d'Ampezzo）</div>
         </div>
-        <span class="tag tag-green" style="white-space:nowrap;font-size:.8125rem;">✅ 已確認</span>
+        <span class="tag tag-green" style="white-space:nowrap;font-size:0.9375rem;">✅ 已確認</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:.8125rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:0.9375rem;">
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">入住</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">入住</div>
           <div style="font-weight:500;">6/21（日）</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">退房</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">退房</div>
           <div style="font-weight:500;">6/25（四）</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">晚數</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">晚數</div>
           <div style="font-weight:500;">4晚</div>
         </div>
       </div>
-      <div style="margin-top:0.5rem;font-size:.8125rem;">
+      <div style="margin-top:0.5rem;font-size:0.9375rem;">
         ⏰ <strong>Check-in：14:00</strong>（Agoda 標示）&nbsp;|&nbsp; <strong>Check-out：10:00</strong>
       </div>
-      <div style="margin-top:0.4rem;font-size:.8125rem;color:var(--muted);">
+      <div style="margin-top:0.4rem;font-size:0.9375rem;color:var(--muted);">
         📌 6/21 入住第1晚（1筆訂單），6/22 起續住至 6/25（另1筆訂單，共3晚）。同一家飯店，但分兩筆訂單，建議提前告知飯店勿移房。
       </div>
       <a href="https://www.google.com/maps/search/?api=1&query=46.5404,12.1358" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Cortina 市中心</a>
@@ -2099,26 +2141,26 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
     <div class="notice-card" style="padding:0.75rem 1rem;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;">
         <div>
-          <div style="font-weight:600;font-size:0.9rem;">🏙 6/25–26 米蘭住宿</div>
-          <div style="font-size:.8125rem;color:var(--muted);margin-top:2px;">Sesto San Giovanni（米蘭北郊，M1 站旁）</div>
+          <div style="font-weight:600;font-size:0.9375rem;">🏙 6/25–26 米蘭住宿</div>
+          <div style="font-size:0.9375rem;color:var(--muted);margin-top:2px;">Sesto San Giovanni（米蘭北郊，M1 站旁）</div>
         </div>
-        <span class="tag tag-green" style="white-space:nowrap;font-size:.8125rem;">✅ 已確認</span>
+        <span class="tag tag-green" style="white-space:nowrap;font-size:0.9375rem;">✅ 已確認</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:.8125rem;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.6rem;font-size:0.9375rem;">
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">入住</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">入住</div>
           <div style="font-weight:500;">6/25（四）</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">退房</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">退房</div>
           <div style="font-weight:500;">6/27（六）</div>
         </div>
         <div style="background:var(--bg);border-radius:6px;padding:0.35rem 0.5rem;">
-          <div style="color:var(--muted);font-size:.8125rem;">晚數</div>
+          <div style="color:var(--muted);font-size:0.9375rem;">晚數</div>
           <div style="font-weight:500;">2 晚</div>
         </div>
       </div>
-      <div style="margin-top:0.5rem;font-size:.8125rem;">
+      <div style="margin-top:0.5rem;font-size:0.9375rem;">
         Sesto San Giovanni 位於米蘭北郊，飯店在 <strong>M1 Sesto 1° Maggio 站旁（步行約 180m）</strong>，進市區搭地鐵 25 分到 Duomo，車整趟停飯店不用動；6/27 早上往 MXP 約 50 分鐘車程。
       </div>
       <a href="https://www.google.com/maps/search/?api=1&query=Sesto+1+Maggio+M1+Milano" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Sesto 1° Maggio M1 站</a>
@@ -2135,37 +2177,37 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   <div class="section-label">💱 匯率換算</div>
   <div class="notice-card" style="padding:1rem;">
     <h3>💱 台幣 ↔ 瑞士法郎 / 歐元</h3>
-    <p style="font-size:.8125rem;color:var(--muted);margin-bottom:0.8rem;">輸入金額即時換算（匯率每次開啟頁面自動更新）</p>
+    <p style="font-size:0.9375rem;color:var(--muted);margin-bottom:0.8rem;">輸入金額即時換算（匯率每次開啟頁面自動更新）</p>
     <div style="display:flex;gap:0.5rem;margin-bottom:0.6rem;align-items:center;">
-      <select id="tool-from" onchange="convertCurrency()" style="flex:1;padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:8px;font-family:'Noto Sans TC',sans-serif;font-size:0.85rem;background:var(--bg);">
+      <select id="tool-from" onchange="convertCurrency()" style="flex:1;padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;font-size:0.9375rem;background:var(--bg);">
         <option value="TWD">🇹🇼 TWD 台幣</option>
         <option value="CHF">🇨🇭 CHF 瑞士法郎</option>
         <option value="EUR">🇪🇺 EUR 歐元</option>
       </select>
       <span style="font-size:1rem;">→</span>
-      <select id="tool-to" onchange="convertCurrency()" style="flex:1;padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:8px;font-family:'Noto Sans TC',sans-serif;font-size:0.85rem;background:var(--bg);">
+      <select id="tool-to" onchange="convertCurrency()" style="flex:1;padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;font-size:0.9375rem;background:var(--bg);">
         <option value="CHF">🇨🇭 CHF 瑞士法郎</option>
         <option value="EUR">🇪🇺 EUR 歐元</option>
         <option value="TWD">🇹🇼 TWD 台幣</option>
       </select>
     </div>
     <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.8rem;">
-      <input id="tool-amount" type="number" value="1000" oninput="convertCurrency()" placeholder="輸入金額" style="flex:1;padding:0.5rem 0.7rem;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:'Noto Sans TC',sans-serif;background:var(--bg);">
+      <input id="tool-amount" type="number" value="1000" oninput="convertCurrency()" placeholder="輸入金額" style="flex:1;padding:0.5rem 0.7rem;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;background:var(--bg);">
       <div id="tool-result" style="flex:1;text-align:center;font-size:1.2rem;font-weight:600;color:var(--accent);background:var(--tag-blue);padding:0.45rem 0.5rem;border-radius:8px;">— </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-bottom:0.6rem;">
-      <button onclick="setAmount(500)" style="padding:0.35rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:.8125rem;cursor:pointer;font-family:'Noto Sans TC',sans-serif;">500</button>
-      <button onclick="setAmount(1000)" style="padding:0.35rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:.8125rem;cursor:pointer;font-family:'Noto Sans TC',sans-serif;">1,000</button>
-      <button onclick="setAmount(5000)" style="padding:0.35rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:.8125rem;cursor:pointer;font-family:'Noto Sans TC',sans-serif;">5,000</button>
+      <button onclick="setAmount(500)" style="padding:0.35rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:0.9375rem;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;">500</button>
+      <button onclick="setAmount(1000)" style="padding:0.35rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:0.9375rem;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;">1,000</button>
+      <button onclick="setAmount(5000)" style="padding:0.35rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:0.9375rem;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;">5,000</button>
     </div>
-    <div id="tool-rate-info" style="font-size:.8125rem;color:var(--muted);text-align:center;"></div>
+    <div id="tool-rate-info" style="font-size:0.9375rem;color:var(--muted);text-align:center;"></div>
   </div>
 
   <!-- 參考匯率快查 -->
   <div class="notice-card">
     <h3>📊 常用金額快查表</h3>
-    <div id="quick-table" style="font-size:0.82rem;"></div>
-    <p style="font-size:.8125rem;color:var(--muted);margin-top:0.5rem;">※ 匯率為參考值，實際依銀行牌告為準。建議用 Wise/Revolut 換匯。</p>
+    <div id="quick-table" style="font-size:0.9375rem;"></div>
+    <p style="font-size:0.9375rem;color:var(--muted);margin-top:0.5rem;">※ 匯率為參考值，實際依銀行牌告為準。建議用 Wise/Revolut 換匯。</p>
   </div>
 
   <!-- 拍照點建議 -->
@@ -2215,12 +2257,12 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   <div class="section-label" style="margin-top:1.2rem;">🌅 日出 / 日落時刻</div>
   <div class="notice-card">
     <h3>🌅 各地日出日落（2026/6 夏至前後）</h3>
-    <p style="font-size:.8125rem;color:var(--muted);margin-bottom:0.6rem;">接近夏至，白天很長；時間為當地 CEST，約略值（±數分鐘）。深谷與高峰會遮擋，實際見光更晚、沒入更早。</p>
-    <div style="font-size:0.82rem;">
-      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🏔 策馬特 <span style="color:var(--muted);font-size:.8125rem;">6/15–17</span></span><span style="font-weight:500;">🌅 05:45　🌇 21:25</span></div>
-      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>⛷ 少女峰區 <span style="color:var(--muted);font-size:.8125rem;">6/18–20</span></span><span style="font-weight:500;">🌅 05:35　🌇 21:30</span></div>
-      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🏔 Cortina / 多洛米堤 <span style="color:var(--muted);font-size:.8125rem;">6/21–25</span></span><span style="font-weight:500;">🌅 05:25　🌇 21:10</span></div>
-      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;"><span>🏙 米蘭 <span style="color:var(--muted);font-size:.8125rem;">6/26</span></span><span style="font-weight:500;">🌅 05:35　🌇 21:15</span></div>
+    <p style="font-size:0.9375rem;color:var(--muted);margin-bottom:0.6rem;">接近夏至，白天很長；時間為當地 CEST，約略值（±數分鐘）。深谷與高峰會遮擋，實際見光更晚、沒入更早。</p>
+    <div style="font-size:0.9375rem;">
+      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🏔 策馬特 <span style="color:var(--muted);font-size:0.9375rem;">6/15–17</span></span><span style="font-weight:500;">🌅 05:45　🌇 21:25</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>⛷ 少女峰區 <span style="color:var(--muted);font-size:0.9375rem;">6/18–20</span></span><span style="font-weight:500;">🌅 05:35　🌇 21:30</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🏔 Cortina / 多洛米堤 <span style="color:var(--muted);font-size:0.9375rem;">6/21–25</span></span><span style="font-weight:500;">🌅 05:25　🌇 21:10</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.4rem 0;"><span>🏙 米蘭 <span style="color:var(--muted);font-size:0.9375rem;">6/26</span></span><span style="font-weight:500;">🌅 05:35　🌇 21:15</span></div>
     </div>
     <div class="alert alert-info" style="margin-top:0.6rem;">
       <span class="alert-icon">📸</span>
@@ -2293,37 +2335,37 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
   <div class="notice-card" style="padding:1rem;">
     <h3 style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.6rem;">🇨🇭 瑞士地區紀念品</h3>
-    <div style="font-size:0.82rem;">
+    <div style="font-size:0.9375rem;">
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>Swatch 策馬特限定腕錶</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Bahnhofstrasse 52</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Bahnhofstrasse 52</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">策馬特店限定發售，錶帶印有 Zermatt 字樣與馬特洪峰剪影，極具收藏價值。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">策馬特店限定發售，錶帶印有 Zermatt 字樣與馬特洪峰剪影，極具收藏價值。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.0216,7.7470" target="_blank" class="map-btn" style="margin-top:4px;">📍 Swatch Store Zermatt</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>馬特洪峰造型巧克力</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Kirchstrasse 46</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Kirchstrasse 46</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">Bäckerei Fuchs 特製三角馬特洪峰造型巧克力，小盒精緻，是送禮最佳選擇。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">Bäckerei Fuchs 特製三角馬特洪峰造型巧克力，小盒精緻，是送禮最佳選擇。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.0199,7.7483" target="_blank" class="map-btn" style="margin-top:4px;">📍 Bäckerei Fuchs Zermatt</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>雷射刻字瑞士萬用刀</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Dorfstrasse 129</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Dorfstrasse 129</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">Victorinox 專賣店，提供萬用刀現場免費雷射雕刻名字與日期服務，5-10分鐘取件。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">Victorinox 專賣店，提供萬用刀現場免費雷射雕刻名字與日期服務，5-10分鐘取件。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.6234,8.0425" target="_blank" class="map-btn" style="margin-top:4px;">📍 Kaufmann Bucher (Grindelwald)</a>
       </div>
       <div style="padding:0.6rem 0;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>土撥鼠關節特效藥膏</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Dorfstrasse 101</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Dorfstrasse 101</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">瑞士傳統高山草本藥膏（Murmeli Salbe），對長期登山健行造成的關節與肌肉痠痛效果奇佳。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">瑞士傳統高山草本藥膏（Murmeli Salbe），對長期登山健行造成的關節與肌肉痠痛效果奇佳。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.6241,8.0415" target="_blank" class="map-btn" style="margin-top:4px;">📍 Coop Vitality 藥局</a>
       </div>
     </div>
@@ -2331,29 +2373,29 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
   <div class="notice-card" style="padding:1rem;">
     <h3 style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.6rem;">🇮🇹 多洛米堤地區紀念品</h3>
-    <div style="font-size:0.82rem;">
+    <div style="font-size:0.9375rem;">
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>瑞士石松香氛枕與石松酒</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Corso Italia 40</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Corso Italia 40</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">特產石松 (Zirbe) 香氣可改善睡眠。另有石松利口酒 (Zirbenschnaps)，充滿森林療癒香氣。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">特產石松 (Zirbe) 香氣可改善睡眠。另有石松利口酒 (Zirbenschnaps)，充滿森林療癒香氣。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.5370,12.1387" target="_blank" class="map-btn" style="margin-top:4px;">📍 Cooperativa di Cortina</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>南蒂羅爾煙燻生火腿 (Speck)</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Via Rezia 1</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Via Rezia 1</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">帶有杜松子與輕煙燻香氣，切薄片配紅酒絕配。在山區超市購買比大城市便宜很多。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">帶有杜松子與輕煙燻香氣，切薄片配紅酒絕配。在山區超市購買比大城市便宜很多。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.5752,11.6756" target="_blank" class="map-btn" style="margin-top:4px;">📍 Despar 超市 (Ortisei)</a>
       </div>
       <div style="padding:0.6rem 0;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>瓦爾加德納手工木雕</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Via Rezia 9</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Via Rezia 9</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">傳承百年的精緻木雕工藝，可選購小木偶、聖誕裝飾或小動物雕像（請認明手工防偽標章）。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">傳承百年的精緻木雕工藝，可選購小木偶、聖誕裝飾或小動物雕像（請認明手工防偽標章）。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.5743,11.6717" target="_blank" class="map-btn" style="margin-top:4px;">📍 DOLFI Shop (Ortisei)</a>
       </div>
     </div>
@@ -2361,45 +2403,45 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
   <div class="notice-card" style="padding:1rem;">
     <h3 style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.6rem;">🇮🇹 米蘭地區紀念品</h3>
-    <div style="font-size:0.82rem;">
+    <div style="font-size:0.9375rem;">
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>Prada 旗下百年甜點 Marchesi 禮盒</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Galleria Vittorio Emanuele II</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Galleria Vittorio Emanuele II</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">Prada 旗下名店。包裝精緻典雅，其傳統聖誕蛋糕 (Panettone) 或手工巧克力送禮非常體面。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">Prada 旗下名店。包裝精緻典雅，其傳統聖誕蛋糕 (Panettone) 或手工巧克力送禮非常體面。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=45.4654,9.1901" target="_blank" class="map-btn" style="margin-top:4px;">📍 Pasticceria Marchesi (米蘭拱廊)</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>Kiko Milano 平價彩妝</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Corso Vittorio Emanuele II</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Corso Vittorio Emanuele II</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">義大利國民彩妝品牌，口紅與眼影極為平價好用（常有 EUR 5-10 的促銷），非常適合送禮。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">義大利國民彩妝品牌，口紅與眼影極為平價好用（常有 EUR 5-10 的促銷），非常適合送禮。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=45.4655,9.1950" target="_blank" class="map-btn" style="margin-top:4px;">📍 Kiko Milano (大教堂旁)</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>開心果抹醬與黑松露醬</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Esselunga Supermarket</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Esselunga Supermarket</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">在地連鎖超市，松露醬極便宜（一罐約 EUR 5-8），濃郁的開心果醬與牙膏界的愛馬仕 Marvis 必買。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">在地連鎖超市，松露醬極便宜（一罐約 EUR 5-8），濃郁的開心果醬與牙膏界的愛馬仕 Marvis 必買。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=45.4745,9.2015" target="_blank" class="map-btn" style="margin-top:4px;">📍 Esselunga 超市 (米蘭)</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>高級松露、火腿與巴薩米克醋</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Via Spadari 9</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Via Spadari 9</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">1883年創立的米蘭美食指標，有最頂級的火腿、熟成起司、松露製品與各式義大利精品熟食。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">1883年創立的米蘭美食指標，有最頂級的火腿、熟成起司、松露製品與各式義大利精品熟食。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=45.4630,9.1878" target="_blank" class="map-btn" style="margin-top:4px;">📍 Peck Milano (大教堂旁)</a>
       </div>
       <div style="padding:0.6rem 0;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
           <strong>精裝老醋與特級初榨橄欖油</strong>
-          <span style="font-size:.8125rem;color:var(--muted);">Piazza XXV Aprile 10</span>
+          <span style="font-size:0.9375rem;color:var(--muted);">Piazza XXV Aprile 10</span>
         </div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">頂級義大利食材旗艦店，精選各產區頂級食材、精裝巴薩米克醋與金杯咖啡豆，包裝精美。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">頂級義大利食材旗艦店，精選各產區頂級食材、精裝巴薩米克醋與金杯咖啡豆，包裝精美。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=45.4806,9.1879" target="_blank" class="map-btn" style="margin-top:4px;">📍 Eataly Milano Smeraldo</a>
       </div>
     </div>
@@ -2409,43 +2451,43 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
   <div class="section-label" style="margin-top:1.2rem;">🎥 高山即時影像 (Live Webcams)</div>
   <div class="notice-card">
     <h3>🎥 景點即時路況/天氣監控</h3>
-    <p style="font-size:.8125rem;color:var(--muted);margin-bottom:0.8rem;">上山或搭乘纜車前，請務必點擊查看即時影像，避免山頂大霧（白牆）浪費車票與時間。</p>
+    <p style="font-size:0.9375rem;color:var(--muted);margin-bottom:0.8rem;">上山或搭乘纜車前，請務必點擊查看即時影像，避免山頂大霧（白牆）浪費車票與時間。</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
       <a href="https://www.gornergrat.ch/en/pages/webcams" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Gornergrat</div><div style="font-size:.8125rem;color:var(--muted);">葛納葛特 (策馬特)</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Gornergrat</div><div style="font-size:0.9375rem;color:var(--muted);">葛納葛特 (策馬特)</div></div>
       </a>
       <a href="https://www.matterhornparadise.ch/en/Information/Webcams" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Glacier Paradise</div><div style="font-size:.8125rem;color:var(--muted);">冰川天堂 (策馬特)</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Glacier Paradise</div><div style="font-size:0.9375rem;color:var(--muted);">冰川天堂 (策馬特)</div></div>
       </a>
       <a href="https://www.jungfrau.ch/en-gb/live-webcams/" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Jungfraujoch</div><div style="font-size:.8125rem;color:var(--muted);">少女峰頂</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Jungfraujoch</div><div style="font-size:0.9375rem;color:var(--muted);">少女峰頂</div></div>
       </a>
       <a href="https://www.maennlichen.ch/en/live-weather/webcams.html" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Männlichen</div><div style="font-size:.8125rem;color:var(--muted);">曼利申 (全景步道)</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Männlichen</div><div style="font-size:0.9375rem;color:var(--muted);">曼利申 (全景步道)</div></div>
       </a>
       <a href="https://www.jungfrau.ch/en-gb/live-webcams/first/" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Grindelwald First</div><div style="font-size:.8125rem;color:var(--muted);">費爾斯特</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Grindelwald First</div><div style="font-size:0.9375rem;color:var(--muted);">費爾斯特</div></div>
       </a>
       <a href="https://schilthorn.ch/en/Info/Webcams" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Schilthorn / Birg</div><div style="font-size:.8125rem;color:var(--muted);">雪朗峰 / 畢爾</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Schilthorn / Birg</div><div style="font-size:0.9375rem;color:var(--muted);">雪朗峰 / 畢爾</div></div>
       </a>
       <a href="https://www.seceda.it/en/live-webcam" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Seceda</div><div style="font-size:.8125rem;color:var(--muted);">刀鋒山 (多洛米堤)</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Seceda</div><div style="font-size:0.9375rem;color:var(--muted);">刀鋒山 (多洛米堤)</div></div>
       </a>
       <a href="https://www.seiseralm.it/en/info/service/webcam.html" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Alpe di Siusi</div><div style="font-size:.8125rem;color:var(--muted);">高山草原 (多洛米堤)</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Alpe di Siusi</div><div style="font-size:0.9375rem;color:var(--muted);">高山草原 (多洛米堤)</div></div>
       </a>
       <a href="https://www.drei-zinnen.info/en/webcams.html" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);grid-column: span 2;">
         <span style="font-size:1.2rem;">📸</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Tre Cime di Lavaredo</div><div style="font-size:.8125rem;color:var(--muted);">三峰山群 (多洛米堤)</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Tre Cime di Lavaredo</div><div style="font-size:0.9375rem;color:var(--muted);">三峰山群 (多洛米堤)</div></div>
       </a>
     </div>
   </div>
@@ -2455,31 +2497,31 @@ body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: va
 
   <div class="notice-card">
     <h3>🌤 各地天氣連結</h3>
-    <p style="font-size:.8125rem;color:var(--muted);margin-bottom:0.8rem;">點擊下方地點直接查看最新天氣預報（Meteoblue 高山天氣最準確）</p>
+    <p style="font-size:0.9375rem;color:var(--muted);margin-bottom:0.8rem;">點擊下方地點直接查看最新天氣預報（Meteoblue 高山天氣最準確）</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
       <a href="https://www.meteoblue.com/zh/weather/week/zermatt_switzerland_2657908" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">🏔</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">策馬特</div><div style="font-size:.8125rem;color:var(--muted);">Zermatt</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">策馬特</div><div style="font-size:0.9375rem;color:var(--muted);">Zermatt</div></div>
       </a>
       <a href="https://www.meteoblue.com/zh/weather/week/grindelwald_switzerland_2660523" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">⛷</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">少女峰地區</div><div style="font-size:.8125rem;color:var(--muted);">Grindelwald</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">少女峰地區</div><div style="font-size:0.9375rem;color:var(--muted);">Grindelwald</div></div>
       </a>
       <a href="https://www.meteoblue.com/zh/weather/week/cortina-dampezzo_italy_3177831" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">🏔</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">Cortina</div><div style="font-size:.8125rem;color:var(--muted);">多洛米堤</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">Cortina</div><div style="font-size:0.9375rem;color:var(--muted);">多洛米堤</div></div>
       </a>
       <a href="https://www.meteoblue.com/zh/weather/week/tre-cime-di-lavaredo_italy_3165242" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">🗻</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">三峰山區</div><div style="font-size:.8125rem;color:var(--muted);">Tre Cime</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">三峰山區</div><div style="font-size:0.9375rem;color:var(--muted);">Tre Cime</div></div>
       </a>
       <a href="https://www.meteoblue.com/zh/weather/week/milan_italy_3173435" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">🏙</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">米蘭</div><div style="font-size:.8125rem;color:var(--muted);">Milano</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">米蘭</div><div style="font-size:0.9375rem;color:var(--muted);">Milano</div></div>
       </a>
       <a href="https://www.meteoblue.com/zh/weather/week/interlaken_switzerland_2660552" target="_blank" style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 0.7rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);">
         <span style="font-size:1.2rem;">🌊</span>
-        <div><div style="font-size:0.82rem;font-weight:500;">茵特拉根</div><div style="font-size:.8125rem;color:var(--muted);">Interlaken</div></div>
+        <div><div style="font-size:0.9375rem;font-weight:500;">茵特拉根</div><div style="font-size:0.9375rem;color:var(--muted);">Interlaken</div></div>
       </a>
     </div>
     <div class="alert alert-info" style="margin-top:0.8rem;">
@@ -2623,7 +2665,7 @@ function setAmount(n) {
 
 function buildQuickTable() {
   const twds = [100, 500, 1000, 3000, 5000, 10000];
-  let html = '<table style="width:100%;border-collapse:collapse;font-size:.8125rem;">';
+  let html = '<table style="width:100%;border-collapse:collapse;font-size:0.9375rem;">';
   html += '<tr style="background:var(--bg);"><th style="padding:0.3rem 0.4rem;text-align:left;color:var(--muted);font-weight:500;">TWD</th><th style="padding:0.3rem 0.4rem;text-align:right;color:var(--tag-blue-t);font-weight:500;">CHF</th><th style="padding:0.3rem 0.4rem;text-align:right;color:var(--tag-green-t);font-weight:500;">EUR</th></tr>';
   twds.forEach((t,i) => {
     const bg = i%2===0 ? 'var(--surface)' : 'var(--bg)';
@@ -2695,8 +2737,47 @@ function updateBigCountdown() {
 setInterval(updateBigCountdown, 1000);
 updateBigCountdown();
 
+// ===== 起手引導：開始看行程／出發準備進度 =====
+function gotoTab(id) {
+  var b = document.querySelector(".nav-btn[onclick*=\"'" + id + "'\"]");
+  if (b) { b.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+function nextDayCard() {
+  var cards = document.querySelectorAll('#tab-itinerary .day-card');
+  var now = new Date(), y = 2026;
+  var pick = null;
+  cards.forEach(function (c) {
+    if (pick) return;
+    var el = c.querySelector('.day-date'); var mt = el && el.textContent.match(/(\d+)月(\d+)日/);
+    if (!mt) return;
+    var dt = new Date(y, parseInt(mt[1], 10) - 1, parseInt(mt[2], 10), 23, 59, 59);
+    if (dt >= now) pick = c;
+  });
+  return { card: pick || cards[0], mode: !pick ? 'after' : (now < TRIP_DEPART ? 'before' : 'during') };
+}
+function openNextDay() {
+  var r = nextDayCard(); if (!r.card) return;
+  r.card.classList.add('open');
+  r.card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function updateHomeProgress() {
+  var all = document.querySelectorAll('.todo-check'), done = document.querySelectorAll('.todo-check:checked');
+  var t = document.getElementById('home-prog'), bar = document.getElementById('home-prog-bar');
+  if (t) t.textContent = '已完成 ' + done.length + ' / ' + all.length + ' 項';
+  if (bar) bar.style.width = (all.length ? Math.round(done.length / all.length * 100) : 0) + '%';
+}
+function initStartButton() {
+  var btn = document.getElementById('start-btn'); if (!btn) return;
+  var r = nextDayCard(); var el = r.card && r.card.querySelector('.day-date');
+  var label = el ? el.textContent.replace(/⭐.*$/, '').replace(/[（(].*?[）)]/, ' ').trim() : '';
+  if (r.mode === 'during') btn.textContent = '打開今天的行程：' + label;
+  else if (r.mode === 'after') btn.textContent = '回顧行程：從 ' + label + ' 開始';
+  else btn.textContent = '開始看行程：' + label;
+}
+
 // ===== 勾選進度 =====
 function updateProgress() {
+  updateHomeProgress();
   const bar = document.getElementById('progress-bar');
   if (!bar) return;
   const all  = document.querySelectorAll('.todo-check');
@@ -2729,44 +2810,44 @@ function initChecklist() {
 }
 
 // 網頁載入完成後執行初始化
-window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightToday(); applyThemeIcon(); initMyId(); });
+window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartButton(); highlightToday(); applyThemeIcon(); initMyId(); });
 </script>
 
 <style>
-.hike-region-title { font-family:'Noto Serif TC',serif; font-size:1rem; font-weight:600; padding:0.6rem 0.8rem; background:linear-gradient(90deg,var(--tag-blue),transparent); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; margin-bottom:0.75rem; }
+.hike-region-title { font-family:'Noto Serif TC','Songti TC','PMingLiU',serif; font-size:1rem; font-weight:600; padding:0.6rem 0.8rem; background:linear-gradient(90deg,var(--tag-blue),transparent); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; margin-bottom:0.75rem; }
 .hike-region-title.green { background:linear-gradient(90deg,var(--tag-green),transparent); border-left-color:var(--accent2); }
 .hike-region-title.amber { background:linear-gradient(90deg,var(--tag-amber),transparent); border-left-color:var(--accent3); }
 .hike-region-title.red { background:linear-gradient(90deg,var(--tag-red),transparent); border-left-color:var(--warn); }
 .hike-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; margin-bottom:0.75rem; overflow:hidden; }
 .hike-card-header { display:flex; align-items:center; gap:0.6rem; padding:0.75rem 1rem; cursor:pointer; user-select:none; }
-.hike-rank { width:28px; height:28px; border-radius:50%; background:var(--accent); color:white; font-size:.8125rem; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.hike-rank { width:28px; height:28px; border-radius:50%; background:var(--accent); color:white; font-size:0.9375rem; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .hike-rank.top { background:#c17d3c; }
 .hike-rank.great { background:var(--accent2); }
 .hike-header-info { flex:1; }
-.hike-name { font-weight:500; font-size:0.88rem; }
-.hike-subtitle { font-size:.8125rem; color:var(--muted); margin-top:1px; }
-.hike-stars { font-size:0.82rem; color:var(--accent3); flex-shrink:0; letter-spacing:1px; }
+.hike-name { font-weight:500; font-size:0.9375rem; }
+.hike-subtitle { font-size:0.9375rem; color:var(--muted); margin-top:1px; }
+.hike-stars { font-size:0.9375rem; color:var(--accent3); flex-shrink:0; letter-spacing:1px; }
 .hike-body { display:none; padding:0 1rem 1rem; border-top:1px solid var(--border); }
 .hike-card.open .hike-body { display:block; }
 .hike-card.open .chevron { transform:rotate(180deg); }
 .hike-stats { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.4rem; margin:0.75rem 0; }
 .hike-stat { background:var(--bg); border-radius:8px; padding:0.4rem 0.5rem; text-align:center; }
-.hike-stat-val { font-size:0.85rem; font-weight:600; color:var(--accent); }
-.hike-stat-lbl { font-size:.8125rem; color:var(--muted); margin-top:1px; }
+.hike-stat-val { font-size:0.9375rem; font-weight:600; color:var(--accent); }
+.hike-stat-lbl { font-size:0.9375rem; color:var(--muted); margin-top:1px; }
 .hike-badges { display:flex; flex-wrap:wrap; gap:4px; margin:0.5rem 0; }
-.badge { font-size:.8125rem; padding:2px 7px; border-radius:20px; font-weight:500; }
+.badge { font-size:0.9375rem; padding:2px 7px; border-radius:20px; font-weight:500; }
 .badge-easy { background:var(--tag-green); color:var(--tag-green-t); }
 .badge-mid { background:var(--tag-amber); color:var(--tag-amber-t); }
 .badge-hard { background:var(--tag-red); color:var(--tag-red-t); }
 .badge-info { background:var(--tag-blue); color:var(--tag-blue-t); }
 .badge-warn { background:var(--tag-amber); color:var(--tag-amber-t); }
 .badge-tip { background:var(--tag-purple); color:var(--tag-purple-t); }
-.hike-desc { font-size:0.82rem; line-height:1.7; margin:0.5rem 0; }
-.hike-highlight { font-size:.8125rem; background:var(--bg); border-radius:8px; padding:0.5rem 0.7rem; margin:0.5rem 0; border-left:3px solid var(--accent3); }
+.hike-desc { font-size:0.9375rem; line-height:1.7; margin:0.5rem 0; }
+.hike-highlight { font-size:0.9375rem; background:var(--bg); border-radius:8px; padding:0.5rem 0.7rem; margin:0.5rem 0; border-left:3px solid var(--accent3); }
 .ranking-table { background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:1rem; }
-.ranking-row { display:flex; align-items:center; gap:0.6rem; padding:0.5rem 0.8rem; border-bottom:1px solid var(--bg); font-size:0.82rem; }
+.ranking-row { display:flex; align-items:center; gap:0.6rem; padding:0.5rem 0.8rem; border-bottom:1px solid var(--bg); font-size:0.9375rem; }
 .ranking-row:last-child { border:none; }
-.rank-num { width:22px; height:22px; border-radius:50%; background:var(--bg); font-size:.8125rem; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--muted); }
+.rank-num { width:22px; height:22px; border-radius:50%; background:var(--bg); font-size:0.9375rem; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--muted); }
 .rank-num.gold { background:#fde68a; color:#7a4510; }
 .rank-num.silver { background:#e2e8f0; color:#374151; }
 .rank-num.bronze { background:#fed7aa; color:#7c3a10; }
@@ -2787,16 +2868,16 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
   <!-- 總排名 -->
   <div class="section-label">🏆 這趟行程總推薦排名 TOP 10</div>
   <div class="ranking-table">
-    <div class="ranking-row"><div class="rank-num gold">1</div><span>⛰️ Seceda 刀鋒山脊</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">多洛米堤西</span></div>
-    <div class="ranking-row"><div class="rank-num gold">2</div><span>🏔 五湖步道 Five Lakes Trail</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">策馬特</span></div>
-    <div class="ranking-row"><div class="rank-num gold">3</div><span>🗻 Tre Cime 三峰環線</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">多洛米堤東</span></div>
-    <div class="ranking-row"><div class="rank-num silver">4</div><span>🧱 Eiger Trail 艾格步道</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">少女峰區</span></div>
-    <div class="ranking-row"><div class="rank-num silver">5</div><span>🌲 Adolf Munkel Trail</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">多洛米堤西</span></div>
-    <div class="ranking-row"><div class="rank-num silver">6</div><span>💎 Oeschinensee Panorama</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">少女峰區</span></div>
-    <div class="ranking-row"><div class="rank-num bronze">7</div><span>🚂 Gornergrat → Riffelsee</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">策馬特</span></div>
-    <div class="ranking-row"><div class="rank-num bronze">8</div><span>🏊 Lago di Sorapis</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">多洛米堤東</span></div>
-    <div class="ranking-row"><div class="rank-num bronze">9</div><span>🪨 Sassolungo Circuit</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">多洛米堤西</span></div>
-    <div class="ranking-row"><div class="rank-num" style="background:var(--tag-purple);color:var(--tag-purple-t);">10</div><span>🌾 Männlichen Panorama Trail</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:.8125rem;color:var(--muted);margin-left:0.5rem;">少女峰區</span></div>
+    <div class="ranking-row"><div class="rank-num gold">1</div><span>⛰️ Seceda 刀鋒山脊</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">多洛米堤西</span></div>
+    <div class="ranking-row"><div class="rank-num gold">2</div><span>🏔 五湖步道 Five Lakes Trail</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">策馬特</span></div>
+    <div class="ranking-row"><div class="rank-num gold">3</div><span>🗻 Tre Cime 三峰環線</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">多洛米堤東</span></div>
+    <div class="ranking-row"><div class="rank-num silver">4</div><span>🧱 Eiger Trail 艾格步道</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">少女峰區</span></div>
+    <div class="ranking-row"><div class="rank-num silver">5</div><span>🌲 Adolf Munkel Trail</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">多洛米堤西</span></div>
+    <div class="ranking-row"><div class="rank-num silver">6</div><span>💎 Oeschinensee Panorama</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">少女峰區</span></div>
+    <div class="ranking-row"><div class="rank-num bronze">7</div><span>🚂 Gornergrat → Riffelsee</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">策馬特</span></div>
+    <div class="ranking-row"><div class="rank-num bronze">8</div><span>🏊 Lago di Sorapis</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">多洛米堤東</span></div>
+    <div class="ranking-row"><div class="rank-num bronze">9</div><span>🪨 Sassolungo Circuit</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">多洛米堤西</span></div>
+    <div class="ranking-row"><div class="rank-num" style="background:var(--tag-purple);color:var(--tag-purple-t);">10</div><span>🌾 Männlichen Panorama Trail</span><span style="margin-left:auto;color:var(--accent3);">★★★★★</span><span style="font-size:0.9375rem;color:var(--muted);margin-left:0.5rem;">少女峰區</span></div>
   </div>
 
   <!-- ===== 少女峰區 ===== -->
@@ -2812,7 +2893,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -2847,7 +2928,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -2882,7 +2963,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★☆</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -2913,7 +2994,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★☆</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -2946,7 +3027,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -2981,7 +3062,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -3019,7 +3100,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -3054,7 +3135,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -3085,7 +3166,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★☆</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -3122,7 +3203,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -3158,7 +3239,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -3194,7 +3275,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★★</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -3225,7 +3306,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
         <span class="hike-stars">★★★★☆</span>
-        <span class="chevron" style="font-size:0.9rem;color:var(--muted);">▼</span>
+        <span class="chevron" style="font-size:0.9375rem;color:var(--muted);">▼</span>
       </div>
     </div>
     <div class="hike-body">
@@ -3257,7 +3338,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
   </div>
 
   <a href="./italy-trip-map.html" class="book-btn" style="background:var(--accent3);">🗺 全程互動地圖（景點・餐廳・超市・停車・住宿）→</a>
-  <p style="font-size:.8125rem;color:var(--muted);margin:0.3rem 0 0;">※ 互動地圖需網路載入底圖；山區無訊號時僅顯示已瀏覽過的區域。</p>
+  <p style="font-size:0.9375rem;color:var(--muted);margin:0.3rem 0 0;">※ 互動地圖需網路載入底圖；山區無訊號時僅顯示已瀏覽過的區域。</p>
 
   <!-- 租車資訊 -->
   <div class="section-label">🚙 租車資訊</div>
@@ -3289,7 +3370,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
   <div class="section-label">💳 公路通行費總覽</div>
   <div class="notice-card">
     <h3>🛣️ 各國必付費用</h3>
-    <div style="font-size:0.82rem;">
+    <div style="font-size:0.9375rem;">
       <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🇨🇭 瑞士 Vignette（年貼）</span><span style="font-weight:600;color:var(--accent);">CHF 40</span></div>
       <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🇦🇹 奧地利 Vignette（10天）</span><span style="font-weight:600;color:var(--accent);">€ 9.40</span></div>
       <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--bg);"><span>🇦🇹 Brenner Pass 隧道費</span><span style="font-weight:600;color:var(--accent);">€ 12~15</span></div>
@@ -3325,37 +3406,37 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       <li><strong>Segrate</strong>（M2綠線）— 往東側住宿較近 <a href="https://www.google.com/maps/search/?api=1&query=45.4943,9.2796" class="doc-link">📍導航</a></li>
       <li><strong>Cascina Gobba</strong>（M2綠線）— 免費停車，24小時 <a href="https://www.google.com/maps/search/?api=1&query=45.5024,9.2558" class="doc-link">📍導航</a></li>
     </ul>
-    <p style="font-size:.8125rem;color:var(--muted);margin-top:0.5rem;">停好車後搭地鐵至 Duomo 站，大教堂出口就是廣場，全程 20 分鐘內。</p>
+    <p style="font-size:0.9375rem;color:var(--muted);margin-top:0.5rem;">停好車後搭地鐵至 Duomo 站，大教堂出口就是廣場，全程 20 分鐘內。</p>
   </div>
 
   <!-- 山口資訊 -->
   <div class="section-label">⛰️ 行程山口資訊</div>
   <div class="notice-card">
     <h3>🗻 你會經過的山口</h3>
-    <div style="font-size:0.82rem;">
+    <div style="font-size:0.9375rem;">
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Brenner Pass</strong><span style="color:var(--muted);">1,374m｜🇦🇹/🇮🇹邊境</span></div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">A22高速，夏季通暢。隧道另收費€12~15。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">A22高速，夏季通暢。隧道另收費€12~15。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=47.0081,11.5069" target="_blank" class="map-btn" style="margin-top:4px;">📍 Brenner Pass</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Gardena</strong><span style="color:var(--muted);">2,121m｜多洛米堤</span></div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">景觀公路，沿途停車點多。路面良好，6月應無積雪。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">景觀公路，沿途停車點多。路面良好，6月應無積雪。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.5497,11.8080" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Gardena</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Falzarego</strong><span style="color:var(--muted);">2,105m｜多洛米堤</span></div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">Lagazuoi 纜車在此。Cinque Torri 停車也在旁邊。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">Lagazuoi 纜車在此。Cinque Torri 停車也在旁邊。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Falzarego</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Giau</strong><span style="color:var(--muted);">2,236m｜多洛米堤</span></div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">⚠️ 路窄陡彎，清晨能見度低注意霧。開慢點！</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">⚠️ 路窄陡彎，清晨能見度低注意霧。開慢點！</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.4822,12.0537" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Giau</a>
       </div>
       <div style="padding:0.5rem 0;">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Tre Croci</strong><span style="color:var(--muted);">1,805m｜Sorapis步道起點</span></div>
-        <div style="color:var(--muted);font-size:.8125rem;margin-top:2px;">SS48旁路邊停車，免費，早去才有位。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">SS48旁路邊停車，免費，早去才有位。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.5561,12.2046" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Tre Croci</a>
       </div>
     </div>
@@ -3380,7 +3461,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
   <div class="section-label">🗺️ 全程自駕路線概要</div>
   <div class="notice-card">
     <h3>📍 各段行車時間（不含停留）</h3>
-    <div style="font-size:0.82rem;">
+    <div style="font-size:0.9375rem;">
       <div style="display:flex;justify-content:space-between;align-items:center;padding:0.35rem 0;border-bottom:1px solid var(--bg);"><span>米蘭 MXP 機場 → 策馬特 Täsch</span><span style="color:var(--accent);font-weight:500;">約 3.5~4h</span></div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:0.35rem 0;border-bottom:1px solid var(--bg);"><span>Täsch → Lauterbrunnen</span><span style="color:var(--accent);font-weight:500;">約 2.5h</span></div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:0.35rem 0;border-bottom:1px solid var(--bg);"><span>Lauterbrunnen → Imst（瑞士北側 / Arlberg）</span><span style="color:var(--accent);font-weight:500;">約 4.5~5h</span></div>
@@ -3543,25 +3624,25 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
       <a href="tel:112" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:var(--tag-red);border:1px solid var(--tag-red);border-radius:10px;text-decoration:none;">
         <span style="font-size:1.4rem;">🆘</span>
         <span style="font-size:1.1rem;font-weight:700;color:var(--warn);margin-top:4px;">112</span>
-        <span style="font-size:.8125rem;color:var(--warn);text-align:center;">歐盟通用緊急<br>（瑞士/義大利/奧地利）</span>
+        <span style="font-size:0.9375rem;color:var(--warn);text-align:center;">歐盟通用緊急<br>（瑞士/義大利/奧地利）</span>
       </a>
       <a href="tel:117" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:var(--tag-blue);border:1px solid var(--tag-blue);border-radius:10px;text-decoration:none;">
         <span style="font-size:1.4rem;">👮</span>
         <span style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-top:4px;">117</span>
-        <span style="font-size:.8125rem;color:var(--accent);text-align:center;">瑞士警察<br>Switzerland Police</span>
+        <span style="font-size:0.9375rem;color:var(--accent);text-align:center;">瑞士警察<br>Switzerland Police</span>
       </a>
       <a href="tel:118" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:var(--tag-green);border:1px solid var(--tag-green);border-radius:10px;text-decoration:none;">
         <span style="font-size:1.4rem;">🚑</span>
         <span style="font-size:1.1rem;font-weight:700;color:var(--accent2);margin-top:4px;">118</span>
-        <span style="font-size:.8125rem;color:var(--accent2);text-align:center;">義大利救護車<br>Italy Ambulance</span>
+        <span style="font-size:0.9375rem;color:var(--accent2);text-align:center;">義大利救護車<br>Italy Ambulance</span>
       </a>
       <a href="tel:1414" style="display:flex;flex-direction:column;align-items:center;padding:0.8rem;background:var(--tag-amber);border:1px solid var(--tag-amber);border-radius:10px;text-decoration:none;">
         <span style="font-size:1.4rem;">🚁</span>
         <span style="font-size:1.1rem;font-weight:700;color:var(--accent3);margin-top:4px;">1414</span>
-        <span style="font-size:.8125rem;color:var(--accent3);text-align:center;">瑞士山難救援<br>REGA 直升機</span>
+        <span style="font-size:0.9375rem;color:var(--accent3);text-align:center;">瑞士山難救援<br>REGA 直升機</span>
       </a>
     </div>
-    <div style="margin-top:0.6rem;padding:0.5rem 0.7rem;background:var(--bg);border-radius:8px;font-size:.8125rem;color:var(--muted);">
+    <div style="margin-top:0.6rem;padding:0.5rem 0.7rem;background:var(--bg);border-radius:8px;font-size:0.9375rem;color:var(--muted);">
       💡 <strong style="color:var(--text);">打電話前：</strong>說清楚你在哪（附近地名/山口名稱/座標），幾個人，傷情狀況。救援直升機約 15~30 分鐘到達。
     </div>
   </div>
@@ -3582,25 +3663,25 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
   <div class="section-label">🏥 行程沿線主要醫院</div>
   <div class="notice-card">
     <h3>🏥 各地最近醫院</h3>
-    <div style="font-size:0.82rem;">
+    <div style="font-size:0.9375rem;">
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="font-weight:500;">策馬特 — Zermatt Ärztehaus</div>
-        <div style="color:var(--muted);font-size:.8125rem;">策馬特村內診所，一般急救可處理。重傷轉 Visp 或直升機。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;">策馬特村內診所，一般急救可處理。重傷轉 Visp 或直升機。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.0244,7.7490" target="_blank" class="map-btn" style="margin-top:4px;">📍 Zermatt 診所</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="font-weight:500;">少女峰區 — Spital Interlaken</div>
-        <div style="color:var(--muted);font-size:.8125rem;">Interlaken 醫院，距 Lauterbrunnen 約 20 分鐘。24小時急診。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;">Interlaken 醫院，距 Lauterbrunnen 約 20 分鐘。24小時急診。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.6807,7.8433" target="_blank" class="map-btn" style="margin-top:4px;">📍 Spital Interlaken</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="font-weight:500;">多洛米堤 — Ospedale di Cortina d'Ampezzo</div>
-        <div style="color:var(--muted);font-size:.8125rem;">Cortina 市區內，有急診，離三峰/Sorapis 最近的醫院。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;">Cortina 市區內，有急診，離三峰/Sorapis 最近的醫院。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=46.5580,12.1338" target="_blank" class="map-btn" style="margin-top:4px;">📍 Cortina 醫院</a>
       </div>
       <div style="padding:0.5rem 0;">
         <div style="font-weight:500;">米蘭 — Ospedale Policlinico</div>
-        <div style="color:var(--muted);font-size:.8125rem;">米蘭最大醫院，有英語服務，地鐵 M3 Crocetta 站旁。</div>
+        <div style="color:var(--muted);font-size:0.9375rem;">米蘭最大醫院，有英語服務，地鐵 M3 Crocetta 站旁。</div>
         <a href="https://www.google.com/maps/search/?api=1&query=45.4600,9.1924" target="_blank" class="map-btn" style="margin-top:4px;">📍 Policlinico 米蘭</a>
       </div>
     </div>
@@ -3622,23 +3703,23 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
   <div class="section-label">🏔 高山反應提醒</div>
   <div class="notice-card">
     <h3>⚠️ 高海拔注意事項</h3>
-    <div style="font-size:0.82rem;">
+    <div style="font-size:0.9375rem;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-bottom:0.6rem;">
         <div style="background:var(--tag-amber);border-radius:8px;padding:0.4rem 0.6rem;text-align:center;">
           <div style="font-weight:600;color:var(--accent3);">少女峰頂</div>
-          <div style="font-size:0.9rem;font-weight:700;">3,454m</div>
+          <div style="font-size:0.9375rem;font-weight:700;">3,454m</div>
         </div>
         <div style="background:var(--tag-blue);border-radius:8px;padding:0.4rem 0.6rem;text-align:center;">
           <div style="font-weight:600;color:var(--accent);">冰川天堂</div>
-          <div style="font-size:0.9rem;font-weight:700;">3,883m</div>
+          <div style="font-size:0.9375rem;font-weight:700;">3,883m</div>
         </div>
         <div style="background:var(--tag-purple);border-radius:8px;padding:0.4rem 0.6rem;text-align:center;">
           <div style="font-weight:600;color:var(--tag-purple-t);">高納葛拉特</div>
-          <div style="font-size:0.9rem;font-weight:700;">3,089m</div>
+          <div style="font-size:0.9375rem;font-weight:700;">3,089m</div>
         </div>
         <div style="background:var(--tag-green);border-radius:8px;padding:0.4rem 0.6rem;text-align:center;">
           <div style="font-weight:600;color:var(--accent2);">Seceda</div>
-          <div style="font-size:0.9rem;font-weight:700;">2,519m</div>
+          <div style="font-size:0.9375rem;font-weight:700;">2,519m</div>
         </div>
       </div>
       <ul style="margin-top:0.3rem;">
@@ -4131,38 +4212,38 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
 
   <!-- 大倒數計時器 -->
   <div id="big-countdown" style="background:linear-gradient(135deg,#1a2e52,#2a4a3a);border-radius:16px;padding:1.5rem;text-align:center;color:white;margin-bottom:1rem;">
-    <div id="bc-label" style="font-size:.8125rem;opacity:0.75;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">距離出發</div>
+    <div id="bc-label" style="font-size:0.9375rem;opacity:0.75;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">距離出發</div>
     <div style="display:flex;justify-content:center;gap:0.8rem;margin-bottom:0.5rem;">
       <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:0.6rem 1rem;min-width:60px;">
-        <div id="bc-days" style="font-size:2.2rem;font-weight:700;line-height:1;font-family:'Noto Serif TC',serif;">--</div>
-        <div style="font-size:.8125rem;opacity:0.7;margin-top:2px;">天</div>
+        <div id="bc-days" style="font-size:2.2rem;font-weight:700;line-height:1;font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;">--</div>
+        <div style="font-size:0.9375rem;opacity:0.7;margin-top:2px;">天</div>
       </div>
       <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:0.6rem 1rem;min-width:60px;">
-        <div id="bc-hours" style="font-size:2.2rem;font-weight:700;line-height:1;font-family:'Noto Serif TC',serif;">--</div>
-        <div style="font-size:.8125rem;opacity:0.7;margin-top:2px;">時</div>
+        <div id="bc-hours" style="font-size:2.2rem;font-weight:700;line-height:1;font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;">--</div>
+        <div style="font-size:0.9375rem;opacity:0.7;margin-top:2px;">時</div>
       </div>
       <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:0.6rem 1rem;min-width:60px;">
-        <div id="bc-mins" style="font-size:2.2rem;font-weight:700;line-height:1;font-family:'Noto Serif TC',serif;">--</div>
-        <div style="font-size:.8125rem;opacity:0.7;margin-top:2px;">分</div>
+        <div id="bc-mins" style="font-size:2.2rem;font-weight:700;line-height:1;font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;">--</div>
+        <div style="font-size:0.9375rem;opacity:0.7;margin-top:2px;">分</div>
       </div>
       <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:0.6rem 1rem;min-width:60px;">
-        <div id="bc-secs" style="font-size:2.2rem;font-weight:700;line-height:1;font-family:'Noto Serif TC',serif;">--</div>
-        <div style="font-size:.8125rem;opacity:0.7;margin-top:2px;">秒</div>
+        <div id="bc-secs" style="font-size:2.2rem;font-weight:700;line-height:1;font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;">--</div>
+        <div style="font-size:0.9375rem;opacity:0.7;margin-top:2px;">秒</div>
       </div>
     </div>
-    <div id="bc-sub" style="font-size:.8125rem;opacity:0.7;">2026年6月14日 17:55 出發</div>
+    <div id="bc-sub" style="font-size:0.9375rem;opacity:0.7;">2026年6月14日 17:55 出發</div>
   </div>
 
   <!-- 進度概覽 -->
   <div id="progress-overview" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:1rem;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">
-      <span style="font-size:0.85rem;font-weight:500;">整體完成度</span>
-      <span id="progress-pct" style="font-size:0.85rem;font-weight:600;color:var(--accent2);">0%</span>
+      <span style="font-size:0.9375rem;font-weight:500;">整體完成度</span>
+      <span id="progress-pct" style="font-size:0.9375rem;font-weight:600;color:var(--accent2);">0%</span>
     </div>
     <div style="background:var(--bg);border-radius:20px;height:8px;overflow:hidden;">
       <div id="progress-bar" style="background:linear-gradient(90deg,var(--accent2),var(--accent));height:100%;width:0%;border-radius:20px;transition:width 0.5s;"></div>
     </div>
-    <div id="progress-detail" style="font-size:.8125rem;color:var(--muted);margin-top:0.5rem;text-align:center;">載入中...</div>
+    <div id="progress-detail" style="font-size:0.9375rem;color:var(--muted);margin-top:0.5rem;text-align:center;">載入中...</div>
   </div>
 
   <!-- 緊急待辦（紅框） -->
@@ -4304,7 +4385,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); highlightTo
 </div><!-- end main -->
 
 <!--RL_FOOTER-->
-<footer class="rl-signature" style="background:#F7F3EC;color:#141E2B;padding:40px 22px 32px;border-top:1px solid #e5ddcf;text-align:center;font-family:'Noto Sans TC',sans-serif;margin:0"><div style="display:inline-flex;align-items:center;gap:24px;text-align:left"><span style="display:inline-flex;flex-direction:column;align-items:center;gap:3px"><img class="rl-sig-glyph" src="rl-mark-fitzroy-navy.png" width="60" height="42" alt="" style="object-fit:contain"><span style="font-family:'Noto Serif TC',serif;font-size:14px;font-weight:600;letter-spacing:.5px;color:#141E2B">Mt. Fitz Roy</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:2px;color:#8794a3">3,405 M</span></span><span style="width:2px;height:88px;background:#DE9A45;border-radius:2px;flex:none"></span><p style="margin:0;font-family:'Noto Serif TC',serif;font-weight:700;font-size:22px;line-height:1.35;color:#141E2B">人生的遠方，<br>留給敢啟程的人。</p></div><p style="margin:16px 0 0;font-size:13px;letter-spacing:6px;color:#6E8BA3">Ridgeline · by Lucas</p><p style="font-size:13px;line-height:1.7;color:#8794a3;max-width:560px;margin:14px auto 0">© 2026 Ridgeline · Ridgeline · by Lucas｜免費使用；著作權皆屬作者，未經同意請勿重製、散布或作商業用途。　⚠️ 本行程為個人規劃整理，纜車班表、票價、營運時間、開放狀態等資訊可能異動，出發前請再向官方網站或當地旅客中心確認；行程僅供參考，實際安排請依個人狀況調整。</p></footer>
+<footer class="rl-signature" style="background:#F7F3EC;color:#141E2B;padding:40px 22px 32px;border-top:1px solid #e5ddcf;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;margin:0"><div style="display:inline-flex;align-items:center;gap:24px;text-align:left"><span style="display:inline-flex;flex-direction:column;align-items:center;gap:3px"><img class="rl-sig-glyph" src="rl-mark-fitzroy-navy.png" width="60" height="42" alt="" style="object-fit:contain"><span style="font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;font-size:14px;font-weight:600;letter-spacing:.5px;color:#141E2B">Mt. Fitz Roy</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:2px;color:#5b6877">3,405 M</span></span><span style="width:2px;height:88px;background:#DE9A45;border-radius:2px;flex:none"></span><p style="margin:0;font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;font-weight:700;font-size:22px;line-height:1.35;color:#141E2B">人生的遠方，<br>留給敢啟程的人。</p></div><p style="margin:16px 0 0;font-size:13px;letter-spacing:6px;color:#55708a">Ridgeline · by Lucas</p><p style="font-size:13px;line-height:1.7;color:#5b6877;max-width:560px;margin:14px auto 0">© 2026 Ridgeline · Ridgeline · by Lucas｜免費使用；著作權皆屬作者，未經同意請勿重製、散布或作商業用途。　⚠️ 本行程為個人規劃整理，纜車班表、票價、營運時間、開放狀態等資訊可能異動，出發前請再向官方網站或當地旅客中心確認；行程僅供參考，實際安排請依個人狀況調整。</p></footer>
 <!--REPORT_BTN_START-->
 <style>
 .reportFab{width:32px;height:32px;border-radius:50%;background:#6B7280;border:none;

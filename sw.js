@@ -1,4 +1,4 @@
-const CACHE_NAME = 'travel-itinerary-v29';
+const CACHE_NAME = 'travel-itinerary-v30';
 const ASSETS = [
   './',
   './index.html',
@@ -8,7 +8,8 @@ const ASSETS = [
   './icon.svg',
   './icon-192.png',
   './icon-512.png',
-  './apple-touch-icon.png'
+  './apple-touch-icon.png',
+  './rl-mark-fitzroy-white.png'
 ];
 
 // 安裝 Service Worker 並快取核心資源
