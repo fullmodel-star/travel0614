@@ -4,7 +4,7 @@
 > 版本以 `sw.js` 的快取編號為準（`travel-itinerary-vNN`），每次改版 +1；使用者重開會跳「🔄 有新版本行程」橫幅。
 > 發版提醒：每次改 `index.html`／地圖 HTML 後，記得把 `sw.js` 的 `CACHE_NAME` 編號 +1。
 
-## 2026-10-12 · 體驗改善（v2 評分；sw travel-itinerary-v30，只改 index.html／sw.js）
+## 2026-10-12 · 體驗改善（v2 評分；sw travel-itinerary-v30，只改 index.html／sw.js）｜已部署 2026-10-12 GitHub Pages
 
 - **效能**：移除 Google Fonts 中文字型（首載 2182KB→359KB），改系統字型堆疊；其餘兩頁（地圖、米蘭）仍用 Google 字型。
 - **手機字級與觸控**：主文字 15px、觸控目標全 ≥40px（導覽鈕 44px），手機版導覽改非 sticky（4 排釘在頂端會吃掉 340px）。
