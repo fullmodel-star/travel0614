@@ -4,6 +4,7 @@
 > 版本以 `sw.js` 的快取編號為準（`travel-itinerary-vNN`），每次改版 +1；使用者重開會跳「🔄 有新版本行程」橫幅。
 > 發版提醒：每次改 `index.html`／地圖 HTML 後，記得把 `sw.js` 的 `CACHE_NAME` 編號 +1。
 
+- 2026-10-13 · v33（F09 UI/UX 評比修正，未部署）：①「Schilthornbahn 20XX」被走查當成沒填的年份——查 repo（400 走稜步道 eu_west.js 也寫「新 Schilthornbahn 20XX 系統」）確認 20XX 是工程名稱本身，不填年份，改成「新纜車（官方工程名稱就叫「Schilthornbahn 20XX」，20XX 不是漏填年份）」（Day 5 提醒＋備案決策頁兩處）；② 旅遊工具匯率：負數／空白／非數字不再算出「CHF -13.05」「CHF 0.00」，改顯示「—」＋提示，輸入框加 min="0"；③ 新增浮動「↑ 回分頁」鈕（捲過 1.5 屏才出現，點了捲回分頁列）；④ 返回鍵：`showTab()` 寫入 history（每日行程＝底層，其他分頁 push、分頁間 replace，popstate 還原；不再依賴全域 `event`），手機返回鍵回每日行程、在每日行程再按才離開；⑤ 出發準備勾選框 13px→24px。驗證截圖 `04_管理工具\_docs\App_UIUX評比_2026-10-13\fix_reports\shots\F09\301_*_after.png`；ui_tests 改前 59/59、改後 59/59。
 - 2026-10-12 · v32：apple-touch-icon 四角透明（22:50 放大圖示批次帶回，iOS 主畫面會黑角）→ 壓平到 icon 自身底色 #141E2B，180×180 不透明；manifest 圖示未動。
 - 2026-10-12 · v31（已部署 2026-10-12 GitHub Pages）：桌機（≥768px）引導卡主按鈕限寬 360–420px、手機仍全寬；頁首深色切換由 emoji 🌙／☀️ 改為線條 SVG 月亮／太陽，與回報鈕同為灰底圓鈕＋白色線條圖示（aria-label 不變）；ui_tests 11.1 改驗 SVG 圖示。行程內容未動。
 

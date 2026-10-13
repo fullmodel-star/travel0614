@@ -711,7 +711,7 @@ body { font-size: 15px; }
     <div class="day-body">
       <div class="alert alert-warn">
         <span class="alert-icon">⚠️</span>
-        <span>Schilthornbahn 20XX 新纜車已於 2026/4 完成關鍵開通；6/19 仍請出發前至 schilthorn.ch 查即時營運與末班時間。</span>
+        <span>新纜車（官方工程名稱就叫「Schilthornbahn 20XX」，20XX 不是漏填年份）已於 2026/4 完成關鍵開通；6/19 仍請出發前至 schilthorn.ch 查即時營運與末班時間。</span>
       </div>
       <div class="timeline">
         <div class="timeline-item">
@@ -2198,7 +2198,7 @@ body { font-size: 15px; }
       </select>
     </div>
     <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.8rem;">
-      <input id="tool-amount" type="number" value="1000" oninput="convertCurrency()" placeholder="輸入金額" style="flex:1;padding:0.5rem 0.7rem;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;background:var(--bg);">
+      <input id="tool-amount" type="number" min="0" inputmode="decimal" value="1000" oninput="convertCurrency()" placeholder="輸入金額" style="flex:1;padding:0.5rem 0.7rem;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;background:var(--bg);">
       <div id="tool-result" style="flex:1;text-align:center;font-size:1.2rem;font-weight:600;color:var(--accent);background:var(--tag-blue);padding:0.45rem 0.5rem;border-radius:8px;">— </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-bottom:0.6rem;">
@@ -2583,12 +2583,31 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-function showTab(id) {
+/* 返回鍵（2026-10-13）：「每日行程」是底層紀錄；進其他分頁 pushState、分頁間切換 replaceState，
+   popstate 還原，所以手機返回鍵先回每日行程，在每日行程再按才離開 App。網址不變。 */
+var TAB_HOME = 'itinerary';
+function showTab(id, fromPop) {
+  if (!document.getElementById('tab-' + id)) id = TAB_HOME;
+  if (!fromPop) {
+    var st = history.state && history.state.v301;
+    try {
+      if (id === TAB_HOME) { if (st && st !== TAB_HOME) { history.back(); return; } }
+      else if (!st || st === TAB_HOME) history.pushState({ v301: id }, '');
+      else history.replaceState({ v301: id }, '');
+    } catch (e) {}
+  }
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
-  event.target.classList.add('active');
+  var nb = document.querySelector(".nav-btn[onclick*=\"'" + id + "'\"]");
+  if (nb) nb.classList.add('active');
 }
+(function () {
+  var v = history.state && history.state.v301;
+  if (!v) { try { history.replaceState({ v301: TAB_HOME }, ''); } catch (e) {} }
+  else if (v !== TAB_HOME) { document.addEventListener('DOMContentLoaded', function () { showTab(v, true); }); }
+  window.addEventListener('popstate', function (e) { showTab((e.state && e.state.v301) || TAB_HOME, true); });
+})();
 
 function toggleDay(card) {
   card.classList.toggle('open');
@@ -2658,7 +2677,14 @@ async function fetchRates() {
 }
 
 function convertCurrency() {
-  const amount = parseFloat(document.getElementById('tool-amount').value) || 0;
+  const raw = String(document.getElementById('tool-amount').value).trim();
+  const amount = parseFloat(raw) || 0;
+  // 2026-10-13：負數／空白／非數字不再算出「CHF -13.05」「CHF 0.00」，改顯示提示
+  if (raw === '' || !isFinite(parseFloat(raw)) || parseFloat(raw) < 0) {
+    document.getElementById('tool-result').textContent = '—';
+    document.getElementById('tool-rate-info').textContent = raw === '' ? '⚠️ 請輸入金額（數字，例如 1000）' : '⚠️ 金額不能是負數，請輸入 0 以上的數字';
+    return;
+  }
   const from = document.getElementById('tool-from').value;
   const to = document.getElementById('tool-to').value;
   const inTWD = amount / RATES[from];
@@ -3540,7 +3566,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
   <div class="notice-card">
     <h3>🔧 如果席爾頓纜車停駛</h3>
     <ul>
-      <li>→ Schilthornbahn 20XX 新纜車已於 2026/4 完成關鍵開通；若 6/19 臨時因風勢停駛，再啟用下列備案</li>
+      <li>→ 新纜車（官方工程名稱「Schilthornbahn 20XX」）已於 2026/4 完成關鍵開通；若 6/19 臨時因風勢停駛，再啟用下列備案</li>
       <li>→ 若臨時停駛：改走 <strong>Mürren Thrill Walk</strong>（免費，懸崖步道）</li>
       <li>→ 或改去 <strong>Grütschalp → Mürren</strong> 全景步道</li>
       <li>→ 官方確認：<a href="https://schilthorn.ch" target="_blank" class="doc-link">schilthorn.ch</a></li>
@@ -4575,5 +4601,19 @@ html.fs-unlocked .rdg-install{display:none!important}
 })();
 </script>
 <!--FABSAFE_END-->
+<!-- 2026-10-13 回頂端／回分頁：捲過一屏半才出現，點了回到分頁列 -->
+<style>
+#toTopBtn{position:fixed;right:calc(14px + env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));z-index:150;
+  min-height:48px;padding:0 16px 0 12px;border-radius:24px;border:1px solid var(--border);background:var(--surface);color:var(--text);
+  box-shadow:0 4px 14px rgba(0,0,0,.18);display:none;align-items:center;gap:6px;font:inherit;font-size:.9375rem;font-weight:600;cursor:pointer}
+#toTopBtn.on{display:flex}
+#toTopBtn svg{width:20px;height:20px}
+.todo-check{width:24px;height:24px;min-width:24px;margin-top:0 !important;accent-color:var(--accent)}
+</style>
+<button type="button" id="toTopBtn" aria-label="回到頂端的分頁列" onclick="(document.querySelector('.nav')||document.body).scrollIntoView({behavior:'smooth',block:'start'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>回分頁</button>
+<script>
+(function(){var b=document.getElementById('toTopBtn');function f(){b.classList.toggle('on',window.scrollY>window.innerHeight*1.5);}
+window.addEventListener('scroll',f,{passive:true});f();})();
+</script>
 </body>
 </html>
