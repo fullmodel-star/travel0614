@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>瑞士義大利旅遊行程 2026</title>
-<meta name="theme-color" content="#203a43">
+<meta name="theme-color" content="#F6F1E6">
+<link rel="preload" href="./vendor/round-ui/pp-round.woff2" as="font" type="font/woff2" crossorigin>
 <meta name="application-name" content="瑞義行程">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -230,129 +231,205 @@ body { font-size: 15px; }
 .theme-toggle:hover { border-color: transparent; background: #5b6170; }
 .theme-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .theme-toggle svg { width: 20px; height: 20px; display: block; }
+/* ══ PP_PASSPORT_CSS 2026-10-19 版面美化「護照手帳」（三系列 300／301／302 共用視覺語言）══
+   米色紙底＋細點紋、深藍護照封面、郵戳紅／青綠兩色郵戳、蛋黃立體主鈕、粉圓圓體（子集 PPRound）、Fluent 3D 圖示。
+   字型：vendor/round-ui/pp-round.woff2（jf open 粉圓 2.1 子集，OFL-1.1，內部名稱已改）；圖：vendor/fluent-3d/（MIT）；
+   線條圖示：Tabler Icons 3.49.0（MIT，內嵌 sprite）。只改外觀，行程內容不動。 */
+@font-face { font-family: "PPRound"; src: url("./vendor/round-ui/pp-round.woff2") format("woff2"); font-display: swap; }
+:root {
+  --bg: #F6F1E6; --surface: #FFFDF8; --border: #E6DCC8; --text: #1F2A3A; --muted: #5E6470;
+  --accent: #1E3A5F; --accent2: #2B7A78; --accent3: #B8752E;
+  --navy: #1E3A5F; --stamp: #C2452D; --teal: #2B7A78; --yolk: #F3C552; --yolk-d: #B98D1E;
+  --dot: rgba(30,58,95,.07); --chip-on: #1E3A5F; --chip-on-t: #FFF6DD;
+  --round: "PPRound", -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+}
+:root[data-theme="dark"] {
+  --bg: #0E1726; --surface: #16233A; --border: #2A3A55; --text: #ECE7DC; --muted: #A9B2C1;
+  --accent: #8DB8E8; --accent2: #6CC7C1; --accent3: #E0A15C;
+  --navy: #8DB8E8; --stamp: #F08A72; --teal: #6CC7C1; --yolk: #F3C552; --yolk-d: #A87E16;
+  --dot: rgba(243,230,196,.05); --chip-on: #F3C552; --chip-on-t: #1F2A3A;
+}
+body { background-color: var(--bg); background-image: radial-gradient(var(--dot) 1px, transparent 1px); background-size: 6px 6px; }
+svg.ti { width: 1.05em; height: 1.05em; flex: none; vertical-align: -0.15em; }
+
+/* 頁首：品牌列（山形小磚＋App 名），不黏住 */
+.pp-bar { display: flex; align-items: center; gap: 10px; max-width: 1240px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top)) 16px 6px; }
+.pp-mark { width: 42px; height: 42px; border-radius: 12px; background: #1E3A5F; display: grid; place-items: center; flex: none; box-shadow: 0 8px 14px -10px rgba(21,43,71,.9); }
+.pp-mark .rl-glyph { width: 30px; height: 21px; object-fit: contain; margin: 0; display: block; }
+.pp-name { flex: 1; min-width: 0; line-height: 1.25; }
+.pp-name h1 { font: 400 22px/1.2 var(--round); letter-spacing: 1px; color: var(--text); margin: 0; }
+.pp-name small { display: block; font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pp-bar .theme-toggle, .pp-bar .reportFab { position: static; width: 44px; height: 44px; flex: none; border-radius: 50%;
+  background: var(--surface); color: var(--text); border: 1px solid var(--border); box-shadow: none; }
+.pp-bar .theme-toggle:hover, .pp-bar .reportFab:hover { background: var(--surface); border-color: var(--navy); }
+.pp-bar .theme-toggle:focus-visible, .pp-bar .reportFab:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+.pp-bar .reportFab svg { width: 18px; height: 18px; }
+.pp-bar .reportFab svg path { fill: var(--muted); }
+.update-banner .ub-t { display: inline-flex; align-items: center; gap: 6px; }
+
+/* 分頁：降為次要導覽——單列橫向捲動的小膠囊，全組同一套 3D 圖示 */
+.nav { position: sticky; top: 0; z-index: 50; display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+  padding: 8px 16px; background: var(--bg); border-bottom: 1px solid var(--border); box-shadow: 0 6px 12px -12px rgba(31,42,58,.5); }
+.nav::-webkit-scrollbar { display: none; }
+.nav-btn { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px 0 8px; border: 1px solid var(--border);
+  border-radius: 999px; background: var(--surface); color: var(--text); font: 400 15px/1 var(--round); letter-spacing: .5px; white-space: nowrap; }
+.nav-btn img { width: 26px; height: 26px; flex: none; }
+.nav-btn:hover { color: var(--text); border-color: var(--navy); }
+.nav-btn.active { background: var(--chip-on); color: var(--chip-on-t); border-color: var(--chip-on); font-weight: 400; }
+
+/* 護照封面主視覺（在內容區頂端，不在黏住的頁首裡） */
+.pp-top { margin: 6px 0 4px; }
+.start-card.pp-cover { position: relative; overflow: hidden; border: 0; border-radius: 24px; margin: 0 0 18px; padding: 22px 20px 22px;
+  background: linear-gradient(160deg, #24476F, #152B47); color: #F3E6C4; box-shadow: 0 18px 30px -18px rgba(21,43,71,.85); }
+.pp-cover::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(243,230,196,.28); border-radius: 18px; pointer-events: none; }
+.pp-k { font: 400 12px var(--round); letter-spacing: 4px; opacity: .85; position: relative; }
+.pp-cover h2.pp-title { font: 400 30px/1.22 var(--round); letter-spacing: 1px; color: #FFF6DD; margin: 8px 0 4px; position: relative; }
+.pp-cover p.pp-sub { font-size: 14px; color: #F3E6C4; opacity: .92; margin: 0 0 14px; position: relative; }
+.pp-meta { display: flex; gap: 0; margin: 0 0 18px; position: relative; max-width: 360px; }
+.pp-meta > div { flex: 1; padding: 0 10px; border-left: 1px dashed rgba(243,230,196,.35); }
+.pp-meta > div:first-child { padding-left: 0; border-left: 0; }
+.pp-meta dt { font-size: 12px; letter-spacing: 1px; opacity: .78; }
+.pp-meta dd { margin: 0; font: 400 17px/1.3 var(--round); color: #FFF6DD; white-space: nowrap; }
+.pp-cover .start-btn { position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-width: 0; max-width: none;
+  min-height: 54px; padding: 8px 14px; border: 0; border-radius: 999px; background: #F3C552; color: #1F2A3A; text-wrap: balance;
+  font: 400 16px/1.3 var(--round); letter-spacing: 0; box-shadow: 0 5px 0 #B98D1E; text-align: left; }
+.pp-cover .start-btn img { width: 28px; height: 28px; flex: none; margin-right: -2px; }
+.pp-cover .start-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #B98D1E; }
+.pp-cover .start-btn:focus-visible { outline: 3px solid #FFF6DD; outline-offset: 3px; }
+.pp-art { position: absolute; right: -6px; top: 18px; width: 108px; height: 108px; filter: drop-shadow(0 12px 14px rgba(0,0,0,.35)); pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 92%); mask-image: linear-gradient(to bottom, #000 62%, transparent 92%); }
+.pp-post { display: none; }
+
+/* 住宿郵戳（五個過夜地，資料＝下方分組標題）＋出發準備票卡 */
+.pp-sec { font: 400 19px var(--round); margin: 2px 2px 10px; color: var(--text); }
+.pp-sec small { font: 400 13px -apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif; color: var(--muted); margin-left: 8px; }
+.pp-stamps { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; padding: 6px 4px 14px; margin: 0 -4px; }
+.pp-stamps::-webkit-scrollbar { display: none; }
+.pp-stamp { flex: none; width: 96px; height: 96px; border-radius: 50%; border: 2.5px dashed var(--stamp); color: var(--stamp);
+  background: color-mix(in srgb, var(--stamp) 6%, transparent); display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1px; cursor: pointer; transform: rotate(-6deg); font-family: var(--round); padding: 0; }
+.pp-stamp b { font: 400 16px/1.15 var(--round); }
+.pp-stamp small { font: 700 11px/1 ui-monospace, Consolas, monospace; letter-spacing: 2px; }
+.pp-stamp i { font: 400 12px/1.2 var(--round); font-style: normal; opacity: .9; }
+.pp-stamp:nth-child(2n) { transform: rotate(5deg); border-color: var(--teal); color: var(--teal); background: color-mix(in srgb, var(--teal) 6%, transparent); }
+.pp-stamp:nth-child(3n) { border-style: double; border-width: 4px; }
+.pp-stamp:hover, .pp-stamp:focus-visible { transform: rotate(0deg) scale(1.04); outline: none; }
+.start-btn2.pp-ticket { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; margin: 0; padding: 10px 16px 10px 12px;
+  background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 18px; text-align: left;
+  box-shadow: 0 8px 18px -14px rgba(31,42,58,.45); position: relative; }
+.pp-ticket img { width: 40px; height: 40px; flex: none; }
+.pp-tk { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.pp-tk b { font: 400 17px/1.3 var(--round); }
+.pp-tk small { font-size: 13px; color: var(--muted); }
+.pp-ticket #home-prog { flex: none; white-space: nowrap; padding: 8px 0 8px 12px; border-left: 1.5px dashed var(--border); font: 400 14px/1.3 var(--round); color: var(--navy); }
+.pp-side .start-prog { margin: 8px 14px 0; }
+.start-prog i { background: var(--teal); }
+.pp-hint { font-size: 13px; color: var(--muted); margin: 10px 2px 0; }
+
+/* 每日行程：手帳頁 */
+.day-group { font: 400 19px/1.3 var(--round); border-left: 0; padding-left: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; scroll-margin-top: 76px; }
+.day-group::before { content: ""; width: 14px; height: 14px; border-radius: 50%; border: 2.5px dashed var(--stamp); flex: none; }
+.day-group:nth-of-type(even)::before { border-color: var(--teal); }
+.day-group small { margin-left: 0; font-family: var(--round); }
+.day-card { border-radius: 18px; background: var(--surface); box-shadow: 0 8px 18px -14px rgba(31,42,58,.45); }
+.day-header { padding: 14px 14px 14px 12px; gap: 12px; }
+.day-num, :root[data-theme="dark"] .day-num:not([style]) { width: 48px; height: 48px; background: transparent !important; color: var(--navy) !important;
+  border: 2.5px dashed var(--navy); font: 400 19px/1 var(--round); transform: rotate(-6deg); }
+.day-card:nth-of-type(even) .day-num { transform: rotate(5deg); }
+.day-num[style*="#888"] { color: var(--muted) !important; border-color: var(--muted); }
+.day-num[style*="#8c5a2a"] { color: var(--stamp) !important; border: 4px double var(--stamp); }
+.day-card.today-card .day-num { color: var(--teal) !important; border-color: var(--teal); }
+.day-card.today-card { border-color: var(--teal); box-shadow: 0 0 0 2px color-mix(in srgb, var(--teal) 55%, transparent); }
+.today-badge { background: var(--teal); }
+.day-date { font: 400 17px/1.35 var(--round); letter-spacing: .3px; }
+.day-region { line-height: 1.5; margin-top: 2px; }
+.must { display: inline-block; margin-left: 8px; padding: 1px 7px 0; border: 2px solid var(--stamp); border-radius: 6px; color: var(--stamp);
+  font: 400 14px/1.4 var(--round); letter-spacing: 2px; transform: rotate(-5deg); vertical-align: 1px; }
+.day-hotel { display: flex; align-items: center; gap: 5px; color: var(--accent2); margin-top: 2px; }
+.cc { display: inline-block; font: 700 11px/1 ui-monospace, Consolas, monospace; letter-spacing: 1px; color: var(--stamp); border: 1.5px solid currentColor;
+  border-radius: 4px; padding: 2px 3px 1px; vertical-align: 2px; margin-right: 2px; transform: rotate(-4deg); }
+.chevron { color: var(--navy); }
+.day-body { border-top: 1.5px dashed var(--border); background-image: radial-gradient(var(--dot) 1.2px, transparent 1.2px); background-size: 14px 14px; }
+.tl-time { font-family: var(--round); color: var(--accent); }
+.tl-dot { background: var(--surface); border: 2px solid var(--navy); width: 10px; height: 10px; margin-top: 6px; }
+.tl-dot::after { left: 2px; top: 10px; border-left: 1px dashed var(--border); background: none; }
+.map-btn { gap: 5px; }
+.alert-icon { display: flex; padding-top: 4px; }
+.alert-icon svg.ti { width: 18px; height: 18px; }
+.alert-warn .alert-icon { color: var(--accent3); }
+.alert-info .alert-icon { color: var(--accent); }
+.alert-danger .alert-icon { color: var(--warn); }
+.alert-success .alert-icon { color: var(--accent2); }
+
+/* 其他分頁的標題也用圓體，卡片圓角一致 */
+.notice-card h3, .cable-header h3, .sm-card h4, .section-label, .main h2:not(.pp-title), .main h3:not(.pp-sec) { font-family: var(--round); font-weight: 400; }
+.notice-card, .cable-card { border-radius: 16px; }
+
+/* 深色：深藍夜色版 */
+:root[data-theme="dark"] .start-card.pp-cover { background: linear-gradient(160deg, #1D3757, #0A1424); box-shadow: 0 0 0 1px #2A3A55, 0 18px 30px -18px rgba(0,0,0,.9); }
+:root[data-theme="dark"] .pp-mark { box-shadow: 0 0 0 1px #2A3A55; }
+:root[data-theme="dark"] .day-card, :root[data-theme="dark"] .pp-ticket { box-shadow: none; }
+
+@media (max-width: 380px) {
+  .pp-cover h2.pp-title { font-size: 27px; }
+  .pp-art { width: 92px; height: 92px; }
+  .nav-btn { font-size: 14px; }
+}
+/* 桌機：封面＋郵戳兩欄、內容放寬，分頁一列（放不下就置中換行） */
+@media (min-width: 1000px) {
+  .nav { flex-wrap: wrap; justify-content: center; overflow: visible; gap: 6px; padding: 8px max(16px, calc((100% - 1400px) / 2)); }
+  .nav-btn { font-size: 14px; gap: 5px; padding: 0 11px 0 6px; }
+  .nav-btn img { width: 22px; height: 22px; }
+  .main { max-width: 1240px; padding: 1.25rem 1.5rem 4rem; }
+  .main > .section:not(#tab-itinerary) { max-width: 980px; margin: 0 auto; }
+  .pp-top { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; align-items: stretch; margin-top: 4px; }
+  .start-card.pp-cover { margin: 0; padding: 36px 40px 34px; min-height: 340px; }
+  .pp-cover h2.pp-title { font-size: 44px; }
+  .pp-cover p.pp-sub { font-size: 16px; }
+  .pp-meta { max-width: 420px; }
+  .pp-meta dd { font-size: 20px; }
+  .pp-cover .start-btn { width: auto; min-width: 0; padding: 8px 26px 8px 18px; font-size: 18px; }
+  .pp-art { width: 200px; height: 200px; right: 40px; top: 34px; }
+  .pp-post { display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; right: 44px; bottom: 36px;
+    width: 116px; height: 116px; border-radius: 50%; border: 2px dashed rgba(243,197,82,.75); color: #F3C552; transform: rotate(-10deg);
+    font: 400 12px/1.4 var(--round); letter-spacing: 1px; }
+  .pp-post b { font: 400 26px/1.1 var(--round); letter-spacing: 2px; }
+  .pp-side { display: flex; flex-direction: column; justify-content: center; }
+  .pp-stamps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); overflow: visible; gap: 10px; margin: 0; padding: 6px 0 16px; }
+  .pp-stamp { width: 100%; height: auto; aspect-ratio: 1; max-width: 108px; justify-self: center; }
+  #tab-itinerary.active { gap: 1.1rem 1.25rem; }
+}
+/* ══ PP_PASSPORT_CSS 結束 ══ */
 </style>
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 </head>
 <body>
-<div class="update-banner" id="update-banner"><span>🔄 有新版本行程</span><button onclick="doUpdate()">立即更新</button></div>
-<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式" title="切換深色／淺色" data-icon="moon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></button>
+<div class="update-banner" id="update-banner"><span class="ub-t"><svg class="ti" aria-hidden="true"><use href="#ti-refresh"/></svg>有新版本行程</span><button onclick="doUpdate()">立即更新</button></div>
 
-<header class="hero rl-appbar" role="banner">
-  <svg class="hero-svg" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs>
-      <linearGradient id="sky-dawn" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"  stop-color="#0d0a1a"/>
-        <stop offset="25%" stop-color="#2a1228"/>
-        <stop offset="50%" stop-color="#7a2518"/>
-        <stop offset="72%" stop-color="#c84a1a"/>
-        <stop offset="88%" stop-color="#e8721a"/>
-        <stop offset="100%" stop-color="#f0a030"/>
-      </linearGradient>
-      <linearGradient id="glow-h" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%"   stop-color="#0d0a1a" stop-opacity="0"/>
-        <stop offset="35%"  stop-color="#e86020" stop-opacity="0.28"/>
-        <stop offset="50%"  stop-color="#ffb040" stop-opacity="0.55"/>
-        <stop offset="65%"  stop-color="#e86020" stop-opacity="0.28"/>
-        <stop offset="100%" stop-color="#0d0a1a" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="glow-h2" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%"   stop-color="#0d0a1a" stop-opacity="0"/>
-        <stop offset="40%"  stop-color="#ff8820" stop-opacity="0.18"/>
-        <stop offset="50%"  stop-color="#ffcc60" stop-opacity="0.35"/>
-        <stop offset="60%"  stop-color="#ff8820" stop-opacity="0.18"/>
-        <stop offset="100%" stop-color="#0d0a1a" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="mtn-dawn" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="#d86030"/>
-        <stop offset="20%"  stop-color="#a03820"/>
-        <stop offset="60%"  stop-color="#4a2018"/>
-        <stop offset="100%" stop-color="#1e1010"/>
-      </linearGradient>
-      <linearGradient id="snow-dawn" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"  stop-color="#ffe8c0"/>
-        <stop offset="50%" stop-color="#f0a060"/>
-        <stop offset="100%" stop-color="#c06030"/>
-      </linearGradient>
-      <linearGradient id="ridge-dawn" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"  stop-color="#3a1a10"/>
-        <stop offset="100%" stop-color="#120808"/>
-      </linearGradient>
-      <linearGradient id="lake-dawn" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"  stop-color="#c05818" stop-opacity="0.7"/>
-        <stop offset="40%" stop-color="#7a2810" stop-opacity="0.85"/>
-        <stop offset="100%" stop-color="#1a0a08" stop-opacity="1"/>
-      </linearGradient>
-      <radialGradient id="sun-burst" cx="50%" cy="100%" r="60%">
-        <stop offset="0%"   stop-color="#ffe090" stop-opacity="0.7"/>
-        <stop offset="30%"  stop-color="#ff9030" stop-opacity="0.35"/>
-        <stop offset="70%"  stop-color="#c84010" stop-opacity="0.12"/>
-        <stop offset="100%" stop-color="#0d0a1a" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <rect width="680" height="220" fill="url(#sky-dawn)"/>
-    <rect width="680" height="220" fill="url(#sun-burst)"/>
-    <ellipse cx="340" cy="158" rx="320" ry="55" fill="url(#glow-h)"/>
-    <ellipse cx="340" cy="145" rx="240" ry="38" fill="url(#glow-h2)"/>
-    <circle cx="92"  cy="15" r="1.0" fill="#e8c0a0" opacity="0.7"/>
-    <circle cx="155" cy="8" r="0.8" fill="#ffd8b0" opacity="0.65"/>
-    <circle cx="48"  cy="26" r="0.9" fill="#e0b890" opacity="0.6"/>
-    <circle cx="22"  cy="10" r="0.7" fill="#ffc8a0" opacity="0.55"/>
-    <circle cx="195" cy="19" r="1.1" fill="#e8d0b0" opacity="0.6"/>
-    <circle cx="255" cy="12" r="0.8" fill="#ffd0b0" opacity="0.55"/>
-    <circle cx="580" cy="13" r="1.0" fill="#e8c0a0" opacity="0.65"/>
-    <circle cx="625" cy="6" r="0.8" fill="#ffd8b0" opacity="0.6"/>
-    <circle cx="648" cy="22" r="0.9" fill="#e0b890" opacity="0.55"/>
-    <circle cx="540" cy="10" r="1.0" fill="#e8d0b0" opacity="0.6"/>
-    <circle cx="505" cy="17" r="0.9" fill="#ffd8b0" opacity="0.55"/>
-    <circle cx="458" cy="8" r="0.7" fill="#e8c0a0" opacity="0.5"/>
-    <path d="M 0,162 L 30,152 L 55,157 L 78,148 L 105,154 L 128,144 L 152,150 L 175,139 L 198,146 L 218,134 L 238,141 L 255,129 L 270,136 L 283,122 L 295,129 L 305,116 L 315,122 L 322,108 L 330,114 L 680,134 L 680,162 Z" fill="url(#ridge-dawn)" opacity="0.9"/>
-    <path d="M 680,136 L 655,132 L 632,139 L 608,129 L 585,136 L 562,124 L 538,132 L 515,120 L 492,128 L 468,116 L 445,124 L 422,112 L 400,120 L 378,108 L 360,116 L 345,102 L 330,114 L 322,108 L 315,122 L 680,134 Z" fill="#2a1208" opacity="0.7"/>
-    <path d="M 0,162 L 40,154 L 68,159 L 95,150 L 118,156 L 142,146 L 165,152 L 185,142 L 205,148 L 225,136 L 243,144 L 260,131 L 275,139 L 288,124 L 300,132 L 308,118 L 318,124 L 326,110 L 334,117 L 340,102 L 346,109 L 352,96 L 358,104 L 364,91 L 370,99 L 376,86 L 382,94 L 388,81 L 394,89 L 400,79 L 408,87 L 416,76 L 425,84 L 435,74 L 445,82 L 458,72 L 470,80 L 485,70 L 500,78 L 518,68 L 538,76 L 560,72 L 585,79 L 612,86 L 640,94 L 662,102 L 680,108 L 680,162 Z" fill="#1a0c08"/>
-    <path d="M 315,122 L 322,114 L 328,106 L 334,96 L 340,86 L 344,79 L 348,72 L 352,64 L 356,56 L 360,48 L 364,40 L 368,32 L 372,24 L 376,18 L 380,12 L 382,6 L 384,12 L 386,18 L 390,26 L 394,34 L 398,42 L 402,50 L 406,58 L 410,66 L 414,74 L 418,82 L 422,90 L 428,98 L 435,106 L 442,114 L 450,122 Z" fill="url(#mtn-dawn)"/>
-    <path d="M 382,6 L 378,10 L 374,16 L 370,24 L 366,32 L 362,40 L 358,48 L 362,46 L 366,42 L 370,37 L 374,31 L 377,25 L 380,19 L 382,13 Z" fill="#ff9050" opacity="0.55"/>
-    <path d="M 382,6 L 386,10 L 390,18 L 394,26 L 398,34 L 402,42 L 406,50 L 402,48 L 398,42 L 394,36 L 390,29 L 387,22 L 384,15 Z" fill="#e06030" opacity="0.4"/>
-    <path d="M 382,6 L 379,9 L 376,14 L 382,12 L 385,7 Z" fill="#ffe8c0" opacity="0.92"/>
-    <path d="M 382,6 L 385,9 L 388,14 L 382,12 L 380,8 Z" fill="#ffd0a0" opacity="0.75"/>
-    <path d="M 378,12 L 382,8 L 386,12 L 384,16 L 382,19 L 380,16 Z" fill="#ffb870" opacity="0.65"/>
-    <path d="M 290,139 Q 310,132 330,136 Q 340,102 340,102 Q 350,136 370,132 Q 390,129 410,134 L 412,152 L 288,152 Z" fill="#8a3010" opacity="0.35"/>
-    <rect x="0" y="150" width="680" height="70" fill="url(#lake-dawn)"/>
-    <path d="M 260,164 Q 310,158 360,161 Q 408,158 458,164" stroke="#e07030" stroke-width="1.0" fill="none" opacity="0.35"/>
-    <path d="M 240,172 Q 295,167 360,170 Q 422,167 478,172" stroke="#c05820" stroke-width="0.7" fill="none" opacity="0.28"/>
-    <path d="M 270,180 Q 318,176 360,178 Q 400,176 448,180" stroke="#d06020" stroke-width="0.6" fill="none" opacity="0.22"/>
-    <path d="M 374,155 L 370,162 L 366,169 L 370,172 L 374,169 L 378,172 L 382,169 L 378,162 Z" fill="#ffb060" opacity="0.22"/>
-    <ellipse cx="340" cy="151" rx="340" ry="3" fill="#f09030" opacity="0.12"/>
-    <path d="M 0,150 Q 170,156 340,153 Q 510,150 680,156" stroke="#e07828" stroke-width="1.0" fill="none" opacity="0.5"/>
-    <path d="M 55,163 Q 95,158 132,163" stroke="#e07030" stroke-width="0.6" fill="none" opacity="0.3"/>
-    <path d="M 548,159 Q 588,155 625,159" stroke="#e07030" stroke-width="0.6" fill="none" opacity="0.3"/>
-  </svg>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <img class="rl-glyph" src="./rl-mark-fitzroy-white.png" width="44" height="31" alt="" style="object-fit:contain;margin-bottom:.25rem">
-    <h1>🗺 瑞士 × 義大利多洛米堤</h1>
-    <p>2026年 夏季精華行程 — 12晚14天</p>
-    <div class="hero-meta">
-      <span><strong>6/14 – 6/27</strong>出發日期</span>
-      <span><strong>2人</strong>旅遊人數</span>
-      <span><strong>自駕</strong>交通方式</span>
-    </div>
-  </div>
+<header class="pp-bar rl-appbar" role="banner">
+  <span class="pp-mark"><img class="rl-glyph" src="./rl-mark-fitzroy-white.png" width="44" height="31" alt=""></span>
+  <div class="pp-name"><h1>瑞義行程</h1><small>瑞士 × 義大利多洛米堤 · 2026 夏</small></div>
+  <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式" title="切換深色／淺色" data-icon="moon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></button>
 </header>
+<!-- TABLER_SPRITE_START：Tabler Icons 3.49.0（MIT，授權見 vendor/tabler-icons/LICENSE.txt）；由 _tools/build_icon_sprite.py 產生，勿手改 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><symbol id="ti-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M22 17v-3h-20"/><path d="M2 8v9"/><path d="M12 14h10v-2a3 3 0 0 0 -3 -3h-7v5"/></symbol><symbol id="ti-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10h4a2 2 0 0 1 0 4h-4l-4 7h-3l2 -7h-4l-2 2h-3l2 -4l-2 -4h3l2 2h4l-2 -7h3l4 7"/></symbol><symbol id="ti-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></symbol><symbol id="ti-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></symbol><symbol id="ti-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"/><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"/><path d="M9.7 17l4.6 0"/></symbol><symbol id="ti-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"/></symbol><symbol id="ti-alert-octagon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.802 2.165l5.575 2.389c.48 .206 .863 .589 1.07 1.07l2.388 5.574c.22 .512 .22 1.092 0 1.604l-2.389 5.575c-.206 .48 -.589 .863 -1.07 1.07l-5.574 2.388c-.512 .22 -1.092 .22 -1.604 0l-5.575 -2.389a2.036 2.036 0 0 1 -1.07 -1.07l-2.388 -5.574a2.036 2.036 0 0 1 0 -1.604l2.389 -5.575c.206 -.48 .589 -.863 1.07 -1.07l5.574 -2.388a2.036 2.036 0 0 1 1.604 0"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol><symbol id="ti-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0"/><path d="M12 16h.01"/></symbol><symbol id="ti-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M12 7v5l3 3"/></symbol><symbol id="ti-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -8"/><path d="M3 10l18 0"/><path d="M7 15l.01 0"/><path d="M11 15l2 0"/></symbol><symbol id="ti-glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21l8 0"/><path d="M12 15l0 6"/><path d="M17 3l1 7c0 3.012 -2.686 5 -6 5s-6 -1.988 -6 -5l1 -7h10"/><path d="M6 10a5 5 0 0 1 6 0a5 5 0 0 0 6 0"/></symbol><symbol id="ti-shoe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h5.426a1 1 0 0 1 .863 .496l1.064 1.823a3 3 0 0 0 1.896 1.407l4.677 1.114a4 4 0 0 1 3.074 3.89v2.27a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10a1 1 0 0 1 1 -1"/><path d="M14 13l1 -2"/><path d="M8 18v-1a4 4 0 0 0 -4 -4h-1"/><path d="M10 12l1.5 -3"/></symbol><symbol id="ti-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13c0 -3.87 -3.37 -7 -10 -7h-8"/><path d="M3 15h16a2 2 0 0 0 2 -2"/><path d="M3 6v5h17.5"/><path d="M3 11v4"/><path d="M8 11v-5"/><path d="M13 11v-4.5"/><path d="M3 19h18"/></symbol><symbol id="ti-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/></symbol><symbol id="ti-kitchen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3"/></symbol><symbol id="ti-rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7"/><path d="M11 13v2m0 3v2m4 -5v2m0 3v2"/></symbol><symbol id="ti-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h1m16 0h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7m-9.7 5.7a4 4 0 0 1 8 0"/><path d="M3 21l18 0"/><path d="M12 9v-6l3 3m-6 0l3 -3"/></symbol><symbol id="ti-sos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8a2 2 0 0 1 2 2v4a2 2 0 1 1 -4 0v-4a2 2 0 0 1 2 -2"/><path d="M17 15c.345 .6 1.258 1 2 1a2 2 0 1 0 0 -4a2 2 0 1 1 0 -4c.746 0 1.656 .394 2 1"/><path d="M3 15c.345 .6 1.258 1 2 1a2 2 0 1 0 0 -4a2 2 0 1 1 0 -4c.746 0 1.656 .394 2 1"/></symbol><symbol id="ti-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245"/></symbol><symbol id="ti-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"/></symbol></svg>
+<!-- TABLER_SPRITE_END -->
 
-<nav class="nav">
-  <button class="nav-btn" onclick="showTab('checklist')">✅ 出發準備</button>
-  <button class="nav-btn active" onclick="showTab('itinerary')">📅 每日行程</button>
-  <button class="nav-btn" onclick="showTab('cable')">🚡 纜車票券</button>
-  <button class="nav-btn" onclick="showTab('docs')">📋 證件通行</button>
-  <button class="nav-btn" onclick="showTab('food')">🛒 超市餐廳</button>
-  <button class="nav-btn" onclick="showTab('booking')">⚠️ 預訂提醒</button>
-  <button class="nav-btn" onclick="showTab('tools')">🛠 旅遊工具</button>
-  <button class="nav-btn" onclick="showTab('hiking')">🥾 健行指南</button>
-  <button class="nav-btn" onclick="showTab('drive')">🚗 開車指南</button>
-  <button class="nav-btn" onclick="showTab('backup')">🌧 備案決策</button>
-  <button class="nav-btn" onclick="showTab('sos')">🆘 緊急資訊</button>
-  <button class="nav-btn" onclick="showTab('dining')">🍽 餐廳購物</button>
+<nav class="nav" aria-label="行程手冊分頁">
+  <button class="nav-btn" onclick="showTab('checklist')"><img src="./vendor/fluent-3d/luggage.png" alt="" width="24" height="24"><span>出發準備</span></button>
+  <button class="nav-btn active" onclick="showTab('itinerary')"><img src="./vendor/fluent-3d/calendar.png" alt="" width="24" height="24"><span>每日行程</span></button>
+  <button class="nav-btn" onclick="showTab('cable')"><img src="./vendor/fluent-3d/tramway.png" alt="" width="24" height="24"><span>纜車票券</span></button>
+  <button class="nav-btn" onclick="showTab('docs')"><img src="./vendor/fluent-3d/passport.png" alt="" width="24" height="24"><span>證件通行</span></button>
+  <button class="nav-btn" onclick="showTab('food')"><img src="./vendor/fluent-3d/cart.png" alt="" width="24" height="24"><span>超市餐廳</span></button>
+  <button class="nav-btn" onclick="showTab('booking')"><img src="./vendor/fluent-3d/alarm.png" alt="" width="24" height="24"><span>預訂提醒</span></button>
+  <button class="nav-btn" onclick="showTab('tools')"><img src="./vendor/fluent-3d/toolbox.png" alt="" width="24" height="24"><span>旅遊工具</span></button>
+  <button class="nav-btn" onclick="showTab('hiking')"><img src="./vendor/fluent-3d/boot.png" alt="" width="24" height="24"><span>健行指南</span></button>
+  <button class="nav-btn" onclick="showTab('drive')"><img src="./vendor/fluent-3d/car.png" alt="" width="24" height="24"><span>開車指南</span></button>
+  <button class="nav-btn" onclick="showTab('backup')"><img src="./vendor/fluent-3d/rain.png" alt="" width="24" height="24"><span>備案決策</span></button>
+  <button class="nav-btn" onclick="showTab('sos')"><img src="./vendor/fluent-3d/sos.png" alt="" width="24" height="24"><span>緊急資訊</span></button>
+  <button class="nav-btn" onclick="showTab('dining')"><img src="./vendor/fluent-3d/dining.png" alt="" width="24" height="24"><span>餐廳購物</span></button>
 </nav>
 
 <div class="main">
@@ -360,17 +437,38 @@ body { font-size: 15px; }
 <!-- ===== 每日行程 ===== -->
 <div class="section active" id="tab-itinerary">
 
-  <div class="start-card" id="start-card">
-    <h2>第一次打開？從這裡開始</h2>
-    <p>點下方日期卡片，展開當天的時間軸、住宿與路線。上方 12 個分頁可切換纜車票券、證件、緊急資訊等。</p>
-    <button type="button" class="start-btn" id="start-btn" onclick="openNextDay()">開始看行程：6/14 出發日</button>
-    <button type="button" class="start-btn2" onclick="gotoTab('checklist')">
-      <span>✅ 出發準備清單</span><span id="home-prog">已完成 0 / 0 項</span>
-    </button>
-    <div class="start-prog" aria-hidden="true"><i id="home-prog-bar"></i></div>
+  <div class="pp-top">
+    <section class="start-card pp-cover" id="start-card" aria-labelledby="pp-title">
+      <div class="pp-k">PASSPORT · 2026 SUMMER</div>
+      <h2 class="pp-title" id="pp-title">瑞士 × 義大利<br>多洛米堤</h2>
+      <p class="pp-sub">夏季精華行程 — 12晚14天</p>
+      <dl class="pp-meta">
+        <div><dt>出發日期</dt><dd>6/14 – 6/27</dd></div>
+        <div><dt>旅遊人數</dt><dd>2人</dd></div>
+        <div><dt>交通方式</dt><dd>自駕</dd></div>
+      </dl>
+      <button type="button" class="start-btn" id="start-btn" onclick="openNextDay()"><img src="./vendor/fluent-3d/book.png" alt="" width="28" height="28"><span class="lbl">開始看行程：6/14 出發日</span></button>
+      <img class="pp-art" src="./vendor/fluent-3d/mountain.png" alt="" width="128" height="128">
+      <div class="pp-post" aria-hidden="true"><span>CH · AT · IT</span><b>2026</b><span>12晚14天</span></div>
+    </section>
+    <div class="pp-side">
+      <h3 class="pp-sec">住宿郵戳<small>點郵戳跳到那幾天</small></h3>
+      <div class="pp-stamps">
+        <button type="button" class="pp-stamp" onclick="goGroup('g-zermatt')"><b>策馬特</b><small>CH</small><i>6/14–6/16</i></button>
+        <button type="button" class="pp-stamp" onclick="goGroup('g-lauter')"><b>少女峰區</b><small>CH</small><i>6/17–6/19</i></button>
+        <button type="button" class="pp-stamp" onclick="goGroup('g-imst')"><b>伊姆斯特</b><small>AT</small><i>6/20</i></button>
+        <button type="button" class="pp-stamp" onclick="goGroup('g-cortina')"><b>Cortina</b><small>IT</small><i>6/21–6/24</i></button>
+        <button type="button" class="pp-stamp" onclick="goGroup('g-milano')"><b>米蘭</b><small>IT</small><i>6/25–6/27</i></button>
+      </div>
+      <button type="button" class="start-btn2 pp-ticket" onclick="gotoTab('checklist')">
+        <img src="./vendor/fluent-3d/luggage.png" alt="" width="40" height="40"><span class="pp-tk"><b>出發準備清單</b><small>出發前逐項勾選</small></span><span id="home-prog">已完成 0 / 0 項</span>
+      </button>
+      <div class="start-prog" aria-hidden="true"><i id="home-prog-bar"></i></div>
+      <p class="pp-hint">點下方日期卡片，展開當天的時間軸、住宿與路線；上方分頁可切換纜車票券、證件、緊急資訊等。</p>
+    </div>
   </div>
 
-  <h2 class="day-group">出發與策馬特<small>6/14–6/16</small></h2>
+  <h2 class="day-group" id="g-zermatt">出發與策馬特<small>6/14–6/16</small></h2>
 
   <!-- 6/14 -->
   <div class="day-card" onclick="toggleDay(this)">
@@ -379,7 +477,7 @@ body { font-size: 15px; }
       <div class="day-header-info">
         <div class="day-date">6月14日（日）出發日</div>
         <div class="day-region">台北 → 上海（過境）→ 歐洲</div>
-        <div class="day-hotel">✈️ 機上</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-plane"/></svg>機上</div>
       </div>
       <span class="chevron">▼</span>
     </div>
@@ -403,7 +501,7 @@ body { font-size: 15px; }
         </div>
       </div>
       <div class="alert alert-warn">
-        <span class="alert-icon">⚠️</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-alert"/></svg></span>
         <span>自駕進入瑞士高速公路前需<strong>公路貼紙（Vignette）</strong> CHF 40；因從米蘭入境，建議出發前線上購買 e-Vignette，或於義瑞邊境購買</span>
       </div>
     </div>
@@ -415,15 +513,15 @@ body { font-size: 15px; }
       <div class="day-num">1</div>
       <div class="day-header-info">
         <div class="day-date">6月15日（一）</div>
-        <div class="day-region">🛬 米蘭 MXP 抵達 → 🇨🇭 策馬特（Zermatt）</div>
-        <div class="day-hotel">🏨 策馬特住宿</div>
+        <div class="day-region">米蘭 MXP 抵達 → <span class="cc">CH</span> 策馬特（Zermatt）</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>策馬特住宿</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-info">
-        <span class="alert-icon">🚗</span>
-        <span>策馬特禁止一般車輛進入，須停車於 <strong>Täsch</strong>（停車另計），轉搭接駁火車入村（約12分鐘；全票單程 CHF 8.60、來回 CHF 17.20；半價卡單程 CHF 4.30）<br><a href="https://www.google.com/maps/search/?api=1&query=46.0687,7.7754" target="_blank" class="map-btn">📍 Täsch 停車場導航</a></span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-car"/></svg></span>
+        <span>策馬特禁止一般車輛進入，須停車於 <strong>Täsch</strong>（停車另計），轉搭接駁火車入村（約12分鐘；全票單程 CHF 8.60、來回 CHF 17.20；半價卡單程 CHF 4.30）<br><a href="https://www.google.com/maps/search/?api=1&query=46.0687,7.7754" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Täsch 停車場導航</a></span>
       </div>
       <div class="timeline">
         <div class="timeline-item">
@@ -432,7 +530,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">🛬 抵達米蘭 MXP，取車出發</div>
             <div class="tl-desc">CA967 清晨抵達米蘭馬爾彭薩 T1，領取租車，開往策馬特 Täsch 停車場，車程約 3.5~4 小時（經 Simplon Pass 進入瑞士）</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.6306,8.7281" target="_blank" class="map-btn">📍 馬爾彭薩機場（MXP）</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.6306,8.7281" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>馬爾彭薩機場（MXP）</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -450,7 +548,7 @@ body { font-size: 15px; }
             <div class="tl-title">策馬特村莊漫步</div>
             <div class="tl-desc">馬特洪峰觀景點、策馬特教堂廣場、Bahnhofstrasse 購物街</div>
             <div class="tags"><span class="tag tag-green">輕鬆步行</span><span class="tag tag-blue">免費</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.0207,7.7491" target="_blank" class="map-btn">📍 策馬特村中心</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.0207,7.7491" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>策馬特村中心</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -472,14 +570,14 @@ body { font-size: 15px; }
       <div class="day-num">2</div>
       <div class="day-header-info">
         <div class="day-date">6月16日（二）</div>
-        <div class="day-region">🇨🇭 策馬特 — 高納葛拉特 + 馬特洪峰冰川天堂</div>
-        <div class="day-hotel">🏨 策馬特住宿</div>
+        <div class="day-region"><span class="cc">CH</span> 策馬特 — 高納葛拉特 + 馬特洪峰冰川天堂</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>策馬特住宿</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-warn">
-        <span class="alert-icon">⭐</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-star"/></svg></span>
         <span>這是策馬特最精華一天！建議<strong>清晨出發</strong>搭高納葛拉特（能見度最佳），下午再攻馬特洪峰冰川天堂</span>
       </div>
       <div class="timeline">
@@ -490,7 +588,7 @@ body { font-size: 15px; }
             <div class="tl-title">🚂 高納葛拉特齒輪火車（Gornergrat Bahn）</div>
             <div class="tl-desc">從策馬特車站搭乘，30分鐘抵達3,089m頂峰 — 一次可看見28座4000m以上的山峰及馬特洪峰近距離全景</div>
             <div class="tags"><span class="tag tag-blue">成人 CHF 132（已訂）</span><span class="tag tag-green">含ZOOOM體驗</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.0244,7.7489" target="_blank" class="map-btn">📍 策馬特火車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.0244,7.7489" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>策馬特火車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -517,7 +615,7 @@ body { font-size: 15px; }
             <div class="tl-title">🚡 馬特洪峰冰川天堂（Matterhorn Glacier Paradise）</div>
             <div class="tl-desc">歐洲最高纜車站3,883m，可俯瞰38座山峰 + 16條冰川，參觀冰宮（Glacier Palace）</div>
             <div class="tags"><span class="tag tag-blue">成人 CHF 120（已訂）</span><span class="tag tag-red">記得帶外套！</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.0162,7.7326" target="_blank" class="map-btn">📍 冰川天堂纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.0162,7.7326" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>冰川天堂纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -533,7 +631,7 @@ body { font-size: 15px; }
     </div>
   </div>
 
-  <h2 class="day-group">Lauterbrunnen 少女峰區<small>6/17–6/19</small></h2>
+  <h2 class="day-group" id="g-lauter">Lauterbrunnen 少女峰區<small>6/17–6/19</small></h2>
 
   <!-- 6/17 -->
   <div class="day-card" onclick="toggleDay(this)">
@@ -541,18 +639,18 @@ body { font-size: 15px; }
       <div class="day-num">3</div>
       <div class="day-header-info">
         <div class="day-date">6月17日（三）</div>
-        <div class="day-region">🇨🇭 策馬特下午出發 → Lauterbrunnen</div>
-        <div class="day-hotel">🏨 Lauterbrunnen 住宿</div>
+        <div class="day-region"><span class="cc">CH</span> 策馬特下午出發 → Lauterbrunnen</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>Lauterbrunnen 住宿</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-info">
-        <span class="alert-icon">🚗</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-car"/></svg></span>
         <span><strong>14:00 後出發</strong>。策馬特村（步行）→ Zermatt 火車站 → 搭齒軌火車至 Täsch → 取車 → 開車往 Lauterbrunnen，約 <strong>2.5小時</strong></span>
       </div>
       <div class="alert alert-warn">
-        <span class="alert-icon">🚂</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-train"/></svg></span>
         <span><strong>交通重點：</strong>策馬特禁車，行李需拖行至 Zermatt Bahnhof（火車站），搭 <strong>Matterhorn Gotthard Bahn</strong> 至 Täsch（約8分鐘，每15分一班），在 Täsch P+R 停車場取自駕車</span>
       </div>
       <div class="timeline">
@@ -563,7 +661,7 @@ body { font-size: 15px; }
             <div class="tl-title">策馬特最後早晨 — 五湖步道晨走（可選）</div>
             <div class="tl-desc">五湖健行標準動線：Zermatt → Sunnegga 地下纜車 → Blauherd 纜車；從 Blauherd 下坡走 Stellisee、Grindjisee、Grünsee、Moosjisee、Leisee，最後由 Sunnegga 下山。早晨無風時 Stellisee 倒影最穩，9:00 前抵達最好。</div>
             <div class="tags"><span class="tag tag-green">Peak Pass 含 Sunnegga/Blauherd</span><span class="tag tag-blue">約9km / 2.5~3h</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.0208,7.7540" target="_blank" class="map-btn">📍 Sunnegga 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.0208,7.7540" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Sunnegga 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -581,8 +679,8 @@ body { font-size: 15px; }
             <div class="tl-title">🚂 搭火車 Zermatt → Täsch 取車</div>
             <div class="tl-desc">Matterhorn Gotthard Bahn（MGBahn），約每20分一班，車程約12分鐘；全票單程 CHF 8.60、來回 CHF 17.20，半價卡單程 CHF 4.30。Peak Pass / Swiss Travel Pass 可涵蓋此段。Täsch P+R 停車場領取租車</div>
             <div class="tags"><span class="tag tag-blue">月台：Zermatt Bahnhof</span><span class="tag tag-green">Peak Pass 含接駁</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.0244,7.7489" target="_blank" class="map-btn">📍 Zermatt Bahnhof（火車站）</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.0687,7.7754" target="_blank" class="map-btn" style="margin-top:4px;">📍 Täsch 停車場（取車）</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.0244,7.7489" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Zermatt Bahnhof（火車站）</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.0687,7.7754" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Täsch 停車場（取車）</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -599,7 +697,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">抵達 Lauterbrunnen，辦理入住</div>
             <div class="tl-desc">Lauterbrunnen 住宿，停車場在村莊入口，步行進村</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5982,7.9076" target="_blank" class="map-btn">📍 Lauterbrunnen 停車場</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5982,7.9076" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Lauterbrunnen 停車場</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -609,8 +707,8 @@ body { font-size: 15px; }
             <div class="tl-title">飯店附近散步看瀑布</div>
             <div class="tl-desc">改走飯店周邊、Lauterbrunnen 村與 Staubbach Falls。傍晚光線柔和，適合輕鬆看瀑布與晚餐，不排需要趕閉園時間的付費景點。</div>
             <div class="tags"><span class="tag tag-green">步行可達</span><span class="tag tag-blue">低強度恢復</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5955,7.9090" target="_blank" class="map-btn">📍 Lauterbrunnen 村</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5892,7.9079" target="_blank" class="map-btn" style="margin-top:4px;">📍 Staubbach Falls</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5955,7.9090" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Lauterbrunnen 村</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5892,7.9079" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Staubbach Falls</a>
           </div>
         </div>
       </div>
@@ -623,14 +721,14 @@ body { font-size: 15px; }
       <div class="day-num">4</div>
       <div class="day-header-info">
         <div class="day-date">6月18日（四）</div>
-        <div class="day-region">🇨🇭 少女峰區經典半山腰健行（不上 Jungfraujoch）</div>
-        <div class="day-hotel">🏨 Lauterbrunnen 住宿</div>
+        <div class="day-region"><span class="cc">CH</span> 少女峰區經典半山腰健行（不上 Jungfraujoch）</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>Lauterbrunnen 住宿</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-info">
-        <span class="alert-icon">💡</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
         <span>今日不上 Jungfraujoch 少女峰頂，改走最經典的半山腰視角：Wengen / Männlichen / Kleine Scheidegg。想保留彈性時，First 或 Schynige Platte 可作同日替代二選一。</span>
       </div>
       <div class="timeline">
@@ -641,8 +739,8 @@ body { font-size: 15px; }
             <div class="tl-title">🚂 Lauterbrunnen → Wengen → Männlichen / Kleine Scheidegg</div>
             <div class="tl-desc">從 Lauterbrunnen 搭火車上 Wengen，再接纜車到 Männlichen，或直接搭齒軌火車到 Kleine Scheidegg。這是不用上少女峰頂、但能近看 Eiger / Mönch / Jungfrau 的經典路線。</div>
             <div class="tags"><span class="tag tag-blue">Jungfrau Travel Pass 含多數路段</span><span class="tag tag-green">順路不繞</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6059,7.9200" target="_blank" class="map-btn">📍 Wengen 車站</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6181,7.9381" target="_blank" class="map-btn" style="margin-top:4px;">📍 Männlichen 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6059,7.9200" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Wengen 車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6181,7.9381" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Männlichen 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -652,7 +750,7 @@ body { font-size: 15px; }
             <div class="tl-title">🏔 Panorama Trail：Männlichen → Kleine Scheidegg</div>
             <div class="tl-desc">半山腰健行約 4.5km、1.5~2 小時，幾乎一路面向艾格峰、僧侶峰、少女峰。若不想走完整段，也可搭車到 Kleine Scheidegg 周邊短走。</div>
             <div class="tags"><span class="tag tag-green">經典輕健行</span><span class="tag tag-amber">天氣好優先</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5840,7.9614" target="_blank" class="map-btn">📍 Kleine Scheidegg</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5840,7.9614" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Kleine Scheidegg</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -661,7 +759,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">Kleine Scheidegg 午餐 / 觀景休息</div>
             <div class="tl-desc">在 Kleine Scheidegg 直接看 Eiger 北壁用餐。若雲量變多，午餐後可提早下山，不需要硬等山頂視野。</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5840,7.9614" target="_blank" class="map-btn">📍 Kleine Scheidegg 餐廳區</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5840,7.9614" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Kleine Scheidegg 餐廳區</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -671,7 +769,7 @@ body { font-size: 15px; }
             <div class="tl-title">🚂 下山二選一：回 Wengen 或往 Grindelwald</div>
             <div class="tl-desc">順路版：Kleine Scheidegg → Wengen → Lauterbrunnen。若想看 Grindelwald 村景，可改走 Kleine Scheidegg → Grindelwald → Interlaken → Lauterbrunnen，但時間較長。</div>
             <div class="tags"><span class="tag tag-blue">順路：Wengen 返回</span><span class="tag tag-amber">Grindelwald 版較繞</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6241,8.0409" target="_blank" class="map-btn">📍 Grindelwald（替代下山點）</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6241,8.0409" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Grindelwald（替代下山點）</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -689,8 +787,8 @@ body { font-size: 15px; }
             <div class="tl-title">備案：First 或 Schynige Platte 二選一</div>
             <div class="tl-desc">若當天想改口味：First + Bachalpsee 較活潑、Schynige Platte 較復古安靜。兩者不要同天硬塞，挑一個替代半山腰路線即可。</div>
             <div class="tags"><span class="tag tag-blue">備案二選一</span><span class="tag tag-green">避免過度移動</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6243,8.0419" target="_blank" class="map-btn">📍 Grindelwald First</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6631,7.9086" target="_blank" class="map-btn" style="margin-top:4px;">📍 Schynige Platte</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6243,8.0419" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Grindelwald First</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6631,7.9086" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Schynige Platte</a>
           </div>
         </div>
       </div>
@@ -703,14 +801,14 @@ body { font-size: 15px; }
       <div class="day-num">5</div>
       <div class="day-header-info">
         <div class="day-date">6月19日（五）</div>
-        <div class="day-region">🇨🇭 雪朗峰路線為主（Schilthorn / Mürren）</div>
-        <div class="day-hotel">🏨 Lauterbrunnen 住宿（最後一夜）</div>
+        <div class="day-region"><span class="cc">CH</span> 雪朗峰路線為主（Schilthorn / Mürren）</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>Lauterbrunnen 住宿（最後一夜）</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-warn">
-        <span class="alert-icon">⚠️</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-alert"/></svg></span>
         <span>新纜車（官方工程名稱就叫「Schilthornbahn 20XX」，20XX 不是漏填年份）已於 2026/4 完成關鍵開通；6/19 仍請出發前至 schilthorn.ch 查即時營運與末班時間。</span>
       </div>
       <div class="timeline">
@@ -721,7 +819,7 @@ body { font-size: 15px; }
             <div class="tl-title">🏰 出發往 Stechelberg / Mürren / Schilthorn</div>
             <div class="tl-desc">從 Lauterbrunnen 搭巴士或自駕到 Stechelberg，接纜車上 Mürren、Birg、Schilthorn。今天以雪朗峰路線為主，不再加遊湖或 Niederhorn。</div>
             <div class="tags"><span class="tag tag-red">頂峰段另購票</span><span class="tag tag-amber">先查末班纜車</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5590,7.8409" target="_blank" class="map-btn">📍 Stechelberg 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5590,7.8409" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Stechelberg 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -731,7 +829,7 @@ body { font-size: 15px; }
             <div class="tl-title">Birg Thrill Walk + Schilthorn / Piz Gloria</div>
             <div class="tl-desc">先在 Birg 走 Thrill Walk，再上 Schilthorn 觀景台與 Piz Gloria。若雲層低，可多停 Birg / Mürren，避免把時間全押在山頂白牆。</div>
             <div class="tags"><span class="tag tag-amber">360° 山景</span><span class="tag tag-blue">007 Piz Gloria</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5577,7.8353" target="_blank" class="map-btn">📍 Birg / Schilthornbahn</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5577,7.8353" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Birg / Schilthornbahn</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -741,7 +839,7 @@ body { font-size: 15px; }
             <div class="tl-title">Mürren 午餐與村莊散步</div>
             <div class="tl-desc">下到 Mürren 用午餐，沿無車村與懸崖步道慢慢走，這段比趕第二個景點更舒服，也和隔天移動日節奏銜接較好。</div>
             <div class="tags"><span class="tag tag-green">無車村</span><span class="tag tag-blue">低強度下午</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5591,7.8930" target="_blank" class="map-btn">📍 Mürren 村莊</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5591,7.8930" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Mürren 村莊</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -757,7 +855,7 @@ body { font-size: 15px; }
     </div>
   </div>
 
-  <h2 class="day-group">伊姆斯特<small>6/20</small></h2>
+  <h2 class="day-group" id="g-imst">伊姆斯特<small>6/20</small></h2>
 
   <!-- 6/20 -->
   <div class="day-card" onclick="toggleDay(this)">
@@ -765,18 +863,18 @@ body { font-size: 15px; }
       <div class="day-num">6</div>
       <div class="day-header-info">
         <div class="day-date">6月20日（六）</div>
-        <div class="day-region">🇨🇭→🇦🇹 移動日 → 伊姆斯特 Imst 過夜</div>
-        <div class="day-hotel">🏨 伊姆斯特住宿（已確認；check-in 16:00 / check-out 10:00）</div>
+        <div class="day-region"><span class="cc">CH</span> → <span class="cc">AT</span> 移動日 → 伊姆斯特 Imst 過夜</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>伊姆斯特住宿（已確認；check-in 16:00 / check-out 10:00）</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-info">
-        <span class="alert-icon">🚗</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-car"/></svg></span>
         <span>上午依天氣 A/B 擇一；<strong>14:00 準時往奧地利開</strong>。路線：Lauterbrunnen → Interlaken → Luzern → Zürich → Sargans → Arlberg → Landeck → 伊姆斯特 Imst，含休息約 <strong>4.5~5 小時</strong>。Imst 比 Innsbruck 少 50km，6/20 路程少約 30 分鐘。</span>
       </div>
       <div class="alert alert-warn">
-        <span class="alert-icon">💳</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-card"/></svg></span>
         <span>今天不走 Brenner，Brenner 費放到 6/21。奧地利高速仍需 Vignette（10天約 €9.40~€11，依年度調整），瑞士 Vignette CHF 40 請確認租車已含。</span>
       </div>
       <div class="timeline">
@@ -787,8 +885,8 @@ body { font-size: 15px; }
             <div class="tl-title">上午 A/B：天氣好 Niederhorn、天氣差遊湖</div>
             <div class="tl-desc">A案（天氣好）：Beatenberg / Niederhorn 俯瞰圖恩湖與少女峰。B案（天氣差）：Interlaken West 搭圖恩湖船，或 Spiez / Interlaken 輕鬆午餐。今天只排半天，不要拖到下午。</div>
             <div class="tags"><span class="tag tag-amber">A：Niederhorn</span><span class="tag tag-blue">B：遊湖 / 小鎮</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6980,7.7940" target="_blank" class="map-btn">📍 Beatenberg / Niederhorn</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6874,7.8635" target="_blank" class="map-btn" style="margin-top:4px;">📍 Interlaken West 船站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6980,7.7940" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Beatenberg / Niederhorn</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6874,7.8635" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Interlaken West 船站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -806,7 +904,7 @@ body { font-size: 15px; }
             <div class="tl-title">🚗 出發往伊姆斯特 Imst（經 Arlberg）</div>
             <div class="tl-desc">建議路線：Lauterbrunnen → Interlaken → Luzern → Zürich → Sargans → Arlberg → Landeck → Imst。這天走瑞士北側進奧地利，Brenner 留到隔天。</div>
             <div class="tags"><span class="tag tag-blue">約4.5~5h 含休息</span><span class="tag tag-green">比隔天少壓力</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=47.2381,10.7396" target="_blank" class="map-btn">📍 Imst（伊姆斯特）</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=47.2381,10.7396" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Imst（伊姆斯特）</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -825,18 +923,18 @@ body { font-size: 15px; }
             <div class="tl-title">抵達 Imst，入住與晚餐</div>
             <div class="tl-desc">小鎮以休息為主：飯店或附近小館用餐，早睡。隔天 Imst → Brenner 比 Innsbruck 多 1 小時車程，需更早出發。</div>
             <div class="tags"><span class="tag tag-amber">簡單晚餐</span><span class="tag tag-blue">明日 06:30 出發</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=47.2381,10.7396" target="_blank" class="map-btn">📍 Imst 鎮中心</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=47.2381,10.7396" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Imst 鎮中心</a>
           </div>
         </div>
       </div>
       <div class="alert alert-info" style="margin-top:0.5rem;">
-        <span class="alert-icon">🏨</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg></span>
         <span>Imst（伊姆斯特）位於 Innsbruck 西側約 60km，是 Tyrol 地區小鎮。<strong>隔天往 Brenner 比從 Innsbruck 多約 1 小時車程</strong>，6/21 建議 06:30 出發，孤獨教堂 09:30 仍可到達。</span>
       </div>
     </div>
   </div>
 
-  <h2 class="day-group">Cortina 多洛米堤<small>6/21–6/24</small></h2>
+  <h2 class="day-group" id="g-cortina">Cortina 多洛米堤<small>6/21–6/24</small></h2>
 
   <!-- 6/21 -->
   <div class="day-card" onclick="toggleDay(this)">
@@ -844,22 +942,22 @@ body { font-size: 15px; }
       <div class="day-num">7</div>
       <div class="day-header-info">
         <div class="day-date">6月21日（日）</div>
-        <div class="day-region">🇦🇹→🇮🇹 伊姆斯特 → 孤獨教堂 + Seceda → Cortina</div>
-        <div class="day-hotel">🏨 Cortina 住宿（入住14:00）</div>
+        <div class="day-region"><span class="cc">AT</span> → <span class="cc">IT</span> 伊姆斯特 → 孤獨教堂 + Seceda → Cortina</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>Cortina 住宿（入住14:00）</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-info">
-        <span class="alert-icon">🚗</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-car"/></svg></span>
         <span>伊姆斯特 → A12 → 茵斯布魯克 → Brenner → A22 → Chiusa 出口 → Santa Maddalena（孤獨教堂）→ Ortisei（Seceda）→ Passo Gardena / Falzarego → Cortina，今晚住 <strong>Cortina 住宿</strong>。比原規劃多 1 小時車程，建議 <strong>06:30 出發</strong>。含停留約 <strong>9~10 小時</strong></span>
       </div>
       <div class="alert alert-danger">
-        <span class="alert-icon">🚨</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-alert-octagon"/></svg></span>
         <span>Seceda 纜車 2026 起<strong>強制線上時段預訂</strong>！票價 €74/人。先訂票再排行程！→ <a href="https://www.seceda.it/en/tickets" style="color:#8c1f1f">seceda.it</a></span>
       </div>
       <div class="alert alert-warn">
-        <span class="alert-icon">💳</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-card"/></svg></span>
         <span>Brenner 通行費 / 高速路費放在今天：Innsbruck 南下經 Brenner 與義大利 A22，請預留約 €12+ 的通行費與義大利高速費。</span>
       </div>
       <div class="timeline">
@@ -869,7 +967,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">退房，出發往義大利</div>
             <div class="tl-desc">伊姆斯特 → A12 東行 → 茵斯布魯克 → A13 → Brenner Pass → A22 南下，Chiusa 出口（約 2 小時）</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=47.0081,11.5069" target="_blank" class="map-btn">📍 Brenner Pass</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=47.0081,11.5069" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Brenner Pass</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -879,7 +977,7 @@ body { font-size: 15px; }
             <div class="tl-title">📸 Santa Maddalena 孤獨教堂（Val di Funes）</div>
             <div class="tl-desc">Chiusa 出口後順路 25 分鐘。白色小教堂配 Odle 山峰群，義大利最上鏡景色！停留 45 分鐘拍照</div>
             <div class="tags"><span class="tag tag-green">順路必停</span><span class="tag tag-amber">付費停車 €3-5</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6370,11.7208" target="_blank" class="map-btn">📍 Santa Maddalena 停車場</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6370,11.7208" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Santa Maddalena 停車場</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -889,7 +987,7 @@ body { font-size: 15px; }
             <div class="tl-title">⛰️ Seceda 刀鋒山脊（Ortisei 出發）</div>
             <div class="tl-desc">兩段纜車上山，Odle/Geisler 鋸齒岩峰群，多洛米堤最美稜線，停留 1.5~2 小時</div>
             <div class="tags"><span class="tag tag-red">€74/人｜需提前預訂</span><span class="tag tag-amber">⚠️ Supersummer Card 不適用</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5754,11.6739" target="_blank" class="map-btn">📍 Ortisei 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5754,11.6739" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Ortisei 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -898,7 +996,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">Ortisei 午餐 / 小鎮短走</div>
             <div class="tl-desc">Seceda 下山後在 Ortisei 午餐、補咖啡，控制停留時間。今晚直接住 Cortina。</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5754,11.6739" target="_blank" class="map-btn">📍 Ortisei 市區</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5754,11.6739" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Ortisei 市區</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -908,8 +1006,8 @@ body { font-size: 15px; }
             <div class="tl-title">🚗 出發往 Cortina（景觀路線）</div>
             <div class="tl-desc">Passo Gardena（2,121m）→ Passo Falzarego（2,105m）→ Cortina，壯麗山口連連，沿途停車拍照，實際約 2~2.5 小時。</div>
             <div class="tags"><span class="tag tag-green">景觀公路</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5497,11.8080" target="_blank" class="map-btn">📍 Passo Gardena</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn">📍 Passo Falzarego</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5497,11.8080" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Gardena</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Falzarego</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -918,7 +1016,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">抵達 Cortina，辦理入住</div>
             <div class="tl-desc">Cortina 住宿（Check-in 14:00）。入住後以散步、晚餐、早休息為主，避免移動日再加高山纜車。</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5404,12.1358" target="_blank" class="map-btn">📍 Cortina d'Ampezzo 市中心</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5404,12.1358" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cortina d'Ampezzo 市中心</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -928,7 +1026,7 @@ body { font-size: 15px; }
             <div class="tl-title">Cortina Corso Italia 晚餐散步</div>
             <div class="tl-desc">輕鬆逛市中心、採買水與隔天早餐。這晚重點是順利抵達 Cortina，不再塞高山纜車。</div>
             <div class="tags"><span class="tag tag-green">降低疲勞</span><span class="tag tag-amber">明日三峰早起</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5404,12.1358" target="_blank" class="map-btn">📍 Corso Italia / Cortina 市中心</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5404,12.1358" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Corso Italia / Cortina 市中心</a>
           </div>
         </div>
       </div>
@@ -940,15 +1038,15 @@ body { font-size: 15px; }
     <div class="day-header">
       <div class="day-num" style="background:#8c5a2a">8</div>
       <div class="day-header-info">
-        <div class="day-date">6月22日（一）⭐ 必去</div>
-        <div class="day-region">🇮🇹 三峰山全天 Tre Cime + Cadini + Lago di Misurina</div>
-        <div class="day-hotel">🏨 Cortina 住宿</div>
+        <div class="day-date">6月22日（一）<span class="must">必去</span></div>
+        <div class="day-region"><span class="cc">IT</span> 三峰山全天 Tre Cime + Cadini + Lago di Misurina</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>Cortina 住宿</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-danger">
-        <span class="alert-icon">🚨</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-alert-octagon"/></svg></span>
         <span>三峰停車場<strong>必須提前網路預訂</strong>！2025起強制車牌預約，周末至少提前3~5天。網站：<a href="https://auronzo.info/en/parking-tre-cime-di-lavaredo/" style="color:#8c1f1f">auronzo.info</a></span>
       </div>
       <div class="timeline">
@@ -959,7 +1057,7 @@ body { font-size: 15px; }
             <div class="tl-title">超早出發！Cortina → Rifugio Auronzo（約35分）</div>
             <div class="tl-desc">早去日出光線打在三峰最壯觀，過 Lago di Misurina 後走7公里收費山路上山</div>
             <div class="tags"><span class="tag tag-red">需預訂停車｜無預約不得進入</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6183,12.2948" target="_blank" class="map-btn">📍 Rifugio Auronzo 停車場</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6183,12.2948" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Rifugio Auronzo 停車場</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -986,7 +1084,7 @@ body { font-size: 15px; }
             <div class="tl-title">📸 Cadini di Misurina 觀景點</div>
             <div class="tl-desc">從 Rifugio Auronzo 步行約 1.5 小時，鋸齒狀岩峰群，IG 打卡最強景色，比 Tre Cime 人少、角度更奇特</div>
             <div class="tags"><span class="tag tag-green">加分景點</span><span class="tag tag-amber">來回約3小時</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6071,12.3187" target="_blank" class="map-btn">📍 Cadini 觀景台</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6071,12.3187" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cadini 觀景台</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -996,7 +1094,7 @@ body { font-size: 15px; }
             <div class="tl-title">🌊 Lago di Misurina（米蘇里納湖）</div>
             <div class="tl-desc">回程順道停留，平靜湖面倒映三峰，免費，湖邊咖啡或冰淇淋休息，輕鬆散步一圈約30分</div>
             <div class="tags"><span class="tag tag-green">免費</span><span class="tag tag-blue">輕鬆散步</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5833,12.2581" target="_blank" class="map-btn">📍 Lago di Misurina</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5833,12.2581" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Lago di Misurina</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1017,15 +1115,15 @@ body { font-size: 15px; }
     <div class="day-header">
       <div class="day-num" style="background:#8c5a2a">9</div>
       <div class="day-header-info">
-        <div class="day-date">6月23日（二）⭐ 必去</div>
-        <div class="day-region">🇮🇹 布萊埃斯湖晨光 + 米蘇里納湖 / Cortina 休整</div>
-        <div class="day-hotel">🏨 Cortina 住宿</div>
+        <div class="day-date">6月23日（二）<span class="must">必去</span></div>
+        <div class="day-region"><span class="cc">IT</span> 布萊埃斯湖晨光 + 米蘇里納湖 / Cortina 休整</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>Cortina 住宿</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-warn">
-        <span class="alert-icon">⏰</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-clock"/></svg></span>
         <span>Lago di Braies 旺季 08:30 後停車場即滿！建議 <strong>05:30~06:00 出發</strong>，或搭接駁巴士（搜尋「Braies shuttle bus」從 Cortina/Dobbiaco 出發）</span>
       </div>
       <div class="timeline">
@@ -1036,7 +1134,7 @@ body { font-size: 15px; }
             <div class="tl-title">🌅 Lago di Braies（布萊埃斯湖）晨光</div>
             <div class="tl-desc">從 Cortina 約 1 小時。翡翠色湖水倒映多洛米堤岩峰，晨霧飄渺最夢幻！可租木船（€15-20/30分）划進湖心。早去人少、光線最美。</div>
             <div class="tags"><span class="tag tag-green">免費入場</span><span class="tag tag-blue">早去必備</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.6944,12.0847" target="_blank" class="map-btn">📍 Lago di Braies 停車場</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.6944,12.0847" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Lago di Braies 停車場</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1046,8 +1144,8 @@ body { font-size: 15px; }
             <div class="tl-title">Dobbiaco / San Candido 咖啡短停</div>
             <div class="tl-desc">從 Braies 下山後，不硬排 Sorapis。可在 Dobbiaco 或 San Candido 補咖啡、逛小鎮，讓上午節奏收乾淨。</div>
             <div class="tags"><span class="tag tag-green">順路輕鬆</span><span class="tag tag-blue">小鎮散步</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.7355,12.2230" target="_blank" class="map-btn">📍 Dobbiaco / Toblach</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.7320,12.2782" target="_blank" class="map-btn" style="margin-top:4px;">📍 San Candido / Innichen</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.7355,12.2230" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Dobbiaco / Toblach</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.7320,12.2782" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>San Candido / Innichen</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1057,7 +1155,7 @@ body { font-size: 15px; }
             <div class="tl-title">Lago di Misurina 午餐 / 湖邊散步</div>
             <div class="tl-desc">回 Cortina 路上順停 Misurina，湖邊散步、午餐、拍 Tre Cime 遠景。這天刻意不把 Braies 與 Sorapis 放同一天。</div>
             <div class="tags"><span class="tag tag-green">低強度</span><span class="tag tag-blue">順路回 Cortina</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5833,12.2581" target="_blank" class="map-btn">📍 Lago di Misurina</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5833,12.2581" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Lago di Misurina</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1095,15 +1193,15 @@ body { font-size: 15px; }
     <div class="day-header">
       <div class="day-num" style="background:#8c5a2a">10</div>
       <div class="day-header-info">
-        <div class="day-date">6月24日（三）⭐ 必去</div>
-        <div class="day-region">🇮🇹 五塔山全天 — Cinque Torri + Lagazuoi + Passo Giau 日出</div>
-        <div class="day-hotel">🏨 Cortina 住宿（最後一晚）</div>
+        <div class="day-date">6月24日（三）<span class="must">必去</span></div>
+        <div class="day-region"><span class="cc">IT</span> 五塔山全天 — Cinque Torri + Lagazuoi + Passo Giau 日出</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>Cortina 住宿（最後一晚）</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <div class="alert alert-warn">
-        <span class="alert-icon">🌄</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-sunrise"/></svg></span>
         <span>Passo Giau（2,236m）清晨最魔幻，Ra Gusela 孤峰聳立，雲海繚繞如仙境。<strong>建議帶三腳架！</strong>路面窄陡，注意行駛。</span>
       </div>
       <div class="timeline">
@@ -1114,7 +1212,7 @@ body { font-size: 15px; }
             <div class="tl-title">🌅 Passo Giau 日出魔界</div>
             <div class="tl-desc">從 Cortina 約 30 分鐘，早晨雲霧繚繞，光線打在 Ra Gusela 岩峰極具魔幻感，帶三腳架多拍幾組！</div>
             <div class="tags"><span class="tag tag-amber">日出攝影聖地</span><span class="tag tag-green">免費</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.4822,12.0537" target="_blank" class="map-btn">📍 Passo Giau 山口</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.4822,12.0537" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Giau 山口</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1133,7 +1231,7 @@ body { font-size: 15px; }
             <div class="tl-title">🚡 Lagazuoi 纜車 + 一戰隧道</div>
             <div class="tl-desc">Passo Falzarego 旁纜車上 Lagazuoi（2,752m），可鑽一戰地下隧道，步行返回約 2 小時下坡。歷史感最強的多洛米堤體驗！</div>
             <div class="tags"><span class="tag tag-blue">上山單程 €21｜來回 €29.50</span><span class="tag tag-amber">一戰歷史遺跡</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn">📍 Passo Falzarego 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Falzarego 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1143,7 +1241,7 @@ body { font-size: 15px; }
             <div class="tl-title">🍝 Rifugio Averau 午餐（山頂）⭐</div>
             <div class="tl-desc">Cinque Torri 纜車上去的山屋，被譽為多洛米堤最頂級山頂 Pasta，每盤 €15-18，岩塔群環繞用餐</div>
             <div class="tags"><span class="tag tag-amber">⭐ 多洛米堤最佳山頂餐廳</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn">📍 Cinque Torri 纜車站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cinque Torri 纜車站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1177,7 +1275,7 @@ body { font-size: 15px; }
     </div>
   </div>
 
-  <h2 class="day-group">米蘭與回程<small>6/25–6/27</small></h2>
+  <h2 class="day-group" id="g-milano">米蘭與回程<small>6/25–6/27</small></h2>
 
   <!-- 6/25 -->
   <div class="day-card" onclick="toggleDay(this)">
@@ -1185,15 +1283,15 @@ body { font-size: 15px; }
       <div class="day-num">11</div>
       <div class="day-header-info">
         <div class="day-date">6月25日（四）</div>
-        <div class="day-region">🇮🇹 Cortina → 維羅納（半日）→ 米蘭住宿</div>
-        <div class="day-hotel">🏨 米蘭住宿（已確認；6/25-27 共 2 晚，在 Sesto 過夜）</div>
+        <div class="day-region"><span class="cc">IT</span> Cortina → 維羅納（半日）→ 米蘭住宿</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>米蘭住宿（已確認；6/25-27 共 2 晚，在 Sesto 過夜）</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <a href="./milano-itinerary.html" class="book-btn" style="background:var(--accent3);">🇮🇹 米蘭＋維羅納 詳細行程（逐點時段・餐廳・必買・超市）→</a>
       <div class="alert alert-info">
-        <span class="alert-icon">🚗</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-car"/></svg></span>
         <span>Cortina → 維羅納約 <strong>2.5~3 小時</strong>，下午逛維羅納歷史中心、晚餐後再開往米蘭（A4 約 <strong>1h50</strong>），約 22:00 入住米蘭住宿。<strong>維羅納不過夜</strong>，當晚睡米蘭。</span>
       </div>
       <div class="timeline">
@@ -1203,7 +1301,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">退房，Cortina → 維羅納</div>
             <div class="tl-desc">約 2.5~3 小時。抵達後車停 Parcheggio Cittadella（地下、有保全、ZTL 外），步行進歷史中心</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.436651,10.992243" target="_blank" class="map-btn">📍 Parcheggio Cittadella</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.436651,10.992243" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Parcheggio Cittadella</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1213,8 +1311,8 @@ body { font-size: 15px; }
             <div class="tl-title">🏛 維羅納歷史中心散步</div>
             <div class="tl-desc">Arena 圓形競技場 → Via Mazzini 購物街 → 茱麗葉之家 → Piazza delle Erbe／但丁廣場 → Ponte Pietra 古羅馬石橋（傍晚最美）。詳細時段與門票見上方「詳細行程」。</div>
             <div class="tags"><span class="tag tag-green">羅馬古城</span><span class="tag tag-blue">徒步可達</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.439045,10.994387" target="_blank" class="map-btn">📍 Arena di Verona</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.44706,10.99903" target="_blank" class="map-btn" style="margin-top:4px;">📍 Ponte Pietra 石橋</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.439045,10.994387" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Arena di Verona</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.44706,10.99903" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Ponte Pietra 石橋</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1240,7 +1338,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">抵達米蘭住宿，入住</div>
             <div class="tl-desc">Sesto San Giovanni（M1 Sesto 1° Maggio 站旁），24h 櫃台、可晚到，地下停車、ZTL 外。建議先告知預計抵達時間</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Sesto+1+Maggio+M1+Milano" target="_blank" class="map-btn">📍 Sesto 1° Maggio 站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Sesto+1+Maggio+M1+Milano" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Sesto 1° Maggio 站</a>
           </div>
         </div>
       </div>
@@ -1253,19 +1351,19 @@ body { font-size: 15px; }
       <div class="day-num">12</div>
       <div class="day-header-info">
         <div class="day-date">6月26日（五）</div>
-        <div class="day-region">🇮🇹 米蘭市區（Milan）</div>
-        <div class="day-hotel">🏨 米蘭住宿（Sesto，M1 站旁，已確認）</div>
+        <div class="day-region"><span class="cc">IT</span> 米蘭市區（Milan）</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-bed"/></svg>米蘭住宿（Sesto，M1 站旁，已確認）</div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="day-body">
       <a href="./milano-itinerary.html" class="book-btn" style="background:var(--accent3);">🇮🇹 米蘭＋維羅納 詳細行程（必買・超市・訂票・交通）→</a>
       <div class="alert alert-info">
-        <span class="alert-icon">🚇</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-train"/></svg></span>
         <span>飯店就在 <strong>M1 Sesto 1° Maggio 站旁（步行約 180m）</strong>，今天進市區直接搭<strong>地鐵 M1</strong>（紅線）到 Duomo 約 25 分鐘，避開 Area C 罰款與市區停車。車整天停飯店不用動。</span>
       </div>
       <div class="alert alert-warn">
-        <span class="alert-icon">⚠️</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-alert"/></svg></span>
         <span>米蘭市中心有<strong>Area C限制通行區（ZTL）</strong>！外地車輛週一至五07-19時禁止進入（€5通行費），建議停在市郊停車場搭地鐵</span>
       </div>
       <div class="timeline">
@@ -1275,7 +1373,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">飯店步行到 M1 站，搭地鐵進城</div>
             <div class="tl-desc">從飯店步行約 180m 到 M1 Sesto 1° Maggio 站（紅線終點），搭到 Duomo 約 25 分鐘。車留飯店，整天不用開。</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Sesto+1+Maggio+M1+Milano" target="_blank" class="map-btn">📍 Sesto 1° Maggio M1 站</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Sesto+1+Maggio+M1+Milano" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Sesto 1° Maggio M1 站</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1285,7 +1383,7 @@ body { font-size: 15px; }
             <div class="tl-title">🎨 米蘭大教堂（Duomo）+ 屋頂</div>
             <div class="tl-desc">哥德式大教堂，建議提前網路訂票（含屋頂 €20，爬樓梯版 €15），人潮多需排隊</div>
             <div class="tags"><span class="tag tag-red">需提前訂票</span><span class="tag tag-blue">屋頂視野極佳</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.4641,9.1919" target="_blank" class="map-btn">📍 米蘭大教堂</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.4641,9.1919" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>米蘭大教堂</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1294,8 +1392,8 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">Galleria Vittorio Emanuele II + Brera區</div>
             <div class="tl-desc">歐洲最美拱廊購物中心，Brera藝術區小巷漫步，Aperitivo文化</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.4654,9.1896" target="_blank" class="map-btn">📍 Galleria Vittorio Emanuele II</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.4724,9.1873" target="_blank" class="map-btn">📍 Brera 藝術區</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.4654,9.1896" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Galleria Vittorio Emanuele II</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.4724,9.1873" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Brera 藝術區</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1305,7 +1403,7 @@ body { font-size: 15px; }
             <div class="tl-title">米蘭最後晚餐</div>
             <div class="tl-desc">Navigli運河區，Aperitivo，米蘭燉飯（Risotto alla Milanese）</div>
             <div class="tags"><span class="tag tag-amber">傳統米蘭料理</span></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.4508,9.1751" target="_blank" class="map-btn">📍 Navigli 運河區</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.4508,9.1751" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Navigli 運河區</a>
           </div>
         </div>
       </div>
@@ -1318,8 +1416,8 @@ body { font-size: 15px; }
       <div class="day-num" style="background:#888">—</div>
       <div class="day-header-info">
         <div class="day-date">6月27日（六）</div>
-        <div class="day-region">🛫 返程 米蘭 → 台北</div>
-        <div class="day-hotel">✈️ 機上</div>
+        <div class="day-region">返程 米蘭 → 台北</div>
+        <div class="day-hotel"><svg class="ti" aria-hidden="true"><use href="#ti-plane"/></svg>機上</div>
       </div>
       <span class="chevron">▼</span>
     </div>
@@ -1332,7 +1430,7 @@ body { font-size: 15px; }
           <div class="tl-content">
             <div class="tl-title">退房，從 Sesto 出發</div>
             <div class="tl-desc">Sesto → A4 / A8 → MXP，約 50 分鐘。航班 12:15 起飛，建議 09:00 前到 MXP 還車＋報到，預留 3 小時。</div>
-            <a href="https://www.google.com/maps/search/?api=1&query=45.6306,8.7281" target="_blank" class="map-btn">📍 馬爾彭薩機場（MXP）</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=45.6306,8.7281" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>馬爾彭薩機場（MXP）</a>
           </div>
         </div>
         <div class="timeline-item">
@@ -1372,7 +1470,7 @@ body { font-size: 15px; }
         <div class="cable-row"><span class="cable-label" style="font-weight:600;">方案 B：不買 Peak Pass、改單張票</span><span class="cable-val">單張買策馬特 3 段 + JTP + Schilthorn：2人淨省約 CHF 157.20</span></div>
       </div>
       <div class="alert alert-info" style="margin-top:0.5rem;">
-        <span class="alert-icon">💡</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
         <span><strong>結論：</strong>若確定買 Zermatt Peak Pass + Jungfrau Travel Pass，半價卡幾乎打平；若想依天氣改成單張票、加搭 Schilthorn/Niederhorn、或多搭瑞士火車/湖船，買半價卡比較有安全邊際。</span>
       </div>
       <a href="https://www.sbb.ch/en/offers/swiss-half-fare-card" class="book-btn">SBB Swiss Half Fare Card →</a>
@@ -1395,7 +1493,7 @@ body { font-size: 15px; }
       <div class="cable-row"><span class="cable-label">含冰宮（Glacier Palace）入場</span><span class="cable-val">✅ 含在內</span></div>
       <div class="cable-row"><span class="cable-label">你的行程（6/15~6/17）</span><span class="cable-val" style="color:var(--accent2);">3日券剛好涵蓋 ✅</span></div>
       <div class="alert alert-info" style="margin-top:0.5rem;">
-        <span class="alert-icon">💡</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
         <span>你在策馬特若排 6/16 Gornergrat + 冰川天堂、6/17 五湖健行，Peak Pass 才容易回本；若只選一個山頭，出發前按天氣改買單程/來回票更彈性。</span>
       </div>
       <a href="https://www.matterhornparadise.ch/en/book/tickets/peak-pass" class="book-btn">官網購買 Peak Pass →</a>
@@ -1442,7 +1540,7 @@ body { font-size: 15px; }
       <div class="cable-row"><span class="cable-label">Peak Pass</span><span class="cable-val">✅ 含 Zermatt-Sunnegga-Blauherd-Rothorn</span></div>
       <div class="cable-row"><span class="cable-label">拍照策略</span><span class="cable-val">先衝 Stellisee；無風清晨倒影最穩，午後雲和風較容易起</span></div>
       <div class="alert alert-info" style="margin-top:0.5rem;">
-        <span class="alert-icon">💡</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
         <span>建議 6/17 早上只帶水、外套與輕食上山，行李先寄放飯店或車站；走完 Sunnegga 下山後再回 Täsch 取車。</span>
       </div>
       <a href="https://www.matterhornparadise.ch/en/experience/hiking/5-lakes-walk" class="book-btn">五湖健行官方資訊 →</a>
@@ -1469,7 +1567,7 @@ body { font-size: 15px; }
       <div class="cable-row"><span class="cable-label">⚠️ 2026 重要通知</span><span class="cable-val" style="color:var(--warn);">Lauterbrunnen-Grütschalp 纜車 2026/4/13-7/10 停駛；此期間 JTP 可替代搭 Stechelberg→Mürren，並可用 Lauterbrunnen→Stechelberg 郵政巴士</span></div>
       <div class="cable-row"><span class="cable-label">你的行程（6/18~6/20）</span><span class="cable-val" style="color:var(--accent2);">3日券涵蓋多數交通 ✅</span></div>
       <div class="alert alert-info" style="margin-top:0.5rem;">
-        <span class="alert-icon">💡</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
         <span>你的少女峰區安排改為不上 Jungfraujoch：6/18 Männlichen / Kleine Scheidegg，6/19 Mürren / Schilthorn，6/20 視天氣選湖船或 Niederhorn。3日券仍適合核心交通；Schilthorn 頂峰與 Niederhorn 需另外估票。</span>
       </div>
       <a href="https://www.jungfrau.ch/en-gb/jungfrau-travel-pass/" class="book-btn">官網購買 Jungfrau Travel Pass →</a>
@@ -1551,8 +1649,8 @@ body { font-size: 15px; }
       <div class="cable-row"><span class="cable-label">推薦健行</span><span class="cable-val">Niederhorn → Burgfeldstand → Gemmenalphorn（稜線，約3~4h）</span></div>
       <a href="https://www.bls-schiff.ch/en/discover-offers/niederhorn-combined-ticket" class="book-btn">🚢 BLS 遊湖套票購買 →</a>
       <a href="https://www.niederhorn.ch/en/timetable-prices/prices" class="book-btn" style="margin-top:0.4rem;background:var(--accent2);">纜車單票票價 →</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.7119,7.8356" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Niederhorn 頂站</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.6980,7.7940" target="_blank" class="map-btn" style="margin-top:4px;">📍 Beatenberg 纜車站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.7119,7.8356" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Niederhorn 頂站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.6980,7.7940" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Beatenberg 纜車站</a>
     </div>
   </div>
 
@@ -1596,7 +1694,7 @@ body { font-size: 15px; }
       </div>
 
       <div class="alert alert-warn" style="margin-top:0.3rem;">
-        <span class="alert-icon">💡</span>
+        <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
         <span>只玩 Val Gardena + Alpe di Siusi 兩個點 → <strong>單張買最省（€115）</strong><br>若還加 Cortina 周邊多條纜車 → <strong>先用單張估價，超過 €145 再改 Supersummer 3/4日券</strong></span>
       </div>
       <a href="https://www.dolomitisuperski.com/en/plan-and-book/lift-pass" class="book-btn green">Dolomiti Supersummer 購票 →</a>
@@ -1768,7 +1866,7 @@ body { font-size: 15px; }
     </div>
 
     <div class="alert alert-warn" style="margin-top:0.3rem;">
-      <span class="alert-icon">⏰</span>
+      <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-clock"/></svg></span>
       <span>上海轉機停留約 <strong>5小時35分</strong>（19:55抵達→01:30出發）。需過境中國，台灣護照可申請<strong>上海口岸72小時免簽過境</strong>，或在機場休息等候。</span>
     </div>
   </div>
@@ -1826,7 +1924,7 @@ body { font-size: 15px; }
     </div>
 
     <div class="alert alert-warn" style="margin-top:0.3rem;">
-      <span class="alert-icon">⏰</span>
+      <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-clock"/></svg></span>
       <span>回程上海轉機約 <strong>8小時35分</strong>（05:50抵→14:25出發）。時間充裕，可在浦東機場休息。</span>
     </div>
   </div>
@@ -1844,7 +1942,7 @@ body { font-size: 15px; }
       <li>🪙 常旅客號：請查 e-ticket（為隱私已從公開頁移除）</li>
     </ul>
     <div class="alert alert-danger" style="margin-top:0.6rem;">
-      <span class="alert-icon">🚨</span>
+      <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-alert-octagon"/></svg></span>
       <span>出發前請確認：護照效期至 <strong>2026/12/28</strong> 以上（回程日 +6個月）、中國過境簽證或免簽資格</span>
     </div>
   </div>
@@ -1960,7 +2058,7 @@ body { font-size: 15px; }
   </div>
 
   <div class="alert alert-info" style="margin-top:0.75rem">
-    <span class="alert-icon">💡</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
     <span>超市策略：在瑞士超市買麵包、起司、火腿、優格、水果當早餐和午餐，晚餐才去餐廳。可省下大量餐費！</span>
   </div>
 
@@ -2047,7 +2145,7 @@ body { font-size: 15px; }
       <div style="margin-top:0.4rem;font-size:0.9375rem;">
         <span class="alert alert-warn" style="padding:0.3rem 0.6rem;display:inline-flex;margin:0;">⚠️ 策馬特禁車，停車於 Täsch，搭接駁火車入村</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.0205,7.7488" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 策馬特住宿 位置</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.0205,7.7488" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>策馬特住宿 位置</a>
     </div>
 
     <!-- Lauterbrunnen 住宿 -->
@@ -2079,7 +2177,7 @@ body { font-size: 15px; }
       <div style="margin-top:0.4rem;font-size:0.9375rem;">
         <span class="alert alert-info" style="padding:0.3rem 0.6rem;display:inline-flex;margin:0;">💡 少女峰、席爾頓3天的基地，停車場在村莊入口</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5932,7.9087" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Lauterbrunnen 住宿 位置</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5932,7.9087" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Lauterbrunnen 住宿 位置</a>
     </div>
 
     <!-- 6/20 Imst confirmed -->
@@ -2108,7 +2206,7 @@ body { font-size: 15px; }
       <div style="margin-top:0.5rem;font-size:0.9375rem;">
         Imst 位於 Innsbruck 西側約 60km、A12 高速旁。6/20 從 Lauterbrunnen 出發車程比 Innsbruck 少 30 分鐘；但 6/21 早上往 Brenner 多 1 小時，建議 06:30 出發。
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=47.2381,10.7396" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Imst 鎮中心</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=47.2381,10.7396" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Imst 鎮中心</a>
     </div>
 
     <!-- Cortina 住宿 (第1晚) -->
@@ -2140,7 +2238,7 @@ body { font-size: 15px; }
       <div style="margin-top:0.4rem;font-size:0.9375rem;color:var(--muted);">
         📌 6/21 入住第1晚（1筆訂單），6/22 起續住至 6/25（另1筆訂單，共3晚）。同一家飯店，但分兩筆訂單，建議提前告知飯店勿移房。
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5404,12.1358" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Cortina 市中心</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5404,12.1358" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cortina 市中心</a>
     </div>
 
     <!-- 6/25-27 Milan confirmed (合併 2 晚) -->
@@ -2169,7 +2267,7 @@ body { font-size: 15px; }
       <div style="margin-top:0.5rem;font-size:0.9375rem;">
         Sesto San Giovanni 位於米蘭北郊，飯店在 <strong>M1 Sesto 1° Maggio 站旁（步行約 180m）</strong>，進市區搭地鐵 25 分到 Duomo，車整趟停飯店不用動；6/27 早上往 MXP 約 50 分鐘車程。
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=Sesto+1+Maggio+M1+Milano" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Sesto 1° Maggio M1 站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Sesto+1+Maggio+M1+Milano" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Sesto 1° Maggio M1 站</a>
     </div>
 
   </div>
@@ -2271,7 +2369,7 @@ body { font-size: 15px; }
       <div style="display:flex;justify-content:space-between;padding:0.4rem 0;"><span>🏙 米蘭 <span style="color:var(--muted);font-size:0.9375rem;">6/26</span></span><span style="font-weight:500;">🌅 05:35　🌇 21:15</span></div>
     </div>
     <div class="alert alert-info" style="margin-top:0.6rem;">
-      <span class="alert-icon">📸</span>
+      <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-camera"/></svg></span>
       <span>多洛米堤<strong>岩石橙紅（Enrosadira）</strong>約在日落前 30–60 分鐘最濃（約 20:10–21:10）；Passo Giau / Braies 晨景建議日出前 30 分鐘到位。</span>
     </div>
   </div>
@@ -2279,7 +2377,7 @@ body { font-size: 15px; }
   <!-- 空拍機規範 -->
   <div class="section-label" style="margin-top:1.2rem;">🛸 空拍機規範（CH / IT / AT）</div>
   <div class="alert alert-danger">
-    <span class="alert-icon">⚠️</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-alert"/></svg></span>
     <span>三國均採 EU 框架，但<strong>義大利、奧地利強制責任險</strong>，違規罰款最重 €64,000＋沒收。<strong>有相機的空拍機（含 DJI Mini 系列）都要先註冊</strong>。出發前務必到下方官網辦理。</span>
   </div>
 
@@ -2348,7 +2446,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Bahnhofstrasse 52</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">策馬特店限定發售，錶帶印有 Zermatt 字樣與馬特洪峰剪影，極具收藏價值。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.0216,7.7470" target="_blank" class="map-btn" style="margin-top:4px;">📍 Swatch Store Zermatt</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.0216,7.7470" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Swatch Store Zermatt</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2356,7 +2454,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Kirchstrasse 46</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">Bäckerei Fuchs 特製三角馬特洪峰造型巧克力，小盒精緻，是送禮最佳選擇。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.0199,7.7483" target="_blank" class="map-btn" style="margin-top:4px;">📍 Bäckerei Fuchs Zermatt</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.0199,7.7483" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Bäckerei Fuchs Zermatt</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2364,7 +2462,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Dorfstrasse 129</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">Victorinox 專賣店，提供萬用刀現場免費雷射雕刻名字與日期服務，5-10分鐘取件。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.6234,8.0425" target="_blank" class="map-btn" style="margin-top:4px;">📍 Kaufmann Bucher (Grindelwald)</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.6234,8.0425" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Kaufmann Bucher (Grindelwald)</a>
       </div>
       <div style="padding:0.6rem 0;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2372,7 +2470,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Dorfstrasse 101</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">瑞士傳統高山草本藥膏（Murmeli Salbe），對長期登山健行造成的關節與肌肉痠痛效果奇佳。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.6241,8.0415" target="_blank" class="map-btn" style="margin-top:4px;">📍 Coop Vitality 藥局</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.6241,8.0415" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Coop Vitality 藥局</a>
       </div>
     </div>
   </div>
@@ -2386,7 +2484,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Corso Italia 40</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">特產石松 (Zirbe) 香氣可改善睡眠。另有石松利口酒 (Zirbenschnaps)，充滿森林療癒香氣。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5370,12.1387" target="_blank" class="map-btn" style="margin-top:4px;">📍 Cooperativa di Cortina</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5370,12.1387" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cooperativa di Cortina</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2394,7 +2492,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Via Rezia 1</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">帶有杜松子與輕煙燻香氣，切薄片配紅酒絕配。在山區超市購買比大城市便宜很多。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5752,11.6756" target="_blank" class="map-btn" style="margin-top:4px;">📍 Despar 超市 (Ortisei)</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5752,11.6756" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Despar 超市 (Ortisei)</a>
       </div>
       <div style="padding:0.6rem 0;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2402,7 +2500,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Via Rezia 9</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">傳承百年的精緻木雕工藝，可選購小木偶、聖誕裝飾或小動物雕像（請認明手工防偽標章）。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5743,11.6717" target="_blank" class="map-btn" style="margin-top:4px;">📍 DOLFI Shop (Ortisei)</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5743,11.6717" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>DOLFI Shop (Ortisei)</a>
       </div>
     </div>
   </div>
@@ -2416,7 +2514,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Galleria Vittorio Emanuele II</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">Prada 旗下名店。包裝精緻典雅，其傳統聖誕蛋糕 (Panettone) 或手工巧克力送禮非常體面。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=45.4654,9.1901" target="_blank" class="map-btn" style="margin-top:4px;">📍 Pasticceria Marchesi (米蘭拱廊)</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=45.4654,9.1901" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Pasticceria Marchesi (米蘭拱廊)</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2424,7 +2522,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Corso Vittorio Emanuele II</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">義大利國民彩妝品牌，口紅與眼影極為平價好用（常有 EUR 5-10 的促銷），非常適合送禮。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=45.4655,9.1950" target="_blank" class="map-btn" style="margin-top:4px;">📍 Kiko Milano (大教堂旁)</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=45.4655,9.1950" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Kiko Milano (大教堂旁)</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2432,7 +2530,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Esselunga Supermarket</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">在地連鎖超市，松露醬極便宜（一罐約 EUR 5-8），濃郁的開心果醬與牙膏界的愛馬仕 Marvis 必買。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=45.4745,9.2015" target="_blank" class="map-btn" style="margin-top:4px;">📍 Esselunga 超市 (米蘭)</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=45.4745,9.2015" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Esselunga 超市 (米蘭)</a>
       </div>
       <div style="padding:0.6rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2440,7 +2538,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Via Spadari 9</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">1883年創立的米蘭美食指標，有最頂級的火腿、熟成起司、松露製品與各式義大利精品熟食。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=45.4630,9.1878" target="_blank" class="map-btn" style="margin-top:4px;">📍 Peck Milano (大教堂旁)</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=45.4630,9.1878" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Peck Milano (大教堂旁)</a>
       </div>
       <div style="padding:0.6rem 0;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
@@ -2448,7 +2546,7 @@ body { font-size: 15px; }
           <span style="font-size:0.9375rem;color:var(--muted);">Piazza XXV Aprile 10</span>
         </div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">頂級義大利食材旗艦店，精選各產區頂級食材、精裝巴薩米克醋與金杯咖啡豆，包裝精美。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=45.4806,9.1879" target="_blank" class="map-btn" style="margin-top:4px;">📍 Eataly Milano Smeraldo</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=45.4806,9.1879" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Eataly Milano Smeraldo</a>
       </div>
     </div>
   </div>
@@ -2531,7 +2629,7 @@ body { font-size: 15px; }
       </a>
     </div>
     <div class="alert alert-info" style="margin-top:0.8rem;">
-      <span class="alert-icon">💡</span>
+      <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
       <span>高山天氣瞬息萬變，建議<strong>出發前一天晚上</strong>再確認，早上6點前的天氣最準確。Meteoblue比Google Weather更適合高山地區。</span>
     </div>
   </div>
@@ -2600,7 +2698,19 @@ function showTab(id, fromPop) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   var nb = document.querySelector(".nav-btn[onclick*=\"'" + id + "'\"]");
-  if (nb) nb.classList.add('active');
+  if (nb) {
+    nb.classList.add('active');
+    // 分頁列是橫向捲動的單列：切換後把目前分頁捲進可見範圍（只動分頁列，不動整頁）
+    var nv = nb.parentNode;
+    if (nv && nv.scrollWidth > nv.clientWidth) {
+      var l = nb.offsetLeft - nv.offsetLeft, r2 = l + nb.offsetWidth;
+      if (l < nv.scrollLeft || r2 > nv.scrollLeft + nv.clientWidth) nv.scrollLeft = Math.max(0, l - 16);
+    }
+  }
+}
+function goGroup(id) {
+  var g = document.getElementById(id); if (!g) return;
+  g.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 (function () {
   var v = history.state && history.state.v301;
@@ -2624,7 +2734,7 @@ function applyThemeIcon() {
             : '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>') + '</svg>';
   }
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', dark ? '#15130f' : '#203a43');
+  if (meta) meta.setAttribute('content', dark ? '#0E1726' : '#F6F1E6');
 }
 function toggleTheme() {
   const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -2806,10 +2916,11 @@ function updateHomeProgress() {
 function initStartButton() {
   var btn = document.getElementById('start-btn'); if (!btn) return;
   var r = nextDayCard(); var el = r.card && r.card.querySelector('.day-date');
-  var label = el ? el.textContent.replace(/⭐.*$/, '').replace(/[（(].*?[）)]/, ' ').trim() : '';
-  if (r.mode === 'during') btn.textContent = '打開今天的行程：' + label;
-  else if (r.mode === 'after') btn.textContent = '回顧行程：從 ' + label + ' 開始';
-  else btn.textContent = '開始看行程：' + label;
+  var label = el ? el.textContent.replace(/(⭐\s*)?必去.*$/, '').replace(/[（(].*?[）)]/, ' ').trim() : '';
+  var L = btn.querySelector('.lbl') || btn;   // 只改文字，3D 圖示留著（605 踩過 textContent 蓋掉圖示）
+  if (r.mode === 'during') L.textContent = '打開今天的行程：' + label;
+  else if (r.mode === 'after') L.textContent = '回顧行程：從 ' + label + ' 開始';
+  else L.textContent = '開始看行程：' + label;
 }
 
 // ===== 勾選進度 =====
@@ -2898,7 +3009,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
 <div class="section" id="tab-hiking">
 
   <div class="alert alert-info" style="margin-bottom:1rem;">
-    <span class="alert-icon">🥾</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-shoe"/></svg></span>
     <span>這趟涵蓋<strong>四大世界級健行區</strong>，每區山風格完全不同。點開各步道看詳細資訊。</span>
   </div>
 
@@ -2951,7 +3062,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
         <span class="badge badge-warn">⏰ 下午雲霧易起，建議上午走</span>
         <span class="badge badge-warn">❄️ 六月初可能有殘雪</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.6181,7.9381" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Männlichen 纜車站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.6181,7.9381" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Männlichen 纜車站</a>
     </div>
   </div>
 
@@ -2986,7 +3097,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
         <span class="badge badge-warn">⏰ 適合少女峰當天下山順走</span>
         <span class="badge badge-tip">🥾 務必穿防滑健行鞋</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5819,7.9796" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Eigergletscher 站（步道起點）</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5819,7.9796" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Eigergletscher 站（步道起點）</a>
     </div>
   </div>
 
@@ -3017,7 +3128,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       </div>
       <div class="hike-desc">從 Lauterbrunnen 村沿私家道路走入山谷深處，兩側懸崖瀑布傾瀉而下，六月份融雪水量最大最壯觀。可走到 Trümmelbach Falls（CHF 14）、Staubbachfall，或繼續深入到 Stechelberg。適合抵達日、雨天備案或大行程後的輕鬆恢復。</div>
       <div class="hike-highlight"><strong>景色亮點：</strong>世界上絕無僅有的U型冰川峽谷，72條瀑布從200m高的懸崖直瀉而下。六月融雪時水量是一年中最壯觀的時期。</div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5934,7.9088" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Lauterbrunnen 村步道起點</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5934,7.9088" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Lauterbrunnen 村步道起點</a>
     </div>
   </div>
 
@@ -3047,7 +3158,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       </div>
       <div class="hike-desc">從 Grütschalp 纜車站沿崖邊步道走到 Mürren，平緩易行。一路俯瞰 Lauterbrunnen 山谷，少女峰三連峰在對面陪你走。是傍晚夕陽時間的絕佳選擇，也適合不想消耗太多體力的日子。可加入 Schilthorn 纜車搭配一天行程。</div>
       <div class="hike-highlight"><strong>最佳時間：</strong>傍晚出發，走到 Mürren 後看日落（約21:30），回程搭最後一班纜車下山。夏季日照長，晚上 8 點仍天亮，非常值得。</div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5965,7.8909" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Grütschalp 纜車站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5965,7.8909" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Grütschalp 纜車站</a>
     </div>
   </div>
 
@@ -3085,7 +3196,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
         <span class="badge badge-warn">⚠️ 碎石路需穿健行鞋，雨天濕滑</span>
         <span class="badge badge-tip">🐑 沿途常見黑面羊</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=45.9858,7.7625" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Rotenboden 站（Riffelsee 步道起點）</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=45.9858,7.7625" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Rotenboden 站（Riffelsee 步道起點）</a>
     </div>
   </div>
 
@@ -3120,7 +3231,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
         <span class="badge badge-warn">⚠️ 下午人潮暴增，建議早出發</span>
         <span class="badge badge-tip">🔗 可與 Gornergrat → Riffelsee 合併為一天</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.0182,7.7851" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Blauherd 站（步道起點）</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.0182,7.7851" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Blauherd 站（步道起點）</a>
     </div>
   </div>
 
@@ -3158,7 +3269,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
         <span class="badge badge-warn">⚠️ 2026年強制線上時段預訂，先訂先得</span>
         <span class="badge badge-info">可加走 Adolf Munkel Trail（見下方）</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5772,11.6749" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Ortisei 纜車站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5772,11.6749" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Ortisei 纜車站</a>
     </div>
   </div>
 
@@ -3189,7 +3300,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       </div>
       <div class="hike-desc">很多人只去 Seceda，但真正最舒服的多洛米堤步道之一其實是這條。在森林裡行走，抬頭就是 Odle 山群的垂直巨牆。景色非常史詩，人潮比 Seceda 少很多。全程免纜車費用，是絕佳的 CP 值選擇。可與 Seceda 合併成一整天。</div>
       <div class="hike-highlight"><strong>黑馬推薦：</strong>大部分觀光客只去 Seceda，但真正懂健行的人更愛這條。森林氛圍加上巨峰俯壓感，是完全不同的體驗。</div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.6350,11.7637" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Zannes 停車場（步道起點）</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.6350,11.7637" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Zannes 停車場（步道起點）</a>
     </div>
   </div>
 
@@ -3223,7 +3334,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <div class="hike-badges">
         <span class="badge badge-warn">⚠️ 空中纜椅 12:30~13:30 午休停駛</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5399,11.6213" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Alpe di Siusi 纜車站</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5399,11.6213" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Alpe di Siusi 纜車站</a>
     </div>
   </div>
 
@@ -3262,7 +3373,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
         <span class="badge badge-tip">💡 可加走 Cadini di Misurina（+3h）</span>
         <span class="badge badge-warn">❄️ 六月中山屋剛開放，確認開放狀況</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.6183,12.2948" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Rifugio Auronzo 停車場</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.6183,12.2948" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Rifugio Auronzo 停車場</a>
     </div>
   </div>
 
@@ -3298,7 +3409,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
         <span class="badge badge-tip">💧 備足 1.5L 飲水，山屋價格昂貴</span>
         <span class="badge badge-info">🕗 建議上午 9:30 前出發</span>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5561,12.2046" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Passo Tre Croci 停車場（步道起點）</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5561,12.2046" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Tre Croci 停車場（步道起點）</a>
     </div>
   </div>
 
@@ -3329,7 +3440,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       </div>
       <div class="hike-desc">五座獨特的岩塔群，從 Passo Falzarego 旁的停車場步行可達。同時保留完整的一戰地下壕溝網絡，文化景觀豐富。人潮比 Tre Cime 少很多，停車也免費，是非常高 CP 值的選擇。傍晚岩塔在 Enrosadira 現象下轉橙紅色極美。</div>
       <div class="hike-highlight"><strong>推薦加入行程：</strong>此地在你 6/21 移動至 Cortina 的路上，Passo Falzarego 就在必經路線，只需停留 1.5~2h，極度值得！</div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Cinque Torri 停車場</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cinque Torri 停車場</a>
     </div>
   </div>
 
@@ -3360,7 +3471,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       </div>
       <div class="hike-desc">翡翠綠湖水倒映多洛米堤岩峰，環湖一圈約1小時，幾乎平路，任何人都能完成。關鍵是要早去——08:30 後停車場即滿，9 點後人爆多。清晨湖面如鏡，晨霧飄渺是一生一次的畫面。可租木船划進湖心，從水上看群峰是另一個視角。</div>
       <div class="hike-highlight"><strong>清晨時光：</strong>你的行程安排 6/23 清晨 5:30 出發，這是最完美的選擇。6 點的 Lago di Braies 幾乎沒有人，只有你和湖面與山峰。</div>
-      <a href="https://www.google.com/maps/search/?api=1&query=46.6944,12.0847" target="_blank" class="map-btn" style="margin-top:0.5rem;">📍 Lago di Braies 停車場</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=46.6944,12.0847" target="_blank" class="map-btn" style="margin-top:0.5rem;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Lago di Braies 停車場</a>
     </div>
   </div>
 
@@ -3370,7 +3481,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
 <div class="section" id="tab-drive">
 
   <div class="alert alert-warn">
-    <span class="alert-icon">🚗</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-car"/></svg></span>
     <span>此頁整合全程自駕重點，離線也能查。出發前確認完畢，路上不慌。</span>
   </div>
 
@@ -3429,7 +3540,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>多洛米堤山區小鎮中心也可能有 ZTL，進村前看路標</li>
     </ul>
     <div class="alert alert-danger" style="margin-top:0.6rem;">
-      <span class="alert-icon">🚨</span>
+      <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-alert-octagon"/></svg></span>
       <span>Google Maps 導航不會提示 ZTL！進城前先查清楚停車地點再出發。</span>
     </div>
   </div>
@@ -3454,27 +3565,27 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Brenner Pass</strong><span style="color:var(--muted);">1,374m｜🇦🇹/🇮🇹邊境</span></div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">A22高速，夏季通暢。隧道另收費€12~15。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=47.0081,11.5069" target="_blank" class="map-btn" style="margin-top:4px;">📍 Brenner Pass</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=47.0081,11.5069" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Brenner Pass</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Gardena</strong><span style="color:var(--muted);">2,121m｜多洛米堤</span></div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">景觀公路，沿途停車點多。路面良好，6月應無積雪。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5497,11.8080" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Gardena</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5497,11.8080" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Gardena</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Falzarego</strong><span style="color:var(--muted);">2,105m｜多洛米堤</span></div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">Lagazuoi 纜車在此。Cinque Torri 停車也在旁邊。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Falzarego</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5199,12.0084" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Falzarego</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Giau</strong><span style="color:var(--muted);">2,236m｜多洛米堤</span></div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">⚠️ 路窄陡彎，清晨能見度低注意霧。開慢點！</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.4822,12.0537" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Giau</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.4822,12.0537" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Giau</a>
       </div>
       <div style="padding:0.5rem 0;">
         <div style="display:flex;justify-content:space-between;"><strong>Passo Tre Croci</strong><span style="color:var(--muted);">1,805m｜Sorapis步道起點</span></div>
         <div style="color:var(--muted);font-size:0.9375rem;margin-top:2px;">SS48旁路邊停車，免費，早去才有位。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5561,12.2046" target="_blank" class="map-btn" style="margin-top:4px;">📍 Passo Tre Croci</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5561,12.2046" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Passo Tre Croci</a>
       </div>
     </div>
   </div>
@@ -3519,7 +3630,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
 <div class="section" id="tab-backup">
 
   <div class="alert alert-info">
-    <span class="alert-icon">🌧</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-rain"/></svg></span>
     <span>天氣差、停車滿、纜車停駛……遇到狀況不要慌，這頁幫你快速找備案。</span>
   </div>
 
@@ -3558,7 +3669,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>→ 備案日：等到第二天再去，行程順序調換</li>
     </ul>
     <div class="alert alert-info" style="margin-top:0.5rem;">
-      <span class="alert-icon">💡</span>
+      <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
       <span>建議早上 6 點查 <a href="https://www.meteoblue.com/zh/weather/week/jungfraujoch_switzerland_7647056" target="_blank" style="color:var(--accent);">少女峰頂天氣</a>，頂部能見度 &gt;10km 才去。</span>
     </div>
   </div>
@@ -3594,7 +3705,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>→ 傍晚雨停後（約 17~18 點）再出發拍 Enrosadira 日落岩石橙紅</li>
     </ul>
     <div class="alert alert-warn" style="margin-top:0.5rem;">
-      <span class="alert-icon">⚡</span>
+      <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bolt"/></svg></span>
       <span>山頂雷雨危險！聽到雷聲立刻下山，不要在稜線或山頂等雨停。</span>
     </div>
   </div>
@@ -3649,7 +3760,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
 <div class="section" id="tab-sos">
 
   <div class="alert alert-danger">
-    <span class="alert-icon">🆘</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-sos"/></svg></span>
     <span>此頁資訊<strong>離線也能查看</strong>，出發前請確認已載入頁面。山區緊急時刻不要慌。</span>
   </div>
 
@@ -3704,22 +3815,22 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="font-weight:500;">策馬特 — Zermatt Ärztehaus</div>
         <div style="color:var(--muted);font-size:0.9375rem;">策馬特村內診所，一般急救可處理。重傷轉 Visp 或直升機。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.0244,7.7490" target="_blank" class="map-btn" style="margin-top:4px;">📍 Zermatt 診所</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.0244,7.7490" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Zermatt 診所</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="font-weight:500;">少女峰區 — Spital Interlaken</div>
         <div style="color:var(--muted);font-size:0.9375rem;">Interlaken 醫院，距 Lauterbrunnen 約 20 分鐘。24小時急診。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.6807,7.8433" target="_blank" class="map-btn" style="margin-top:4px;">📍 Spital Interlaken</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.6807,7.8433" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Spital Interlaken</a>
       </div>
       <div style="padding:0.5rem 0;border-bottom:1px solid var(--bg);">
         <div style="font-weight:500;">多洛米堤 — Ospedale di Cortina d'Ampezzo</div>
         <div style="color:var(--muted);font-size:0.9375rem;">Cortina 市區內，有急診，離三峰/Sorapis 最近的醫院。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=46.5580,12.1338" target="_blank" class="map-btn" style="margin-top:4px;">📍 Cortina 醫院</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=46.5580,12.1338" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cortina 醫院</a>
       </div>
       <div style="padding:0.5rem 0;">
         <div style="font-weight:500;">米蘭 — Ospedale Policlinico</div>
         <div style="color:var(--muted);font-size:0.9375rem;">米蘭最大醫院，有英語服務，地鐵 M3 Crocetta 站旁。</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=45.4600,9.1924" target="_blank" class="map-btn" style="margin-top:4px;">📍 Policlinico 米蘭</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=45.4600,9.1924" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Policlinico 米蘭</a>
       </div>
     </div>
   </div>
@@ -3775,7 +3886,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
 <div class="section" id="tab-dining">
 
   <div class="alert alert-info">
-    <span class="alert-icon">💡</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-bulb"/></svg></span>
     <span>瑞士餐廳普遍貴，善用超市可省很多。義大利相對便宜，多洛米堤山屋料理值得嘗試。</span>
   </div>
 
@@ -3789,7 +3900,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>CHF 10–15</strong>（全鎮最划算！大碗湯附麵包約 CHF 12）</li>
       <li>💡 健行回來補充熱量首選</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.0196,7.7460" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.0196,7.7460" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3799,7 +3910,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>CHF 22–40</strong>（大分量披薩 CHF 19–28）</li>
       <li>💡 廚房至凌晨2點，Raclettissima 披薩必點</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.0205,7.7479" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.0205,7.7479" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3808,7 +3919,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 11:45–14:00, 17:30–22:30（週一休）</li>
       <li>💰 人均 <strong>CHF 20–35</strong>（手工窯烤披薩 CHF 18 起）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.0195,7.7481" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.0195,7.7481" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3818,7 +3929,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>CHF 40–60</strong>（正宗起司鍋 / Raclette 每人 CHF 38 起）</li>
       <li>⚠️ 熱門，<strong>建議提前預約</strong></li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.0253,7.7538" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.0253,7.7538" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3845,7 +3956,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🛒 <strong>Coop Zermatt</strong>：週一至六 08:00–20:00，週日 08:30–20:00。熱烤雞半隻 CHF 8–10，健行最佳補給</li>
       <li>🛒 <strong>Migros Zermatt</strong>：週一至六 08:00–20:00，週日 08:30–20:00。自有品牌最平價</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.0242,7.7494" target="_blank" class="map-btn">📍 Coop Zermatt</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.0242,7.7494" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Coop Zermatt</a>
   </div>
 
   <!-- ===== 少女峰區 ===== -->
@@ -3857,7 +3968,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 17:00–22:00（瀑布鎮露營區旁）</li>
       <li>💰 人均 <strong>CHF 25–40</strong>（阿爾卑斯通心粉 Älplermagronen CHF 23，分量極大）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5887,7.9089" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5887,7.9089" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3866,7 +3977,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 每日 11:30–22:00</li>
       <li>💰 人均 <strong>CHF 25–45</strong>（傳統 Fondue 起司鍋著稱）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5908,7.9079" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5908,7.9079" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3876,7 +3987,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>CHF 20–35</strong>（獨創薯餅披薩 Röstizza® CHF 25）</li>
       <li>💡 少女峰鐵路中途站，景觀極佳的午餐點</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5850,7.9615" target="_blank" class="map-btn">📍 Kleine Scheidegg</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5850,7.9615" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Kleine Scheidegg</a>
   </div>
 
   <div class="notice-card">
@@ -3886,7 +3997,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>CHF 30–50</strong>（舊牛棚改建！阿爾卑斯肉排與薯餅套餐 CHF 28–38）</li>
       <li>💡 氣氛最特別的用餐體驗</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.6186,8.0336" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.6186,8.0336" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3895,7 +4006,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 每日 11:30–14:00, 17:30–22:00</li>
       <li>💰 人均 <strong>CHF 28–50</strong>（在地傳統瑞士火鍋與牛排）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.6234,8.0427" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.6234,8.0427" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3904,7 +4015,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 每日 07:00–23:00（大街中心，全天供餐）</li>
       <li>💰 人均 <strong>CHF 22–40</strong>（健行客最愛平價主食，義大利麵/薯餅 CHF 22 起）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.6241,8.0417" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.6241,8.0417" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3913,7 +4024,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 每日 11:00–23:00</li>
       <li>💰 人均 <strong>CHF 25–45</strong>（各式起司/巧克力火鍋吃到飽或單點，適合家庭）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.6235,8.0435" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.6235,8.0435" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3922,7 +4033,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 09:00–18:00（週二、三休）</li>
       <li>💰 人均 <strong>CHF 15–30</strong>（小木屋風格，風景絕佳，手工蛋糕與咖啡）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.6277,8.0560" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.6277,8.0560" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3932,15 +4043,15 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🛒 <strong>Coop Grindelwald</strong>：週一至六 08:00–19:30，週日 08:00–18:30。山區自駕最重要補給基地</li>
       <li>🛒 <strong>Coop Lauterbrunnen</strong>：每日 08:00–18:30（近車站，方便迅速補給）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.6243,8.0415" target="_blank" class="map-btn">📍 Coop Grindelwald</a>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5982,7.9076" target="_blank" class="map-btn" style="margin-top:4px;">📍 Coop Lauterbrunnen</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.6243,8.0415" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Coop Grindelwald</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5982,7.9076" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Coop Lauterbrunnen</a>
   </div>
 
   <!-- ===== 多洛米堤 ===== -->
   <!-- ===== 茵斯布魯克 ===== -->
   <div class="section-label" style="margin-top:1rem;">🇦🇹 茵斯布魯克 / Imst（6/20 餐廳選項）</div>
   <div class="alert alert-info">
-    <span class="alert-icon">🍽</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-kitchen"/></svg></span>
     <span><strong>6/20 實際住 Imst（伊姆斯特）</strong>，最方便是飯店餐廳或鎮上 Stadtplatz 附近小館。若有體力可東行約 50 分鐘到 Innsbruck 老城晚餐——以下三家是 Innsbruck 推薦，提洛經典 Tiroler Gröstl、Knödel、Kaiserschmarrn 都可吃到。營業時間以 Google 為準。</span>
   </div>
 
@@ -3950,7 +4061,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 20–35</strong>（17 世紀老店，道地提洛料理，老城區二樓）</li>
       <li>💡 想吃經典 Tiroler 套餐的首選，氣氛溫暖</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Weisses+Rössl+Innsbruck" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Weisses+Rössl+Innsbruck" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3959,7 +4070,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 22–38</strong>（在地食材、每週換菜單，年輕活潑）</li>
       <li>💡 有創意又道地，熱門建議訂位</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=die+Wilderin+Innsbruck" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=die+Wilderin+Innsbruck" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3968,7 +4079,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 25–45</strong>（六百年歷史名店，提洛經典、觀光客友善）</li>
       <li>💡 就在黃金屋頂旁，飯後順遊老城最方便</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Goldener+Adler+Innsbruck" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Goldener+Adler+Innsbruck" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3978,7 +4089,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🏰 <strong>Herzog-Friedrich-Straße（老城）</strong>：黃金屋頂周邊小店、Swarovski 水晶</li>
       <li>🛒 <strong>MPREIS / SPAR</strong>：奧地利連鎖超市，隔天早餐與路上補給</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Maria-Theresien-Strasse+Innsbruck" target="_blank" class="map-btn">📍 購物大街</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Maria-Theresien-Strasse+Innsbruck" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>購物大街</a>
   </div>
 
   <div class="section-label" style="margin-top:1rem;">🇮🇹 東西多洛米堤（Ortisei / Cortina）餐廳</div>
@@ -3990,7 +4101,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 18–35</strong>（地下百年酒館！披薩 EUR 10–15，尺寸巨大）</li>
       <li>💡 Ortisei 最超值餐廳，當地人常去</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5742,11.6715" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5742,11.6715" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -3999,7 +4110,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 12:00–14:00, 19:00–21:30（週三休）</li>
       <li>💰 人均 <strong>EUR 30–55</strong>（南蒂羅爾烤豬腳、鹿肉排，物超所值）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5732,11.6717" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5732,11.6717" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4009,7 +4120,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 15–28</strong>（菠菜起司丸 Canederli + 燉牛肉，景觀絕佳）</li>
       <li>💡 在高原草甸上用餐，Sassolungo 山峰為背景</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5399,11.6213" target="_blank" class="map-btn">📍 Alpe di Siusi 高原</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5399,11.6213" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Alpe di Siusi 高原</a>
   </div>
 
   <div class="notice-card">
@@ -4018,7 +4129,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 12:00–14:15, 18:30–22:15（週二休）</li>
       <li>💰 人均 <strong>EUR 15–30</strong>（傳統手擀義大利麵、各式窯烤披薩，出餐極快）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5731,11.6741" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5731,11.6741" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4036,7 +4147,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 20–35</strong>（多洛米堤最頂級山頂 Pasta，每盤 EUR 15–18）</li>
       <li>💡 Cinque Torri 纜車上去，景觀絕頂的山屋午餐</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn">📍 Cinque Torri 纜車站</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5189,12.0244" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cinque Torri 纜車站</a>
   </div>
 
   <div class="notice-card">
@@ -4045,7 +4156,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 12:00–14:30, 19:00–22:30（週三休）</li>
       <li>💰 人均 <strong>EUR 15–30</strong>（高級度假鎮 Cortina 內的平價救星，披薩極佳）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5372,12.1373" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5372,12.1373" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4054,7 +4165,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 15–30</strong>（市中心啤酒餐館，提洛＋義式家常，份量足）</li>
       <li>💡 度假鎮裡少見的實惠選擇，住 Cortina 4 晚的日常好夥伴</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Hacker+Pschorr+Haus+Cortina" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Hacker+Pschorr+Haus+Cortina" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4063,7 +4174,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 35–55</strong>（傳統 Ampezzo 菜，casunziei 甜菜根餃、鹿肉，Veneto 葡萄酒）</li>
       <li>💡 行程多次提到的經典，建議提前訂位</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Ristorante+Da+Beppe+Sello+Cortina" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Ristorante+Da+Beppe+Sello+Cortina" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4072,7 +4183,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 35–55</strong>（自家牧場起司與肉品，森林中的農莊餐廳，極受歡迎）</li>
       <li>💡 往 Passo Tre Croci 方向，務必訂位；同家族另有米其林綠星 SanBrite</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=El+Brite+de+Larieto+Cortina" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=El+Brite+de+Larieto+Cortina" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4081,7 +4192,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 90+</strong>（Tofane 山腳，精緻演繹多洛米堤與亞得里亞海食材）</li>
       <li>💡 慶祝/紀念日的 splurge；務必提前預約</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Ristorante+Tivoli+Cortina" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Ristorante+Tivoli+Cortina" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4101,14 +4212,14 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🛒 <strong>Despar Dolomiti (Ortisei)</strong>：週一至六 08:00–19:30，週日 08:00–13:00</li>
       <li>🛒 <strong>Eurospin（幹道大賣場）</strong>：每日 08:00–20:00。Prosciutto 生火腿 100g 僅 EUR 2–3！進山前大量補給</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5754,11.6739" target="_blank" class="map-btn">📍 Ortisei 步行街</a>
-    <a href="https://www.google.com/maps/search/?api=1&query=46.5414,12.1368" target="_blank" class="map-btn" style="margin-top:4px;">📍 Cooperativa di Cortina</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5754,11.6739" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Ortisei 步行街</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=46.5414,12.1368" target="_blank" class="map-btn" style="margin-top:4px;"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Cooperativa di Cortina</a>
   </div>
 
   <!-- ===== 維羅納 ===== -->
   <div class="section-label" style="margin-top:1rem;">🇮🇹 維羅納（Verona，6/25 過夜）餐廳</div>
   <div class="alert alert-info">
-    <span class="alert-icon">🍷</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-glass"/></svg></span>
     <span>維羅納經典：risotto all'Amarone（Amarone 紅酒燉飯）、pastissada de caval（燉馬肉）、bigoli 粗麵、bollito misto con pearà，配 Amarone / Valpolicella 紅酒。營業時間以 Google 為準。</span>
   </div>
 
@@ -4118,7 +4229,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 25–45</strong>（百年咖啡館，risotto all'Amarone 達市府標準，也供小食 cicchetti）</li>
       <li>💡 市中心、復古氣氛，想吃地道燉飯來這</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Caffe+Monte+Baldo+Verona" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Caffe+Monte+Baldo+Verona" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4127,7 +4238,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 20–35</strong>（在地人最愛，bigoli con sarde 沙丁魚粗麵、salumi＋formaggi 拼盤）</li>
       <li>💡 河對岸 Veronetta 區，避開觀光陷阱、價格實在</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Osteria+ai+Osei+Verona" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Osteria+ai+Osei+Verona" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4135,7 +4246,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
     <ul>
       <li>💰 人均 <strong>EUR 20–38</strong>（維羅納家常經典、自製麵包與大酒單）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Trattoria+Pane+e+Vino+Verona" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Trattoria+Pane+e+Vino+Verona" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4145,11 +4256,11 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🧀 <strong>Piazza delle Erbe 市集</strong>：當地食材、橄欖油、紀念品</li>
       <li>🍦 在地 Gelato 與 Amarone / Valpolicella 紅酒最適合當伴手</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=Via+Mazzini+Verona" target="_blank" class="map-btn">📍 Via Mazzini</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Via+Mazzini+Verona" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Via Mazzini</a>
   </div>
 
   <div class="alert alert-info">
-    <span class="alert-icon">🍷</span>
+    <span class="alert-icon"><svg class="ti" aria-hidden="true"><use href="#ti-glass"/></svg></span>
     <span>6/25 維羅納為<strong>白天順遊＋晚餐</strong>，當晚開車回米蘭 Sesto 住宿（不在維羅納過夜）。維羅納晚餐 3 家推薦與訂位連結見 <a href="./milano-itinerary.html">米蘭＋維羅納詳細行程</a>。</span>
   </div>
 
@@ -4163,7 +4274,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 4–8</strong>（番茄起司包子 Panzerotti 每個 EUR 3.5，排隊名店）</li>
       <li>💡 大教堂步行 5 分鐘，當地學生人手一個</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4658,9.1915" target="_blank" class="map-btn">📍 Luini 位置</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4658,9.1915" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Luini 位置</a>
   </div>
 
   <div class="notice-card">
@@ -4173,7 +4284,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 12–20</strong>（披薩 EUR 8–12，免費招待氣泡酒與小點）</li>
       <li>💡 大教堂旁位置超好，米蘭難得的平價選擇</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4623,9.1866" target="_blank" class="map-btn">📍 米蘭大教堂附近</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4623,9.1866" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>米蘭大教堂附近</a>
   </div>
 
   <div class="notice-card">
@@ -4182,7 +4293,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 週一至五 12:30–14:30, 19:30–22:30（週末休）</li>
       <li>💰 人均 <strong>EUR 25–40</strong>（正宗米蘭藏紅花燉飯 EUR 14）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4802,9.2046" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4802,9.2046" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4192,7 +4303,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 40–60</strong>（帶骨米蘭炸牛排 Cotoletta + 燉牛膝 Ossobuco EUR 28–32，分量極大）</li>
       <li>💡 1880年傳奇老店，米蘭必吃經典</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4819,9.1837" target="_blank" class="map-btn">📍 Brera 附近</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4819,9.1837" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Brera 附近</a>
   </div>
 
   <div class="notice-card">
@@ -4202,7 +4313,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>💰 人均 <strong>EUR 35–50</strong>（炸牛肚 + 現代意式內臟料理，物超所值）</li>
       <li>⚠️ <strong>極度熱門，務必提早預約</strong></li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4533,9.2049" target="_blank" class="map-btn">📍 Navigli 附近</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4533,9.2049" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Navigli 附近</a>
   </div>
 
   <div class="notice-card">
@@ -4211,7 +4322,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 每日 12:30–14:30, 19:30–23:00</li>
       <li>💰 人均 <strong>EUR 30–50</strong>（倫巴底冷盤 + 燉飯，花園氣氛極佳）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4485,9.1706" target="_blank" class="map-btn">📍 Navigli 運河旁</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4485,9.1706" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Navigli 運河旁</a>
   </div>
 
   <div class="notice-card">
@@ -4220,7 +4331,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 12:30–14:00, 19:30–22:00（週日、週一休）</li>
       <li>💰 人均 <strong>EUR 35–55</strong>（1930年代復古風，教科書級酥脆炸豬/牛排）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4542,9.2198" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4542,9.2198" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4229,7 +4340,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🕐 12:30–14:15, 20:00–22:15（週日休，週六僅晚餐）</li>
       <li>💰 人均 <strong>EUR 40–65</strong>（被公認米蘭前三名超厚帶骨炸豬排）</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4542,9.2223" target="_blank" class="map-btn">📍 導航</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4542,9.2223" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>導航</a>
   </div>
 
   <div class="notice-card">
@@ -4239,7 +4350,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
       <li>🛒 <strong>Esselunga</strong>：週一至六 07:30–21:00，週日 08:00–20:00。在地人最愛，紅酒、松露起司種類極多</li>
       <li>🛒 <strong>Carrefour Market</strong>：24小時營業，深夜進城或早出補給最方便</li>
     </ul>
-    <a href="https://www.google.com/maps/search/?api=1&query=45.4792,9.1860" target="_blank" class="map-btn">📍 Eataly Milano</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=45.4792,9.1860" target="_blank" class="map-btn"><svg class="ti" aria-hidden="true"><use href="#ti-pin"/></svg>Eataly Milano</a>
   </div>
 
 </div><!-- end dining -->

@@ -534,7 +534,7 @@ try {
   const th0 = await c.eval(`document.documentElement.getAttribute('data-theme')`);
   await c.eval(`document.getElementById('theme-toggle').click()`);
   const th1 = await c.call(() => ({ t: document.documentElement.getAttribute('data-theme'), s: localStorage.getItem('theme'), icon: document.getElementById('theme-toggle').dataset.icon, svg: !!document.querySelector('#theme-toggle svg circle'), txt: document.getElementById('theme-toggle').textContent.trim(), aria: document.getElementById('theme-toggle').getAttribute('aria-label'), meta: document.querySelector('meta[name="theme-color"]').content, bg: getComputedStyle(document.body).backgroundColor }));
-  ok(`11.1 預設淺色（${th0}），按一次切到深色：記住設定、圖示變線條太陽 SVG（無 emoji 文字、aria-label 保留）、網址列顏色 ${th1.meta}`, th0 === 'light' && th1.t === 'dark' && th1.s === 'dark' && th1.icon === 'sun' && th1.svg && th1.txt === '' && th1.aria === '切換深色模式' && th1.meta === '#15130f', th1);
+  ok(`11.1 預設淺色（${th0}），按一次切到深色：記住設定、圖示變線條太陽 SVG（無 emoji 文字、aria-label 保留）、網址列顏色 ${th1.meta}`, th0 === 'light' && th1.t === 'dark' && th1.s === 'dark' && th1.icon === 'sun' && th1.svg && th1.txt === '' && th1.aria === '切換深色模式' && th1.meta === '#0E1726', th1);   // 2026-10-19 護照手帳：深色改深藍夜色版（原 #15130f）
   await c.open(BASE, { clear: false });
   const th2 = await c.call(() => ({ t: document.documentElement.getAttribute('data-theme'), bg: getComputedStyle(document.body).backgroundColor }));
   ok(`11.2 重新整理後仍是深色，且頁面底色真的變了（${th2.bg}）`, th2.t === 'dark' && th2.bg === th1.bg && th2.bg !== 'rgb(250, 248, 244)', th2);
@@ -565,6 +565,120 @@ try {
     ok(`12.${w}b ${w}px：導覽按鈕 ${sizes.length - 1} 個與主題鈕高度都 ≥ 36px（現行規格；最矮 ${Math.min(...sizes.map((s) => s.h))}px）`, sizes.length >= 13 && small.length === 0, small);
   }
   await c.width(390);
+
+  /* ───────── 14 版面美化「護照手帳」2026-10-19 ───────── */
+  console.log('\n[14 護照手帳：封面主視覺、粉圓字型、3D 分頁圖示、線條圖示、桌機兩欄]');
+  await c.width(390);
+  await c.open(BASE, { now: '2026-06-12T12:00:00' });
+  const cover = await c.call(() => {
+    const h = document.querySelector('.pp-cover'); if (!h) return null;
+    const r = h.getBoundingClientRect(), first = document.querySelector('#tab-itinerary .day-card').getBoundingClientRect();
+    const btns = [...h.querySelectorAll('button')];
+    const sb = document.getElementById('start-btn');
+    return { top: Math.round(r.top), bottom: Math.round(r.bottom), firstCard: Math.round(first.top), inHeader: !!h.closest('header'),
+      inItin: !!h.closest('#tab-itinerary'), title: (h.querySelector('.pp-title') || {}).textContent, meta: [...h.querySelectorAll('.pp-meta dd')].map((d) => d.textContent),
+      btns: btns.length, onlyStart: btns.length === 1 && btns[0] === sb, lbl: (sb.querySelector('.lbl') || {}).textContent, img: !!sb.querySelector('img[src*="fluent-3d"]'),
+      btnBottom: Math.round(sb.getBoundingClientRect().bottom), vh: innerHeight };
+  });
+  ok(`14.1 手機首屏：護照封面（${cover && cover.title}；${cover && cover.meta.join('／')}）在每日卡上方、不在頁首裡，裡面只有一顆主鈕且在首屏內（底 ${cover && cover.btnBottom}px）`,
+    !!cover && cover.title === '瑞士 × 義大利多洛米堤' && cover.meta.join('|') === '6/14 – 6/27|2人|自駕' && !cover.inHeader && cover.inItin
+    && cover.top < 200 && cover.bottom <= cover.firstCard && cover.onlyStart && cover.btnBottom <= cover.vh, cover);
+  ok(`14.2 主鈕改字後 3D 圖示還在、文字＝「${cover && cover.lbl}」（假定 6/12）`, !!cover && cover.img && cover.lbl === '開始看行程：6月14日 出發日', cover && cover.lbl);
+  await c.open(BASE, { now: '2026-06-22T10:00:00' });   // 6/22 是「必去」日：標籤要拿掉「必去」印章字
+  const mustLbl = await c.eval(`(document.querySelector('#start-btn .lbl') || {}).textContent`);
+  ok(`14.2b 今天是「必去」日（假定 6/22）：主鈕文字＝「${mustLbl}」（不夾印章字）`, mustLbl === '打開今天的行程：6月22日', mustLbl);
+  await c.open(BASE, { now: '2026-06-12T12:00:00' });   // 回到出發前：旅程中會自動捲到今天，干擾下面的郵戳跳轉測試
+  await c.eval(`document.fonts.ready.then(() => 1)`);
+  const fontOk = await c.until(`[...document.fonts].some(f => f.family.replace(/"/g,'') === 'PPRound' && f.status === 'loaded')`, 5000);
+  const fams = await c.call(() => ['.nav-btn', '.pp-title', '.day-date', '.day-group', '#start-btn', '.pp-name h1'].map((s) => [s, getComputedStyle(document.querySelector(s)).fontFamily]));
+  const famBad = fams.filter(([, f]) => !/^"?PPRound/.test(f));
+  ok(`14.3 粉圓子集字型（PPRound）有載入，頁首／分頁／封面／日期／主鈕都用它（${fams.length} 處）`, fontOk && famBad.length === 0, famBad);
+  const f3 = await c.call(async () => {
+    const srcs = [...new Set([...document.querySelectorAll('img[src*="fluent-3d"]')].map((i) => i.getAttribute('src')))];
+    const res = await Promise.all(srcs.map((s) => new Promise((done) => { const im = new Image(); im.onload = () => done(im.naturalWidth > 0 ? null : s); im.onerror = () => done(s); im.src = s; })));
+    return { n: srcs.length, broken: res.filter(Boolean) };
+  });
+  ok(`14.4 用到的 3D 圖檔（${f3.n} 種）每種都實際載得出來（不用 img.complete）`, f3.n >= 14 && f3.broken.length === 0, f3);
+  const navI = await c.call(() => {
+    const bs = [...document.querySelectorAll('.nav-btn')];
+    const tops = new Set(bs.map((b) => Math.round(b.getBoundingClientRect().top)));
+    return { n: bs.length, img1: bs.filter((b) => b.querySelectorAll('img[src*="fluent-3d"]').length === 1).length,
+      rows: tops.size, pos: getComputedStyle(document.querySelector('.nav')).position, h: Math.round(document.querySelector('.nav').getBoundingClientRect().height) };
+  });
+  ok(`14.5 12 個分頁全用同一套 3D 圖示（各 1 張）、手機排成單列 ${navI.rows} 列（高 ${navI.h}px）、黏在頂端`, navI.n === 12 && navI.img1 === 12 && navI.rows === 1 && navI.h <= 72 && navI.pos === 'sticky', navI);
+  const emo = await c.call(() => {
+    const sel = '.nav-btn, header button, header a, .start-btn, .start-btn2, .pp-stamp, #toTopBtn, .update-banner, .day-date, .day-region, .day-hotel, a.map-btn, .alert-icon';
+    const els = [...document.querySelectorAll(sel)];
+    const bad = els.map((e) => e.textContent || '').filter((t) => /\p{Extended_Pictographic}|[\u{1F1E6}-\u{1F1FF}]/u.test(t));
+    return { n: els.length, bad: bad.slice(0, 5) };
+  });
+  ok(`14.6 操作元件與每日卡標頭／導航鈕／提示框圖示（${emo.n} 個）文字裡沒有 emoji 或國旗字母`, emo.n >= 150 && emo.bad.length === 0, emo);
+  const ti = await c.call(() => {
+    const u = [...document.querySelectorAll('svg.ti use')].map((x) => x.getAttribute('href'));
+    return { n: u.length, miss: [...new Set(u.filter((h) => !document.querySelector('symbol' + h)))] };
+  });
+  ok(`14.7 線條圖示（${ti.n} 個）全部對得到 Tabler sprite 裡的 symbol`, ti.n >= 150 && ti.miss.length === 0, ti);
+  const stamps = await c.call(() => [...document.querySelectorAll('.pp-stamp')].map((b) => {
+    const id = (b.getAttribute('onclick') || '').match(/goGroup\('([^']+)'\)/);
+    const g = id && document.getElementById(id[1]);
+    return { name: b.querySelector('b').textContent, date: b.querySelector('i').textContent, id: id && id[1],
+      gText: g ? g.textContent : null, gDate: g && g.querySelector('small') ? g.querySelector('small').textContent : null };
+  }));
+  const stBad = stamps.filter((s) => !s.gText || s.gDate !== s.date || !(s.gText.includes(s.name) || (s.name === '少女峰區' && s.gText.includes('少女峰'))));
+  ok(`14.8 住宿郵戳 ${stamps.length} 個：每個都對到存在的分組標題，日期與標題相同（${stamps.map((s) => s.name + ' ' + s.date).join('、')}）`, stamps.length === 5 && stBad.length === 0, stBad);
+  const jump = await c.call(async () => {
+    const b = document.querySelectorAll('.pp-stamp')[3]; b.click();
+    await new Promise((r) => setTimeout(r, 1200));
+    const g = document.getElementById('g-cortina').getBoundingClientRect();
+    const nav = document.querySelector('.nav').getBoundingClientRect();
+    return { top: Math.round(g.top), navBottom: Math.round(nav.bottom), y: Math.round(scrollY) };
+  });
+  ok(`14.9 點「Cortina」郵戳：捲到該分組標題，且標題不被黏住的分頁列蓋住（標題 ${jump.top}px／分頁列底 ${jump.navBottom}px）`, jump.y > 500 && jump.top >= jump.navBottom - 2 && jump.top < 200, jump);
+  const swNew = await c.call(async () => {
+    const ks = await caches.keys(); const k = ks.find((x) => /^travel-itinerary-v\d+$/.test(x)); if (!k) return null;
+    const cc = await caches.open(k);
+    const want = [...new Set([...document.querySelectorAll('img[src*="vendor/"]')].map((i) => i.getAttribute('src')))].concat(['./vendor/round-ui/pp-round.woff2']);
+    const miss = []; for (const w of want) { if (!(await cc.match(w))) miss.push(w); }
+    return { k, n: want.length, miss };
+  });
+  ok(`14.10 新增的 3D 圖與字型（${swNew && swNew.n} 個）都在 SW 預先快取（${swNew && swNew.k}），離線也看得到`, !!swNew && swNew.n >= 15 && swNew.miss.length === 0, swNew);
+  const localOnly = await c.call(() => {
+    const ext = performance.getEntriesByType('resource').map((e) => e.name).filter((u) => /\.(woff2?|ttf|otf|png|svg|css)(\?|$)/.test(u) && !u.startsWith(location.origin));
+    return ext;
+  });
+  ok(`14.11 字型、圖示、樣式只連本機（外部 ${localOnly.length} 個）`, localOnly.length === 0, localOnly);
+  for (const w of [1440, 1100]) {
+    await c.width(w, 900);
+    await c.open(BASE);
+    const d = await c.call(() => {
+      const cv = document.querySelector('.pp-cover').getBoundingClientRect(), sd = document.querySelector('.pp-side').getBoundingClientRect();
+      const cards = [...document.querySelectorAll('#tab-itinerary .day-card')].slice(0, 2).map((e) => e.getBoundingClientRect());
+      const tops = new Set([...document.querySelectorAll('.nav-btn')].map((b) => Math.round(b.getBoundingClientRect().top)));
+      const main = document.querySelector('.main').getBoundingClientRect();
+      return { cvRight: Math.round(cv.right), sdLeft: Math.round(sd.left), sameRow: Math.abs(cv.top - sd.top) < 40, cardsTop: cards.map((r) => Math.round(r.top)),
+        cardsLeft: cards.map((r) => Math.round(r.left)), navRows: tops.size, mainW: Math.round(main.width), hscroll: document.documentElement.scrollWidth > innerWidth + 1 };
+    });
+    ok(`14.12 ${w}px 桌機：封面在左、郵戳＋出發準備在右（兩欄）、每日卡兩欄並排、內容寬 ${d.mainW}px、分頁 ${d.navRows} 列、沒有水平捲動`,
+      d.cvRight <= d.sdLeft && d.sameRow && d.cardsTop[0] === d.cardsTop[1] && d.cardsLeft[0] < d.cardsLeft[1] && d.mainW >= 1000 && d.navRows <= (w >= 1440 ? 1 : 2) && !d.hscroll, d);
+  }
+  await c.width(390);
+  await c.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'dark' }] });
+  await c.open(BASE);
+  const dk = await c.call(() => {
+    const lum = (c) => { const m = c.match(/\d+(\.\d+)?/g).map(Number); const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(m[0]) + 0.7152 * f(m[1]) + 0.0722 * f(m[2]); };
+    const cr = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+    const bg = getComputedStyle(document.body).backgroundColor;
+    const pick = (s) => getComputedStyle(document.querySelector(s)).color;
+    return { theme: document.documentElement.getAttribute('data-theme'), bg,
+      date: +cr(pick('.day-date'), getComputedStyle(document.querySelector('.day-card')).backgroundColor).toFixed(2),
+      region: +cr(pick('.day-region'), getComputedStyle(document.querySelector('.day-card')).backgroundColor).toFixed(2),
+      nav: +cr(pick('.nav-btn:not(.active)'), getComputedStyle(document.querySelector('.nav-btn:not(.active)')).backgroundColor).toFixed(2),
+      navOn: +cr(pick('.nav-btn.active'), getComputedStyle(document.querySelector('.nav-btn.active')).backgroundColor).toFixed(2),
+      group: +cr(pick('.day-group'), bg).toFixed(2) };
+  });
+  ok(`14.13 深色（系統偏好深色）：深藍夜色底 ${dk.bg}；文字對比 日期 ${dk.date}／地點 ${dk.region}／分頁 ${dk.nav}／目前分頁 ${dk.navOn}／分組標題 ${dk.group}（都 ≥ 4.5）`,
+    dk.theme === 'dark' && dk.bg === 'rgb(14, 23, 38)' && [dk.date, dk.region, dk.nav, dk.navOn, dk.group].every((x) => x >= 4.5), dk);
+  await c.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'light' }] });
 
   /* ───────── 13 錯誤與連線 ───────── */
   console.log('\n[13 沒有錯誤、沒有意外的對外連線]');
