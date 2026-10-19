@@ -400,6 +400,10 @@ svg.ti { width: 1.05em; height: 1.05em; flex: none; vertical-align: -0.15em; }
   #tab-itinerary.active { gap: 1.1rem 1.25rem; }
 }
 /* ══ PP_PASSPORT_CSS 結束 ══ */
+/* 2026-10-19 窄手機：出發準備清單的 label 是 display:flex，文字／連結／粗體被拆成好幾欄擠在一起；
+   改回一般段落排版，勾選框掛在左邊（內容不動） */
+li > label:has(> input.todo-check) { display: block !important; padding-left: 2rem; min-width: 0; overflow-wrap: anywhere; }
+li > label > input.todo-check { float: left; margin-left: -2rem !important; }
 </style>
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -2283,13 +2287,13 @@ svg.ti { width: 1.05em; height: 1.05em; flex: none; vertical-align: -0.15em; }
     <h3>💱 台幣 ↔ 瑞士法郎 / 歐元</h3>
     <p style="font-size:0.9375rem;color:var(--muted);margin-bottom:0.8rem;">輸入金額即時換算（匯率每次開啟頁面自動更新）</p>
     <div style="display:flex;gap:0.5rem;margin-bottom:0.6rem;align-items:center;">
-      <select id="tool-from" onchange="convertCurrency()" style="flex:1;padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;font-size:0.9375rem;background:var(--bg);">
+      <select id="tool-from" onchange="convertCurrency()" style="flex:1;min-width:0;padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;font-size:0.9375rem;background:var(--bg);">
         <option value="TWD">🇹🇼 TWD 台幣</option>
         <option value="CHF">🇨🇭 CHF 瑞士法郎</option>
         <option value="EUR">🇪🇺 EUR 歐元</option>
       </select>
       <span style="font-size:1rem;">→</span>
-      <select id="tool-to" onchange="convertCurrency()" style="flex:1;padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;font-size:0.9375rem;background:var(--bg);">
+      <select id="tool-to" onchange="convertCurrency()" style="flex:1;min-width:0;padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;font-size:0.9375rem;background:var(--bg);">
         <option value="CHF">🇨🇭 CHF 瑞士法郎</option>
         <option value="EUR">🇪🇺 EUR 歐元</option>
         <option value="TWD">🇹🇼 TWD 台幣</option>

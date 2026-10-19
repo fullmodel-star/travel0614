@@ -540,8 +540,8 @@ try {
   ok(`11.2 重新整理後仍是深色，且頁面底色真的變了（${th2.bg}）`, th2.t === 'dark' && th2.bg === th1.bg && th2.bg !== 'rgb(250, 248, 244)', th2);
 
   /* ───────── 12 版面 ───────── */
-  console.log('\n[12 版面：手機寬度]');
-  for (const w of [360, 390]) {
+  console.log('\n[12 版面：手機寬度（窄手機不能左右滑）]');
+  for (const w of [360, 375, 390, 412]) {   // 2026-10-19 加 375／412，並加「元件伸出螢幕」檢查（同 04_管理工具\版面檢查\width_check.mjs）
     await c.width(w);
     await c.open(BASE);
     const over = [];
@@ -553,8 +553,20 @@ try {
       await sleep(80);
       const sw = await c.eval(`[document.documentElement.scrollWidth, window.innerWidth]`);
       if (sw[0] > sw[1] + 1) over.push({ tab: t.id, sw });
+      const out = await c.call(() => {
+        const vw = document.documentElement.clientWidth, bad = [];
+        const scrollable = (el) => { for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) { const ox = getComputedStyle(a).overflowX; if (ox === 'auto' || ox === 'scroll') return true; } return false; };
+        const fixedUp = (el) => { for (let a = el; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).position === 'fixed') return true; return false; };
+        for (const e of document.querySelectorAll('body *')) {
+          const r = e.getBoundingClientRect(); if (!r.width || !r.height) continue;
+          const cs = getComputedStyle(e); if (cs.visibility === 'hidden' || cs.display === 'none') continue;
+          if ((r.right > vw + 1 || r.left < -1) && !fixedUp(e) && !scrollable(e)) bad.push((e.id ? '#' + e.id : e.tagName) + '[' + Math.round(r.left) + '..' + Math.round(r.right) + ']');
+        }
+        return bad.slice(0, 5);
+      });
+      if (out.length) over.push({ tab: t.id, out });
     }
-    ok(`12.${w} ${w}px：${targets.length} 個分頁（行程／健行全部展開）都沒有水平捲動`, targets.length === 12 && over.length === 0, over);
+    ok(`12.${w} ${w}px：${targets.length} 個分頁（行程／健行全部展開）都沒有水平捲動、也沒有元件伸出螢幕`, targets.length === 12 && over.length === 0, over);
     await c.call(clickTab, 'itinerary');
     const sizes = await c.call(() => {
       const pick = (sel) => [...document.querySelectorAll(sel)].filter((e) => e.offsetParent || getComputedStyle(e).position === 'fixed')
@@ -564,6 +576,18 @@ try {
     const small = sizes.filter((s) => s.h < 36);
     ok(`12.${w}b ${w}px：導覽按鈕 ${sizes.length - 1} 個與主題鈕高度都 ≥ 36px（現行規格；最矮 ${Math.min(...sizes.map((s) => s.h))}px）`, sizes.length >= 13 && small.length === 0, small);
   }
+  // 12.cl 2026-10-19：出發準備清單的勾選項原本是 flex，文字／連結被拆成好幾欄擠在一起
+  await c.width(360);
+  await c.open(BASE);
+  await c.call(clickTab, 'checklist');
+  await sleep(80);
+  const cl = await c.call(() => {
+    const ls = [...document.querySelectorAll('li > label')].filter((l) => l.querySelector(':scope > input.todo-check'));
+    const cols = ls.filter((l) => { const a = l.querySelector('a'); if (!a) return false; const ra = a.getClientRects()[0], rl = l.getBoundingClientRect(); return getComputedStyle(l).display !== 'block' || !ra || ra.left < rl.left + 20; });
+    return { n: ls.length, withLink: ls.filter((l) => l.querySelector('a')).length, cols: cols.length, sample: cols.slice(0, 2).map((l) => l.textContent.trim().slice(0, 20)) };
+  });
+  ok(`12.cl 360px：出發準備 ${cl.n} 個勾選項（含連結 ${cl.withLink} 個）都是一般段落排版，沒被拆成窄欄（拆欄 ${cl.cols}）`, cl.n === 51 && cl.withLink >= 3 && cl.cols === 0, cl);
+  await c.call(clickTab, 'itinerary');
   await c.width(390);
 
   /* ───────── 14 版面美化「護照手帳」2026-10-19 ───────── */

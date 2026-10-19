@@ -4,6 +4,7 @@
 > 版本以 `sw.js` 的快取編號為準（`travel-itinerary-vNN`），每次改版 +1；使用者重開會跳「🔄 有新版本行程」橫幅。
 > 發版提醒：每次改 `index.html`／地圖 HTML 後，記得把 `sw.js` 的 `CACHE_NAME` 編號 +1。
 
+- 2026-10-19 · v36（窄手機版面，**未部署、未 commit**；這支 push 即上線）：依 `04_管理工具\版面檢查\BRIEF_fix.md` ②。`width_check`（360／375／390／412，首頁＋11 個分頁）修前 1 個問題 → 修後 0：旅遊工具匯率換算的兩個幣別下拉在 360 寬伸出螢幕（整頁可左右滑到 367px）→ 兩個 `<select>` 加 `min-width:0`。另修：出發準備清單 51 個勾選項的 `<label>` 是 `display:flex`，含連結／粗體的項目被拆成 3～4 個窄欄（「三峰（Tre Cime）停車預訂 —｜auronzo.info｜早去早回…」各一欄）→ 加一段 CSS 讓這些 label 回到一般段落排版、勾選框掛左邊，內容與勾選功能不動。⑤ 各分頁開頭的說明都只有 1～2 行，未收合。`_tools/ui_tests.mjs` 第 12 節改測 360／375／390／412 四種寬度＋「元件伸出螢幕」檢查，新增 12.cl（勾選項不被拆欄）：改前 74/74 → 改後 79/79；拿 HEAD 版跑新測試會 FAIL 12.360（#tool-to 伸出到 367px）與 12.cl（拆欄 8），確認測試抓得到。
 - 2026-10-19 · v34（版面美化「護照手帳」，**未部署、未 commit**；這支 push 即上線）：
   - **為什麼**：UI/UX 評比（`04_管理工具\_docs\App_UIUX評比_2026-10-13\ui_feedback\301.json`）扣分在「首屏先被 12 個分頁格佔據、主鈕被擠下去」「12 格混用彩色 emoji／國旗字母／3D 小圖、時間軸卡又混 emoji」「桌機 hero 下大片空白、分頁字極小」。老闆為三系列（300／301／302）選定方向 B「護照郵戳」，三支共用一套視覺語言。
   - **套件**（全部自帶 vendor、不走 CDN）：jf open 粉圓 v2.1（SIL OFL-1.1；子集 `vendor/round-ui/pp-round.woff2` 95KB、423 字，內部名稱改「PP Round」避開保留名稱 huninn／Varela，`_tools/build_round_font.py`）；Microsoft Fluent Emoji 3D（MIT；14 張 128px PNG 共 173KB，`_tools/build_fluent3d.py`，⚠ SOS 的資料夾名是 `Sos button`）；Tabler Icons 3.49.0（MIT；20 個圖示內嵌 sprite，`_tools/build_icon_sprite.py`）。三者 LICENSE 都在 vendor 各資料夾。**改到頁首／分頁／封面／標題／日期文字要重跑字型腳本。**
@@ -13,6 +14,13 @@
 - 2026-10-13 · v33（F09 UI/UX 評比修正，未部署）：①「Schilthornbahn 20XX」被走查當成沒填的年份——查 repo（400 走稜步道 eu_west.js 也寫「新 Schilthornbahn 20XX 系統」）確認 20XX 是工程名稱本身，不填年份，改成「新纜車（官方工程名稱就叫「Schilthornbahn 20XX」，20XX 不是漏填年份）」（Day 5 提醒＋備案決策頁兩處）；② 旅遊工具匯率：負數／空白／非數字不再算出「CHF -13.05」「CHF 0.00」，改顯示「—」＋提示，輸入框加 min="0"；③ 新增浮動「↑ 回分頁」鈕（捲過 1.5 屏才出現，點了捲回分頁列）；④ 返回鍵：`showTab()` 寫入 history（每日行程＝底層，其他分頁 push、分頁間 replace，popstate 還原；不再依賴全域 `event`），手機返回鍵回每日行程、在每日行程再按才離開；⑤ 出發準備勾選框 13px→24px。驗證截圖 `04_管理工具\_docs\App_UIUX評比_2026-10-13\fix_reports\shots\F09\301_*_after.png`；ui_tests 改前 59/59、改後 59/59。
 - 2026-10-12 · v32：apple-touch-icon 四角透明（22:50 放大圖示批次帶回，iOS 主畫面會黑角）→ 壓平到 icon 自身底色 #141E2B，180×180 不透明；manifest 圖示未動。
 - 2026-10-12 · v31（已部署 2026-10-12 GitHub Pages）：桌機（≥768px）引導卡主按鈕限寬 360–420px、手機仍全寬；頁首深色切換由 emoji 🌙／☀️ 改為線條 SVG 月亮／太陽，與回報鈕同為灰底圓鈕＋白色線條圖示（aria-label 不變）；ui_tests 11.1 改驗 SVG 圖示。行程內容未動。
+
+## 2026-10-19 · 手機桌面圖示的字被切：maskable 縮進 Android 安全區（sw travel-itinerary-v34→travel-itinerary-v35；未 commit／未部署）
+
+- 問題：老闆 Android 手機上 408 的安裝圖示 DOLOMITES 被遮罩切成「OLOMITE」。舊規則只保證墨跡在 W3C 安全圈（中心 80% 直徑、半徑 0.40）；但不少安裝路徑會把 maskable 直接當 Android 108dp 前景層，只露中間 72dp，啟動器再套圓形／圓角／水滴，實際放心可見只到半徑約 0.31（Android 安全區 66/108）。
+- 修法：只重產 manifest 指到的 maskable 圖（檔名不變、manifest 路徑不變），整張構圖以中心等比縮小到墨跡最大半徑 ≤ 0.28，背景色延伸滿版；其他尺寸與 any 圖不動。品牌正式檔、v5 母版與產生器（`mask_text.SAFE_R`）同步修正。
+- 本支：`icon-maskable-512.png` 半徑 0.455→0.280（以圖寬為 1；> 0.333 會被切）。
+- 本支原本 manifest 的 maskable 指向透明圓角的 `icon-512.png`（Android 會把透明角與貼邊圖案一起切）：新增 `icon-maskable-512.png`（壓平在圖示本身底色、縮進安全區），manifest 只改 maskable 那一筆的 src；any 圖不動。
 
 ## 2026-10-12 · 體驗改善（v2 評分；sw travel-itinerary-v30，只改 index.html／sw.js）｜已部署 2026-10-12 GitHub Pages
 
