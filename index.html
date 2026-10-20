@@ -404,6 +404,14 @@ svg.ti { width: 1.05em; height: 1.05em; flex: none; vertical-align: -0.15em; }
    改回一般段落排版，勾選框掛在左邊（內容不動） */
 li > label:has(> input.todo-check) { display: block !important; padding-left: 2rem; min-width: 0; overflow-wrap: anywhere; }
 li > label > input.todo-check { float: left; margin-left: -2rem !important; }
+/* 2026-10-20 文字量調整（App文字分層規則 B）：頁尾免責收成一行「⚠ 使用前須知 ›」，點開看全文（全文仍在 DOM；原生 details 可鍵盤開合；字級 13px 不變）。頁尾固定淺底，色值照頁尾原本的 #5b6877 */
+.disc-fold{max-width:560px;margin:12px auto 0;font-size:13px;line-height:1.7;color:#5b6877}
+.disc-fold>summary{display:flex;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:0 auto;min-height:44px;padding:6px 16px;box-sizing:border-box;border:1px solid #d6cdbd;border-radius:999px;font-size:13px;letter-spacing:1px;line-height:1.4;color:#3d4a59;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.disc-fold>summary::-webkit-details-marker{display:none}
+.disc-fold>summary::after{content:"\203A";display:inline-block;font-size:16px;line-height:1;transition:transform .2s}
+.disc-fold[open]>summary::after{transform:rotate(90deg)}
+.disc-fold>summary:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.disc-fold-body{margin-top:8px}
 </style>
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -4537,7 +4545,7 @@ window.addEventListener('DOMContentLoaded', () => { initChecklist(); initStartBu
 </div><!-- end main -->
 
 <!--RL_FOOTER-->
-<footer class="rl-signature" style="background:#F7F3EC;color:#141E2B;padding:40px 22px 32px;border-top:1px solid #e5ddcf;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;margin:0"><div style="display:inline-flex;align-items:center;gap:24px;text-align:left"><span style="display:inline-flex;flex-direction:column;align-items:center;gap:3px"><img class="rl-sig-glyph" src="rl-mark-fitzroy-navy.png" width="60" height="42" alt="" style="object-fit:contain"><span style="font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;font-size:14px;font-weight:600;letter-spacing:.5px;color:#141E2B">Mt. Fitz Roy</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:2px;color:#5b6877">3,405 M</span></span><span style="width:2px;height:88px;background:#DE9A45;border-radius:2px;flex:none"></span><p style="margin:0;font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;font-weight:700;font-size:22px;line-height:1.35;color:#141E2B">人生的遠方，<br>留給敢啟程的人。</p></div><p style="margin:16px 0 0;font-size:13px;letter-spacing:6px;color:#55708a">Ridgeline · by Lucas</p><p style="font-size:13px;line-height:1.7;color:#5b6877;max-width:560px;margin:14px auto 0">© 2026 Ridgeline · Ridgeline · by Lucas｜免費使用；著作權皆屬作者，未經同意請勿重製、散布或作商業用途。　⚠️ 本行程為個人規劃整理，纜車班表、票價、營運時間、開放狀態等資訊可能異動，出發前請再向官方網站或當地旅客中心確認；行程僅供參考，實際安排請依個人狀況調整。</p></footer>
+<footer class="rl-signature" style="background:#F7F3EC;color:#141E2B;padding:40px 22px 32px;border-top:1px solid #e5ddcf;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;margin:0"><div style="display:inline-flex;align-items:center;gap:24px;text-align:left"><span style="display:inline-flex;flex-direction:column;align-items:center;gap:3px"><img class="rl-sig-glyph" src="rl-mark-fitzroy-navy.png" width="60" height="42" alt="" style="object-fit:contain"><span style="font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;font-size:14px;font-weight:600;letter-spacing:.5px;color:#141E2B">Mt. Fitz Roy</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:2px;color:#5b6877">3,405 M</span></span><span style="width:2px;height:88px;background:#DE9A45;border-radius:2px;flex:none"></span><p style="margin:0;font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;font-weight:700;font-size:22px;line-height:1.35;color:#141E2B">人生的遠方，<br>留給敢啟程的人。</p></div><p style="margin:16px 0 0;font-size:13px;letter-spacing:6px;color:#55708a">Ridgeline · by Lucas</p><p style="font-size:13px;line-height:1.7;color:#5b6877;max-width:560px;margin:14px auto 0">© 2026 Ridgeline · Ridgeline · by Lucas｜免費使用；著作權皆屬作者，未經同意請勿重製、散布或作商業用途。</p><details class="disc-fold"><summary>⚠ 使用前須知</summary><div class="disc-fold-body">⚠️ 本行程為個人規劃整理，纜車班表、票價、營運時間、開放狀態等資訊可能異動，出發前請再向官方網站或當地旅客中心確認；行程僅供參考，實際安排請依個人狀況調整。</div></details></footer>
 <!--REPORT_BTN_START-->
 <style>
 .reportFab{width:32px;height:32px;border-radius:50%;background:#6B7280;border:none;
