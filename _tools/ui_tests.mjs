@@ -704,6 +704,44 @@ try {
     dk.theme === 'dark' && dk.bg === 'rgb(14, 23, 38)' && [dk.date, dk.region, dk.nav, dk.navOn, dk.group].every((x) => x >= 4.5), dk);
   await c.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'light' }] });
 
+  /* ───────── 15 返回鍵（2026-10-20） ───────── */
+  console.log('\n[15 返回鍵：分頁回每日行程、重新整理後仍正確、在每日行程才離開]');
+  {
+    await c.width(390, 844);
+    await c.send('Page.navigate', { url: 'about:blank' }); await sleep(300);
+    await c.open(BASE);
+    const view = () => ({ url: location.href, tab: ((document.querySelector('.section.active') || {}).id || ''),
+      nav: ((document.querySelector('.nav-btn.active') || {}).textContent || '').trim(), st: JSON.stringify(history.state) });
+    const back = async () => { await c.eval('history.back()'); await sleep(500); };
+    const v0 = await c.call(view);
+    await c.call(clickTab, 'checklist'); await sleep(300);
+    const v1 = await c.call(view);
+    await back();
+    const v2 = await c.call(view);
+    ok(`15.1 每日行程 → 出發準備 → 上一頁：回每日行程（${v0.tab} → ${v1.tab} → ${v2.tab}），沒有離開 App`,
+      v0.tab === 'tab-itinerary' && v1.tab === 'tab-checklist' && v2.tab === 'tab-itinerary' && v2.nav === '每日行程' && v2.url.startsWith(BASE), [v0, v1, v2]);
+    await c.call(clickTab, 'checklist'); await sleep(250);
+    await c.call(clickTab, 'cable'); await sleep(250);
+    await c.call(clickTab, 'sos'); await sleep(250);
+    await back();
+    const v3 = await c.call(view);
+    ok(`15.2 出發準備 → 纜車 → 緊急 → 上一頁：一次就回每日行程（${v3.tab}）`, v3.tab === 'tab-itinerary' && v3.url.startsWith(BASE), v3);
+    // 在分頁裡重新整理：停在原分頁；按「每日行程」或上一頁都回到底層，不會多出白按的一下
+    await c.call(clickTab, 'docs'); await sleep(250);
+    await c.send('Page.reload'); await sleep(300);
+    await c.until(`document.readyState === 'complete' && typeof showTab === 'function' && !!document.querySelector('.section.active')`, 15000);
+    await sleep(300);
+    const v4 = await c.call(view);
+    await back();
+    const v5 = await c.call(view);
+    ok(`15.3 在「證件通行」重新整理後仍在原分頁（${v4.tab}），上一頁回每日行程（${v5.tab}）`,
+      v4.tab === 'tab-docs' && v5.tab === 'tab-itinerary' && v5.url.startsWith(BASE), [v4, v5]);
+    await back();
+    const u6 = await c.eval('location.href');
+    ok(`15.4 在每日行程按上一頁：離開 App（${u6}）`, u6 === 'about:blank', u6);
+    await c.open(BASE);
+  }
+
   /* ───────── 13 錯誤與連線 ───────── */
   console.log('\n[13 沒有錯誤、沒有意外的對外連線]');
   ok('13.1 全程沒有未捕捉的 JS 例外（' + c.errors.length + '）', c.errors.length === 0, c.errors.slice(0, 3));
