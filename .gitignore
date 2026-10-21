@@ -3,3 +3,6 @@
 
 # macOS
 .DS_Store
+
+# 開發文件與截圖，不進版控（push 即上線的 GitHub Pages 不可帶出）
+_docs/

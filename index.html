@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>瑞士義大利旅遊行程 2026</title>
-<meta name="theme-color" content="#F6F1E6">
-<link rel="preload" href="./vendor/round-ui/pp-round.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#FAF9F4">
+<link rel="preload" href="./vendor/satoshi/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <meta name="application-name" content="瑞義行程">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -235,7 +235,7 @@ body { font-size: 15px; }
    米色紙底＋細點紋、深藍護照封面、郵戳紅／青綠兩色郵戳、蛋黃立體主鈕、粉圓圓體（子集 PPRound）、Fluent 3D 圖示。
    字型：vendor/round-ui/pp-round.woff2（jf open 粉圓 2.1 子集，OFL-1.1，內部名稱已改）；圖：vendor/fluent-3d/（MIT）；
    線條圖示：Tabler Icons 3.49.0（MIT，內嵌 sprite）。只改外觀，行程內容不動。 */
-@font-face { font-family: "PPRound"; src: url("./vendor/round-ui/pp-round.woff2") format("woff2"); font-display: swap; }
+/* （2026-10-22 Komoot 風：PPRound @font-face 已移除，vendor/round-ui 不再引用） */
 :root {
   --bg: #F6F1E6; --surface: #FFFDF8; --border: #E6DCC8; --text: #1F2A3A; --muted: #5E6470;
   --accent: #1E3A5F; --accent2: #2B7A78; --accent3: #B8752E;
@@ -412,6 +412,91 @@ li > label > input.todo-check { float: left; margin-left: -2rem !important; }
 .disc-fold[open]>summary::after{transform:rotate(90deg)}
 .disc-fold>summary:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 .disc-fold-body{margin-top:8px}
+/* ===== 2026-10-22 Komoot 風（取代護照手帳；302 已做，老闆裁示 300/301 跟進）=====
+   色票直接用 Komoot（橄欖綠 #4F6814／按下 #404823、橘 #EE6B17→文字 #A3470A／圖形 #E35F0C、墨 #1C1A18、米白 #FAF9F4／#F5F3EC、線 #E0DBCE）。
+   完全平面：無陰影、無漸層、無點紋、無旋轉郵戳、無 3D 貼紙；圓角 8／16px；主鈕米白底綠字粗體。
+   字體：Satoshi（Fontshare ITF FFL，允許自架；不可裁子集）只用在拉丁字與數字，中文沿用系統字。
+   這一層排在最後，把上方的 PP_PASSPORT_CSS 蓋掉；變數名沿用，所以舊規則自動換色。 */
+@font-face { font-family: 'Satoshi'; src: url("./vendor/satoshi/Satoshi-Variable.woff2") format("woff2"); font-weight: 300 900; font-display: swap; }
+:root {
+  --bg: #FAF9F4; --surface: #FFFFFF; --border: #E0DBCE; --text: #1C1A18; --muted: #5C5852;
+  --accent: #4F6814; --accent2: #4F6814; --accent3: #A3470A;
+  --navy: #4F6814; --stamp: #E35F0C; --teal: #4F6814; --yolk: #4F6814; --yolk-d: #404823;
+  --dot: transparent; --chip-on: #4F6814; --chip-on-t: #F5F3EC;
+  --round: 'Satoshi', -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+}
+:root[data-theme="dark"] {
+  --bg: #1C1A18; --surface: #2A2724; --border: #3C3833; --text: #F5F3EC; --muted: #B5AFA5;
+  --accent: #9DBF4A; --accent2: #9DBF4A; --accent3: #F0A05A;
+  --navy: #9DBF4A; --stamp: #F0A05A; --teal: #9DBF4A; --yolk: #9DBF4A; --yolk-d: #7F9B3A;
+  --dot: transparent; --chip-on: #9DBF4A; --chip-on-t: #1C1A18;
+}
+body { background-color: var(--bg); background-image: none; }
+/* 頁首／分頁：平面 */
+.pp-mark { background: #4F6814; box-shadow: none; }
+:root[data-theme="dark"] .pp-mark { background: #2F3F10; box-shadow: none; }
+.pp-name h1 { font-weight: 700; letter-spacing: 0; }
+.nav { box-shadow: none; }
+.nav-btn { font-weight: 700; letter-spacing: 0; padding: 0 14px 0 10px; }
+.nav-btn svg.ti { width: 20px; height: 20px; flex: none; color: currentColor; }
+.nav-btn.active { background: var(--chip-on); color: var(--chip-on-t); border-color: var(--chip-on); font-weight: 700; }
+/* 封面：純色橄欖綠區塊、無內框、無 3D 圖 */
+.start-card.pp-cover, :root[data-theme="dark"] .start-card.pp-cover { background: #4F6814; background-image: none; color: #F5F3EC; border-radius: 16px; box-shadow: none; border: 0; }
+:root[data-theme="dark"] .start-card.pp-cover { background: #2F3F10; }
+.pp-cover::before { display: none; }
+.pp-k { font-weight: 700; letter-spacing: 3px; color: #E7E8D1; opacity: 1; }
+.pp-cover h2.pp-title { font-weight: 700; letter-spacing: 0; color: #F5F3EC; }
+.pp-cover p.pp-sub { color: #E7E8D1; opacity: 1; }
+.pp-meta > div { border-left: 1px solid rgba(245,243,236,.35); }
+.pp-meta dt { color: #E7E8D1; opacity: 1; }
+.pp-meta dd { color: #F5F3EC; font-weight: 700; }
+.pp-cover .start-btn { background: #F5F3EC; color: #4F6814; border-radius: 16px; box-shadow: none; font-weight: 700; }
+.pp-cover .start-btn svg.ti { width: 22px; height: 22px; flex: none; color: currentColor; }
+.pp-cover .start-btn:hover { background: #FFFFFF; }
+.pp-cover .start-btn:active { transform: none; box-shadow: none; }
+.pp-cover .start-btn:focus-visible { outline: 3px solid #F5F3EC; outline-offset: 3px; }
+.pp-art { display: none !important; }
+.pp-post { display: none !important; }
+/* 住宿郵戳 → 平面方卡；出發準備票卡 */
+.pp-sec { font-weight: 700; letter-spacing: 0; }
+.pp-sec small { font-weight: 400; }
+.pp-stamp, .pp-stamp:nth-child(2n), .pp-stamp:nth-child(3n) { transform: none; border: 1.5px solid var(--navy); border-radius: 16px; background: var(--surface); color: var(--navy); width: 104px; height: auto; min-height: 88px; padding: 10px 6px; }
+.pp-stamp b { font-weight: 700; }
+.pp-stamp small { font-family: var(--round); font-weight: 700; letter-spacing: 1px; color: var(--muted); }
+.pp-stamp i { color: var(--muted); opacity: 1; }
+.pp-stamp:hover, .pp-stamp:focus-visible { transform: none; border-color: var(--stamp); outline: none; }
+.start-btn2.pp-ticket { box-shadow: none; border-radius: 16px; }
+.pp-ticket svg.ti { width: 32px; height: 32px; flex: none; color: var(--navy); }
+.pp-tk b { font-weight: 700; }
+.pp-ticket #home-prog { border-left: 1px solid var(--border); font-weight: 700; }
+/* 每日行程：平面卡 */
+.day-group { font-weight: 700; letter-spacing: 0; }
+.day-group::before, .day-group:nth-of-type(even)::before { width: 10px; height: 10px; border: 0; border-radius: 50%; background: var(--navy); }
+.day-group small { font-weight: 400; }
+.day-card, .day-card.today-card, :root[data-theme="dark"] .day-card { box-shadow: none; border-radius: 16px; }
+.day-card.today-card { border-color: var(--navy); }
+.day-num, :root[data-theme="dark"] .day-num:not([style]), .day-card:nth-of-type(even) .day-num { width: 44px; height: 44px; border-radius: 8px; border: 0; transform: none;
+  background: var(--navy) !important; color: #F5F3EC !important; font-weight: 700; }
+.day-num[style*="#888"] { background: var(--muted) !important; color: #F5F3EC !important; border: 0; }
+.day-num[style*="#8c5a2a"] { background: var(--stamp) !important; color: #F5F3EC !important; border: 0; }
+.day-card.today-card .day-num { background: var(--navy) !important; color: #F5F3EC !important; border: 0; }
+:root[data-theme="dark"] .day-num, :root[data-theme="dark"] .day-num[style*="#888"], :root[data-theme="dark"] .day-num[style*="#8c5a2a"], :root[data-theme="dark"] .day-card.today-card .day-num { color: #1C1A18 !important; }
+.day-date { font-weight: 700; letter-spacing: 0; }
+.must { transform: none; border: 0; border-radius: 6px; background: #FCE1D1; color: #A3470A; font-weight: 700; letter-spacing: 1px; padding: 2px 8px; }
+:root[data-theme="dark"] .must { background: #4A2A14; color: #F0A05A; }
+.cc { transform: none; font-family: var(--round); font-weight: 700; color: var(--muted); border-color: var(--border); }
+.day-body { border-top: 1px solid var(--border); background-image: none; }
+.tl-dot::after { border-left: 1px solid var(--border); }
+.tl-time { font-weight: 700; }
+/* 標題類：700、無字距 */
+.notice-card h3, .cable-header h3, .sm-card h4, .main h2:not(.pp-title), .main h3:not(.pp-sec) { font-weight: 700; letter-spacing: 0; }
+.section-label { font-weight: 700; }
+.start-prog i { background: var(--navy); }
+@media (min-width: 1000px) {
+  .nav-btn svg.ti { width: 18px; height: 18px; }
+  .pp-stamp { width: 100%; max-width: 120px; aspect-ratio: auto; }
+}
+/* ===== 2026-10-22 Komoot 風 結束 ===== */
 </style>
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -426,22 +511,22 @@ li > label > input.todo-check { float: left; margin-left: -2rem !important; }
   <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="切換深色模式" title="切換深色／淺色" data-icon="moon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></button>
 </header>
 <!-- TABLER_SPRITE_START：Tabler Icons 3.49.0（MIT，授權見 vendor/tabler-icons/LICENSE.txt）；由 _tools/build_icon_sprite.py 產生，勿手改 -->
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><symbol id="ti-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M22 17v-3h-20"/><path d="M2 8v9"/><path d="M12 14h10v-2a3 3 0 0 0 -3 -3h-7v5"/></symbol><symbol id="ti-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10h4a2 2 0 0 1 0 4h-4l-4 7h-3l2 -7h-4l-2 2h-3l2 -4l-2 -4h3l2 2h4l-2 -7h3l4 7"/></symbol><symbol id="ti-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></symbol><symbol id="ti-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></symbol><symbol id="ti-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"/><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"/><path d="M9.7 17l4.6 0"/></symbol><symbol id="ti-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"/></symbol><symbol id="ti-alert-octagon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.802 2.165l5.575 2.389c.48 .206 .863 .589 1.07 1.07l2.388 5.574c.22 .512 .22 1.092 0 1.604l-2.389 5.575c-.206 .48 -.589 .863 -1.07 1.07l-5.574 2.388c-.512 .22 -1.092 .22 -1.604 0l-5.575 -2.389a2.036 2.036 0 0 1 -1.07 -1.07l-2.388 -5.574a2.036 2.036 0 0 1 0 -1.604l2.389 -5.575c.206 -.48 .589 -.863 1.07 -1.07l5.574 -2.388a2.036 2.036 0 0 1 1.604 0"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol><symbol id="ti-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0"/><path d="M12 16h.01"/></symbol><symbol id="ti-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M12 7v5l3 3"/></symbol><symbol id="ti-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -8"/><path d="M3 10l18 0"/><path d="M7 15l.01 0"/><path d="M11 15l2 0"/></symbol><symbol id="ti-glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21l8 0"/><path d="M12 15l0 6"/><path d="M17 3l1 7c0 3.012 -2.686 5 -6 5s-6 -1.988 -6 -5l1 -7h10"/><path d="M6 10a5 5 0 0 1 6 0a5 5 0 0 0 6 0"/></symbol><symbol id="ti-shoe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h5.426a1 1 0 0 1 .863 .496l1.064 1.823a3 3 0 0 0 1.896 1.407l4.677 1.114a4 4 0 0 1 3.074 3.89v2.27a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10a1 1 0 0 1 1 -1"/><path d="M14 13l1 -2"/><path d="M8 18v-1a4 4 0 0 0 -4 -4h-1"/><path d="M10 12l1.5 -3"/></symbol><symbol id="ti-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13c0 -3.87 -3.37 -7 -10 -7h-8"/><path d="M3 15h16a2 2 0 0 0 2 -2"/><path d="M3 6v5h17.5"/><path d="M3 11v4"/><path d="M8 11v-5"/><path d="M13 11v-4.5"/><path d="M3 19h18"/></symbol><symbol id="ti-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/></symbol><symbol id="ti-kitchen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3"/></symbol><symbol id="ti-rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7"/><path d="M11 13v2m0 3v2m4 -5v2m0 3v2"/></symbol><symbol id="ti-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h1m16 0h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7m-9.7 5.7a4 4 0 0 1 8 0"/><path d="M3 21l18 0"/><path d="M12 9v-6l3 3m-6 0l3 -3"/></symbol><symbol id="ti-sos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8a2 2 0 0 1 2 2v4a2 2 0 1 1 -4 0v-4a2 2 0 0 1 2 -2"/><path d="M17 15c.345 .6 1.258 1 2 1a2 2 0 1 0 0 -4a2 2 0 1 1 0 -4c.746 0 1.656 .394 2 1"/><path d="M3 15c.345 .6 1.258 1 2 1a2 2 0 1 0 0 -4a2 2 0 1 1 0 -4c.746 0 1.656 .394 2 1"/></symbol><symbol id="ti-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245"/></symbol><symbol id="ti-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"/></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><symbol id="ti-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M22 17v-3h-20"/><path d="M2 8v9"/><path d="M12 14h10v-2a3 3 0 0 0 -3 -3h-7v5"/></symbol><symbol id="ti-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10h4a2 2 0 0 1 0 4h-4l-4 7h-3l2 -7h-4l-2 2h-3l2 -4l-2 -4h3l2 2h4l-2 -7h3l4 7"/></symbol><symbol id="ti-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></symbol><symbol id="ti-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></symbol><symbol id="ti-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"/><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"/><path d="M9.7 17l4.6 0"/></symbol><symbol id="ti-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"/></symbol><symbol id="ti-alert-octagon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.802 2.165l5.575 2.389c.48 .206 .863 .589 1.07 1.07l2.388 5.574c.22 .512 .22 1.092 0 1.604l-2.389 5.575c-.206 .48 -.589 .863 -1.07 1.07l-5.574 2.388c-.512 .22 -1.092 .22 -1.604 0l-5.575 -2.389a2.036 2.036 0 0 1 -1.07 -1.07l-2.388 -5.574a2.036 2.036 0 0 1 0 -1.604l2.389 -5.575c.206 -.48 .589 -.863 1.07 -1.07l5.574 -2.388a2.036 2.036 0 0 1 1.604 0"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol><symbol id="ti-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0"/><path d="M12 16h.01"/></symbol><symbol id="ti-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M12 7v5l3 3"/></symbol><symbol id="ti-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -8"/><path d="M3 10l18 0"/><path d="M7 15l.01 0"/><path d="M11 15l2 0"/></symbol><symbol id="ti-glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21l8 0"/><path d="M12 15l0 6"/><path d="M17 3l1 7c0 3.012 -2.686 5 -6 5s-6 -1.988 -6 -5l1 -7h10"/><path d="M6 10a5 5 0 0 1 6 0a5 5 0 0 0 6 0"/></symbol><symbol id="ti-shoe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h5.426a1 1 0 0 1 .863 .496l1.064 1.823a3 3 0 0 0 1.896 1.407l4.677 1.114a4 4 0 0 1 3.074 3.89v2.27a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10a1 1 0 0 1 1 -1"/><path d="M14 13l1 -2"/><path d="M8 18v-1a4 4 0 0 0 -4 -4h-1"/><path d="M10 12l1.5 -3"/></symbol><symbol id="ti-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13c0 -3.87 -3.37 -7 -10 -7h-8"/><path d="M3 15h16a2 2 0 0 0 2 -2"/><path d="M3 6v5h17.5"/><path d="M3 11v4"/><path d="M8 11v-5"/><path d="M13 11v-4.5"/><path d="M3 19h18"/></symbol><symbol id="ti-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/></symbol><symbol id="ti-kitchen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3"/></symbol><symbol id="ti-rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7"/><path d="M11 13v2m0 3v2m4 -5v2m0 3v2"/></symbol><symbol id="ti-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h1m16 0h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7m-9.7 5.7a4 4 0 0 1 8 0"/><path d="M3 21l18 0"/><path d="M12 9v-6l3 3m-6 0l3 -3"/></symbol><symbol id="ti-sos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8a2 2 0 0 1 2 2v4a2 2 0 1 1 -4 0v-4a2 2 0 0 1 2 -2"/><path d="M17 15c.345 .6 1.258 1 2 1a2 2 0 1 0 0 -4a2 2 0 1 1 0 -4c.746 0 1.656 .394 2 1"/><path d="M3 15c.345 .6 1.258 1 2 1a2 2 0 1 0 0 -4a2 2 0 1 1 0 -4c.746 0 1.656 .394 2 1"/></symbol><symbol id="ti-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245"/></symbol><symbol id="ti-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"/></symbol><symbol id="ti-luggage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -10"/><path d="M9 6v-1a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1"/><path d="M6 10h12"/><path d="M6 16h12"/><path d="M9 20v1"/><path d="M15 20v1"/></symbol><symbol id="ti-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M11 15h1"/><path d="M12 15v3"/></symbol><symbol id="ti-aerial-lift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5l16 -2"/><path d="M12 4v10"/><path d="M6.894 8h10.306c2.45 3 2.45 9 -.2 12h-10.106c-2.544 -3 -2.544 -9 0 -12"/><path d="M5 14h14"/></symbol><symbol id="ti-id" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -10"/><path d="M7 10a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M15 8l2 0"/><path d="M15 12l2 0"/><path d="M7 16l10 0"/></symbol><symbol id="ti-shopping-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M15 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M17 17h-11v-14h-2"/><path d="M6 5l14 1l-1 7h-13"/></symbol><symbol id="ti-alarm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M12 10l0 3l2 0"/><path d="M7 4l-2.75 2"/><path d="M17 4l2.75 2"/></symbol><symbol id="ti-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5"/></symbol><symbol id="ti-cloud-rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7"/><path d="M11 13v2m0 3v2m4 -5v2m0 3v2"/></symbol><symbol id="ti-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6l0 13"/><path d="M12 6l0 13"/><path d="M21 6l0 13"/></symbol></svg>
 <!-- TABLER_SPRITE_END -->
 
 <nav class="nav" aria-label="行程手冊分頁">
-  <button class="nav-btn" onclick="showTab('checklist')"><img src="./vendor/fluent-3d/luggage.png" alt="" width="24" height="24"><span>出發準備</span></button>
-  <button class="nav-btn active" onclick="showTab('itinerary')"><img src="./vendor/fluent-3d/calendar.png" alt="" width="24" height="24"><span>每日行程</span></button>
-  <button class="nav-btn" onclick="showTab('cable')"><img src="./vendor/fluent-3d/tramway.png" alt="" width="24" height="24"><span>纜車票券</span></button>
-  <button class="nav-btn" onclick="showTab('docs')"><img src="./vendor/fluent-3d/passport.png" alt="" width="24" height="24"><span>證件通行</span></button>
-  <button class="nav-btn" onclick="showTab('food')"><img src="./vendor/fluent-3d/cart.png" alt="" width="24" height="24"><span>超市餐廳</span></button>
-  <button class="nav-btn" onclick="showTab('booking')"><img src="./vendor/fluent-3d/alarm.png" alt="" width="24" height="24"><span>預訂提醒</span></button>
-  <button class="nav-btn" onclick="showTab('tools')"><img src="./vendor/fluent-3d/toolbox.png" alt="" width="24" height="24"><span>旅遊工具</span></button>
-  <button class="nav-btn" onclick="showTab('hiking')"><img src="./vendor/fluent-3d/boot.png" alt="" width="24" height="24"><span>健行指南</span></button>
-  <button class="nav-btn" onclick="showTab('drive')"><img src="./vendor/fluent-3d/car.png" alt="" width="24" height="24"><span>開車指南</span></button>
-  <button class="nav-btn" onclick="showTab('backup')"><img src="./vendor/fluent-3d/rain.png" alt="" width="24" height="24"><span>備案決策</span></button>
-  <button class="nav-btn" onclick="showTab('sos')"><img src="./vendor/fluent-3d/sos.png" alt="" width="24" height="24"><span>緊急資訊</span></button>
-  <button class="nav-btn" onclick="showTab('dining')"><img src="./vendor/fluent-3d/dining.png" alt="" width="24" height="24"><span>餐廳購物</span></button>
+  <button class="nav-btn" onclick="showTab('checklist')"><svg class="ti" aria-hidden="true"><use href="#ti-luggage"/></svg><span>出發準備</span></button>
+  <button class="nav-btn active" onclick="showTab('itinerary')"><svg class="ti" aria-hidden="true"><use href="#ti-calendar"/></svg><span>每日行程</span></button>
+  <button class="nav-btn" onclick="showTab('cable')"><svg class="ti" aria-hidden="true"><use href="#ti-aerial-lift"/></svg><span>纜車票券</span></button>
+  <button class="nav-btn" onclick="showTab('docs')"><svg class="ti" aria-hidden="true"><use href="#ti-id"/></svg><span>證件通行</span></button>
+  <button class="nav-btn" onclick="showTab('food')"><svg class="ti" aria-hidden="true"><use href="#ti-shopping-cart"/></svg><span>超市餐廳</span></button>
+  <button class="nav-btn" onclick="showTab('booking')"><svg class="ti" aria-hidden="true"><use href="#ti-alarm"/></svg><span>預訂提醒</span></button>
+  <button class="nav-btn" onclick="showTab('tools')"><svg class="ti" aria-hidden="true"><use href="#ti-tool"/></svg><span>旅遊工具</span></button>
+  <button class="nav-btn" onclick="showTab('hiking')"><svg class="ti" aria-hidden="true"><use href="#ti-shoe"/></svg><span>健行指南</span></button>
+  <button class="nav-btn" onclick="showTab('drive')"><svg class="ti" aria-hidden="true"><use href="#ti-car"/></svg><span>開車指南</span></button>
+  <button class="nav-btn" onclick="showTab('backup')"><svg class="ti" aria-hidden="true"><use href="#ti-cloud-rain"/></svg><span>備案決策</span></button>
+  <button class="nav-btn" onclick="showTab('sos')"><svg class="ti" aria-hidden="true"><use href="#ti-sos"/></svg><span>緊急資訊</span></button>
+  <button class="nav-btn" onclick="showTab('dining')"><svg class="ti" aria-hidden="true"><use href="#ti-kitchen"/></svg><span>餐廳購物</span></button>
 </nav>
 
 <div class="main">
@@ -451,7 +536,7 @@ li > label > input.todo-check { float: left; margin-left: -2rem !important; }
 
   <div class="pp-top">
     <section class="start-card pp-cover" id="start-card" aria-labelledby="pp-title">
-      <div class="pp-k">PASSPORT · 2026 SUMMER</div>
+      <div class="pp-k">ITINERARY · 2026 SUMMER</div>
       <h2 class="pp-title" id="pp-title">瑞士 × 義大利<br>多洛米堤</h2>
       <p class="pp-sub">夏季精華行程 — 12晚14天</p>
       <dl class="pp-meta">
@@ -459,12 +544,11 @@ li > label > input.todo-check { float: left; margin-left: -2rem !important; }
         <div><dt>旅遊人數</dt><dd>2人</dd></div>
         <div><dt>交通方式</dt><dd>自駕</dd></div>
       </dl>
-      <button type="button" class="start-btn" id="start-btn" onclick="openNextDay()"><img src="./vendor/fluent-3d/book.png" alt="" width="28" height="28"><span class="lbl">開始看行程：6/14 出發日</span></button>
-      <img class="pp-art" src="./vendor/fluent-3d/mountain.png" alt="" width="128" height="128">
+      <button type="button" class="start-btn" id="start-btn" onclick="openNextDay()"><svg class="ti" aria-hidden="true"><use href="#ti-book"/></svg><span class="lbl">開始看行程：6/14 出發日</span></button>
       <div class="pp-post" aria-hidden="true"><span>CH · AT · IT</span><b>2026</b><span>12晚14天</span></div>
     </section>
     <div class="pp-side">
-      <h3 class="pp-sec">住宿郵戳<small>點郵戳跳到那幾天</small></h3>
+      <h3 class="pp-sec">住宿地<small>點了跳到那幾天</small></h3>
       <div class="pp-stamps">
         <button type="button" class="pp-stamp" onclick="goGroup('g-zermatt')"><b>策馬特</b><small>CH</small><i>6/14–6/16</i></button>
         <button type="button" class="pp-stamp" onclick="goGroup('g-lauter')"><b>少女峰區</b><small>CH</small><i>6/17–6/19</i></button>
@@ -473,7 +557,7 @@ li > label > input.todo-check { float: left; margin-left: -2rem !important; }
         <button type="button" class="pp-stamp" onclick="goGroup('g-milano')"><b>米蘭</b><small>IT</small><i>6/25–6/27</i></button>
       </div>
       <button type="button" class="start-btn2 pp-ticket" onclick="gotoTab('checklist')">
-        <img src="./vendor/fluent-3d/luggage.png" alt="" width="40" height="40"><span class="pp-tk"><b>出發準備清單</b><small>出發前逐項勾選</small></span><span id="home-prog">已完成 0 / 0 項</span>
+        <svg class="ti" aria-hidden="true"><use href="#ti-luggage"/></svg><span class="pp-tk"><b>出發準備清單</b><small>出發前逐項勾選</small></span><span id="home-prog">已完成 0 / 0 項</span>
       </button>
       <div class="start-prog" aria-hidden="true"><i id="home-prog-bar"></i></div>
       <p class="pp-hint">點下方日期卡片，展開當天的時間軸、住宿與路線；上方分頁可切換纜車票券、證件、緊急資訊等。</p>
@@ -2746,7 +2830,7 @@ function applyThemeIcon() {
             : '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>') + '</svg>';
   }
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', dark ? '#0E1726' : '#F6F1E6');
+  if (meta) meta.setAttribute('content', dark ? '#1C1A18' : '#FAF9F4');
 }
 function toggleTheme() {
   const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';

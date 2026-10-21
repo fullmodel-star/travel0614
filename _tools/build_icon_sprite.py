@@ -27,6 +27,9 @@ ICONS = [
     ("clock", "clock"), ("card", "credit-card"), ("glass", "glass-full"), ("shoe", "shoe"),
     ("train", "train"), ("camera", "camera"), ("kitchen", "tools-kitchen-2"), ("rain", "cloud-rain"),
     ("sunrise", "sunrise"), ("sos", "sos"), ("star", "star"), ("bolt", "bolt"),
+    # 2026-10-22 Komoot 風：12 個分頁膠囊＋封面主鈕＋出發準備票卡改線條圖示（取代 Fluent 3D）
+    ("luggage", "luggage"), ("calendar", "calendar"), ("aerial-lift", "aerial-lift"), ("id", "id"),
+    ("shopping-cart", "shopping-cart"), ("alarm", "alarm"), ("tool", "tool"), ("cloud-rain", "cloud-rain"), ("book", "book"),
 ]
 
 

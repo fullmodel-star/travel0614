@@ -47,7 +47,7 @@
   });
 })();
 /* RL_FRESH_END */
-const CACHE_NAME = 'travel-itinerary-v38';
+const CACHE_NAME = 'travel-itinerary-v39';
 const ASSETS = [
   './',
   './index.html',
@@ -60,22 +60,8 @@ const ASSETS = [
   './apple-touch-icon.png',
   './rl-mark-fitzroy-white.png',
   './rl-mark-fitzroy-navy.png',
-  // 2026-10-19 護照手帳：圓體子集＋ Fluent 3D
-  './vendor/round-ui/pp-round.woff2',
-  './vendor/fluent-3d/luggage.png',
-  './vendor/fluent-3d/calendar.png',
-  './vendor/fluent-3d/tramway.png',
-  './vendor/fluent-3d/passport.png',
-  './vendor/fluent-3d/cart.png',
-  './vendor/fluent-3d/alarm.png',
-  './vendor/fluent-3d/toolbox.png',
-  './vendor/fluent-3d/boot.png',
-  './vendor/fluent-3d/car.png',
-  './vendor/fluent-3d/rain.png',
-  './vendor/fluent-3d/sos.png',
-  './vendor/fluent-3d/dining.png',
-  './vendor/fluent-3d/mountain.png',
-  './vendor/fluent-3d/book.png'
+  // 2026-10-22 Komoot 風：Satoshi 可變字型（取代 10-19 的粉圓子集＋ Fluent 3D，CSS 已不引用）
+  './vendor/satoshi/Satoshi-Variable.woff2'
 ];
 
 // 安裝 Service Worker 並快取核心資源
